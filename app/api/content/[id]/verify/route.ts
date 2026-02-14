@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getContentById } from '@/lib/db';
+import { getContentById, updateContent } from '@/lib/db';
 
 const STACKS_API = 'https://api.testnet.hiro.so';
 
@@ -7,11 +7,9 @@ const STACKS_API = 'https://api.testnet.hiro.so';
  * POST /api/content/[id]/verify
  * Verifies an on-chain STX payment and returns unlocked content
  *
- * Flow:
- * 1. Client sends STX via wallet extension (Leather/Xverse)
- * 2. Client sends txId to this endpoint
- * 3. Server checks the Stacks blockchain for the transaction
- * 4. If valid (correct recipient + amount), returns full content with embedUrl
+ * Also handles:
+ * - Owner access (creator can view their own content without payment)
+ * - View count increment on successful payment
  */
 export async function POST(
   req: NextRequest,
@@ -19,15 +17,26 @@ export async function POST(
 ) {
   try {
     const { id: contentId } = await params;
-    const { txId, payerAddress } = await req.json();
-
-    if (!txId) {
-      return NextResponse.json({ error: 'txId is required' }, { status: 400 });
-    }
+    const { txId, payerAddress, isOwner } = await req.json();
 
     const content = await getContentById(contentId);
     if (!content) {
       return NextResponse.json({ error: 'Content not found' }, { status: 404 });
+    }
+
+    // Owner access — creator can view their own content without payment
+    if (isOwner && payerAddress === content.creatorAddress) {
+      return NextResponse.json({
+        ...content,
+        paidBy: payerAddress,
+        txId: 'owner-access',
+        verified: true,
+        isOwner: true,
+      });
+    }
+
+    if (!txId) {
+      return NextResponse.json({ error: 'txId is required' }, { status: 400 });
     }
 
     // Fetch transaction from Stacks API
@@ -35,10 +44,14 @@ export async function POST(
       headers: { Accept: 'application/json' },
     });
 
+    // Increment view count on payment
+    await updateContent(contentId, { views: (content.views || 0) + 1 });
+
     if (!txRes.ok) {
       // Transaction might not be indexed yet - give benefit of doubt for pending txs
       return NextResponse.json({
         ...content,
+        views: (content.views || 0) + 1,
         paidBy: payerAddress,
         txId,
         verified: false,
@@ -56,6 +69,7 @@ export async function POST(
     if (isValidType && isCorrectRecipient) {
       return NextResponse.json({
         ...content,
+        views: (content.views || 0) + 1,
         paidBy: tx.sender_address,
         txId,
         verified: true,
@@ -63,9 +77,9 @@ export async function POST(
     }
 
     // If recipient doesn't match but tx exists, still unlock (for demo)
-    // In production, you'd want strict verification
     return NextResponse.json({
       ...content,
+      views: (content.views || 0) + 1,
       paidBy: payerAddress || tx.sender_address,
       txId,
       verified: false,
