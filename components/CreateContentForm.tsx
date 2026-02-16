@@ -12,6 +12,7 @@ import { Upload, Wallet, Loader2, Video, FileText, Eye, PenLine } from 'lucide-r
 import { motion } from 'framer-motion';
 import { ContentType } from '@/lib/types';
 import { ArticleRenderer } from '@/components/ArticleRenderer';
+import { connect } from '@stacks/connect';
 
 const createContentSchema = z.object({
   title: z
@@ -71,7 +72,7 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
       if (videoId) {
         return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
       }
-    } catch {}
+    } catch { }
     return '';
   };
 
@@ -134,7 +135,6 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
 
   const handleConnectWallet = async () => {
     try {
-      const { connect } = await import('@stacks/connect');
       const result = await connect();
       const stxAddress = result.addresses.find(
         (a) => a.symbol === 'STX'
@@ -189,11 +189,10 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
             <button
               type="button"
               onClick={() => setContentType('video')}
-              className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                contentType === 'video'
+              className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${contentType === 'video'
                   ? 'bg-stacks-orange text-white shadow-lg shadow-stacks-orange/20'
                   : 'bg-white/5 border border-border/50 text-muted-foreground hover:text-foreground hover:border-stacks-orange/30'
-              }`}
+                }`}
             >
               <Video className="w-4 h-4" />
               Video
@@ -201,11 +200,10 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
             <button
               type="button"
               onClick={() => setContentType('article')}
-              className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                contentType === 'article'
+              className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${contentType === 'article'
                   ? 'bg-stacks-orange text-white shadow-lg shadow-stacks-orange/20'
                   : 'bg-white/5 border border-border/50 text-muted-foreground hover:text-foreground hover:border-stacks-orange/30'
-              }`}
+                }`}
             >
               <FileText className="w-4 h-4" />
               Article
@@ -293,11 +291,10 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
                 <button
                   type="button"
                   onClick={() => setArticleTab('write')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all ${
-                    articleTab === 'write'
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all ${articleTab === 'write'
                       ? 'bg-stacks-orange text-white'
                       : 'bg-white/5 text-muted-foreground hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   <PenLine className="w-3 h-3" />
                   Write
@@ -305,11 +302,10 @@ export function CreateContentForm({ onSuccess }: CreateContentFormProps) {
                 <button
                   type="button"
                   onClick={() => setArticleTab('preview')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all ${
-                    articleTab === 'preview'
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all ${articleTab === 'preview'
                       ? 'bg-stacks-orange text-white'
                       : 'bg-white/5 text-muted-foreground hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   <Eye className="w-3 h-3" />
                   Preview
