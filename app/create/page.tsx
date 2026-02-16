@@ -2,9 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Navbar } from '@/components/Navbar';
-import { CreateContentForm } from '@/components/CreateContentForm';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+
+const CreateContentForm = dynamic(
+  () => import('@/components/CreateContentForm').then((mod) => mod.CreateContentForm),
+  { ssr: false }
+);
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function CreatePage() {

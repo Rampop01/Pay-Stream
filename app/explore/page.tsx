@@ -1,6 +1,8 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
+import dynamic from 'next/dynamic';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 import { ContentCard } from '@/components/ContentCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContent } from '@/hooks/useContent';
@@ -99,11 +101,10 @@ export default function ExplorePage() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory(null)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                  !selectedCategory
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${!selectedCategory
                     ? 'bg-stacks-orange text-white'
                     : 'bg-white/5 border border-border/50 text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
                 All
               </button>
@@ -113,11 +114,10 @@ export default function ExplorePage() {
                   onClick={() =>
                     setSelectedCategory(selectedCategory === cat ? null : cat)
                   }
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                    selectedCategory === cat
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${selectedCategory === cat
                       ? 'bg-stacks-orange text-white'
                       : 'bg-white/5 border border-border/50 text-muted-foreground hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>

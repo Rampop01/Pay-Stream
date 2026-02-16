@@ -2,8 +2,14 @@
 
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Navbar } from '@/components/Navbar';
-import { PaymentGate } from '@/components/PaymentGate';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
+import dynamic from 'next/dynamic';
+
+const PaymentGate = dynamic(
+  () => import('@/components/PaymentGate').then((mod) => mod.PaymentGate),
+  { ssr: false }
+);
 import { VideoPlayer } from '@/components/VideoPlayer';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContentById } from '@/hooks/useContent';
