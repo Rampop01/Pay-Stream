@@ -4,13 +4,14 @@ import { useWalletStore } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Wallet, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
-import { connect, disconnect } from '@stacks/connect';
+
 
 export function WalletConnectPanel() {
     const { address, setAddress, clearWallet } = useWalletStore();
 
     const handleConnect = async () => {
         try {
+            const { connect } = await import('@stacks/connect');
             const result = await connect();
             const stxAddress = result.addresses.find(
                 (a) => a.symbol === 'STX'
@@ -28,7 +29,7 @@ export function WalletConnectPanel() {
 
     const handleDisconnect = () => {
         try {
-            disconnect();
+            import('@stacks/connect').then(({ disconnect }) => disconnect());
         } catch { }
         clearWallet();
         toast.success('Wallet disconnected');

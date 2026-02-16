@@ -2,10 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import { useWalletStore } from '@/lib/store';
-import { openSTXTransfer, connect } from '@stacks/connect';
 import { STXtoMicroSTX } from 'x402-stacks';
+import { toast } from 'sonner';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Loader2,
+  CheckCircle,
+  Lock,
+  Zap,
+  ExternalLink,
+  X,
+  Clock,
+  Copy,
+  Wallet
+} from 'lucide-react';
 
-// ... imports remain the same
+interface PaymentGateProps {
+  contentId: string;
+  price: number;
+  creatorAddress: string;
+  title: string;
+  onUnlocked: (content: any) => void;
+}
 
 export function PaymentGate({
   contentId,
@@ -14,7 +32,32 @@ export function PaymentGate({
   title,
   onUnlocked,
 }: PaymentGateProps) {
-  // ... existing state code ...
+  const { address } = useWalletStore();
+  const [showModal, setShowModal] = useState(false);
+  const [step, setStep] = useState<'idle' | 'fetching402' | 'waitingWallet' | 'broadcasting' | 'verifying' | 'complete' | 'error'>('idle');
+  const [txHash, setTxHash] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Check if current user is the creator
+  const isCreator = address === creatorAddress;
+
+  useEffect(() => {
+    let mounted = true;
+    if (isCreator) {
+      // Auto-unlock for creator
+      const unlockForCreator = async () => {
+        try {
+          const res = await fetch(`/api/content/${contentId}?preview=true`);
+          if (res.ok && mounted) {
+            const data = await res.json();
+            onUnlocked(data);
+          }
+        } catch { }
+      };
+      unlockForCreator();
+    }
+    return () => { mounted = false; };
+  }, [isCreator, contentId, onUnlocked]);
 
   const handlePay = async () => {
     if (!address) {
@@ -57,6 +100,9 @@ export function PaymentGate({
 
       // Step 2: Open wallet extension to sign & broadcast STX transfer
       setStep('waitingWallet');
+
+      // Dynamic import to avoid SSR issues with @stacks/connect
+      const { openSTXTransfer } = await import('@stacks/connect');
 
       openSTXTransfer({
         recipient: payTo,
@@ -333,6 +379,8 @@ function ConnectWalletButton() {
 
   const handleConnect = async () => {
     try {
+      // Dynamic import
+      const { connect } = await import('@stacks/connect');
       const result = await connect();
       const stxAddress = result.addresses.find((a) => a.symbol === 'STX');
       if (stxAddress) {
