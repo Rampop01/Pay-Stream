@@ -6,6 +6,7 @@ import { Wallet, Plus, Home, Zap, Menu, X, LogOut, Compass } from 'lucide-react'
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { connect, disconnect } from '@stacks/connect';
 
 export function Navbar() {
   const { address, setAddress, clearWallet } = useWalletStore();
@@ -19,7 +20,6 @@ export function Navbar() {
   const handleConnect = async () => {
     setConnecting(true);
     try {
-      const { connect } = await import('@stacks/connect');
       const result = await connect();
       const stxAddress = result.addresses.find(
         (a) => a.symbol === 'STX'
@@ -45,7 +45,7 @@ export function Navbar() {
 
   const handleDisconnect = () => {
     try {
-      import('@stacks/connect').then(({ disconnect }) => disconnect());
+      disconnect();
     } catch { }
     clearWallet();
     toast.success('Wallet disconnected');

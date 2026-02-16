@@ -12,7 +12,6 @@ const nextConfig = {
     '@stacks/network',
     'x402-stacks',
   ],
-  turbopack: {},
   async headers() {
     return [
       {

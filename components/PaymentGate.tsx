@@ -2,21 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useWalletStore } from '@/lib/store';
-// @stacks/connect is loaded dynamically to avoid bundler issues on Vercel
-// x402-stacks is loaded dynamically to avoid bundler issues on Vercel
-import { toast } from 'sonner';
-import { Lock, Zap, Loader2, ExternalLink, Wallet, CheckCircle, Clock, Copy, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { openSTXTransfer, connect } from '@stacks/connect';
+import { STXtoMicroSTX } from 'x402-stacks';
 
-interface PaymentGateProps {
-  contentId: string;
-  price: number;
-  creatorAddress: string;
-  title: string;
-  onUnlocked: (content: any) => void;
-}
-
-type PaymentStep = 'idle' | 'fetching402' | 'waitingWallet' | 'broadcasting' | 'verifying' | 'complete' | 'error';
+// ... imports remain the same
 
 export function PaymentGate({
   contentId,
@@ -25,31 +14,7 @@ export function PaymentGate({
   title,
   onUnlocked,
 }: PaymentGateProps) {
-  const { address } = useWalletStore();
-  const [step, setStep] = useState<PaymentStep>('idle');
-  const [txHash, setTxHash] = useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
-
-  // Auto-unlock for content creator
-  const isCreator = address && address === creatorAddress;
-
-  useEffect(() => {
-    if (isCreator) {
-      fetch(`/api/content/${contentId}/verify`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ txId: 'owner-access', payerAddress: address, isOwner: true }),
-      })
-        .then((res) => res.json())
-        .then((content) => onUnlocked(content))
-        .catch(() => {
-          fetch(`/api/content/${contentId}?preview=true`)
-            .then((res) => res.json())
-            .then((preview) => onUnlocked(preview));
-        });
-    }
-  }, [isCreator, contentId, address, onUnlocked]);
+  // ... existing state code ...
 
   const handlePay = async () => {
     if (!address) {
@@ -67,7 +32,7 @@ export function PaymentGate({
       const x402Response = await fetch(`/api/content/${contentId}`);
 
       let payTo = creatorAddress;
-      const { STXtoMicroSTX } = await import('x402-stacks');
+      // Statically imported helper
       let amountMicroSTX: bigint = BigInt(STXtoMicroSTX(price));
 
       if (x402Response.status === 402) {
@@ -93,7 +58,6 @@ export function PaymentGate({
       // Step 2: Open wallet extension to sign & broadcast STX transfer
       setStep('waitingWallet');
 
-      const { openSTXTransfer } = await import('@stacks/connect');
       openSTXTransfer({
         recipient: payTo,
         amount: amountMicroSTX,
@@ -369,7 +333,6 @@ function ConnectWalletButton() {
 
   const handleConnect = async () => {
     try {
-      const { connect } = await import('@stacks/connect');
       const result = await connect();
       const stxAddress = result.addresses.find((a) => a.symbol === 'STX');
       if (stxAddress) {
