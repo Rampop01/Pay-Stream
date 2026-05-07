@@ -40,60 +40,58 @@
   (map-get? unlock-records { buyer: buyer, creator: creator })
 )
 
-;; --- Public Functions ---
-
-;; Register or update a talent profile
-(define-public (register-profile (name (string-ascii 64)) (bio (string-utf8 256)) (skills (string-ascii 128)) (price uint))
+;; Register or update content metadata
+(define-public (register-content (title (string-ascii 64)) (description (string-utf8 256)) (category (string-ascii 32)) (price uint))
   (begin
-    (ok (map-set talent-profiles tx-sender
+    (ok (map-set content-metadata tx-sender
       {
-        name: name,
-        bio: bio,
-        skills: skills,
+        title: title,
+        description: description,
+        category: category,
         price: price,
-        total-hired: (default-to u0 (get total-hired (map-get? talent-profiles tx-sender))),
+        total-unlocks: (default-to u0 (get total-unlocks (map-get? content-metadata tx-sender))),
         is-active: true
       }
     ))
   )
 )
 
-;; Hire a talent by paying their specified price
-(define-public (hire-talent (talent principal))
+;; Unlock content by paying specified price
+(define-public (unlock-content (creator principal))
   (let
     (
-      (profile (unwrap! (map-get? talent-profiles talent) ERR-NOT-FOUND))
-      (price (get price profile))
-      (total-hired (get total-hired profile))
+      (metadata (unwrap! (map-get? content-metadata creator) ERR-NOT-FOUND))
+      (price (get price metadata))
+      (total-unlocks (get total-unlocks metadata))
     )
     (begin
-      ;; 1. Transfer STX from employer (tx-sender) to talent
-      (try! (stx-transfer? price tx-sender talent))
+      ;; 1. Transfer STX from buyer (tx-sender) to creator
+      (try! (stx-transfer? price tx-sender creator))
       
-      ;; 2. Record the hire
-      (map-set hire-records { employer: tx-sender, talent: talent } 
+      ;; 2. Record the unlock
+      (map-set unlock-records { buyer: tx-sender, creator: creator } 
         { timestamp: block-height, amount: price }
       )
       
-      ;; 3. Increment hire count
-      (map-set talent-profiles talent
-        (merge profile { total-hired: (+ total-hired u1) })
+      ;; 3. Increment unlock count
+      (map-set content-metadata creator
+        (merge metadata { total-unlocks: (+ total-unlocks u1) })
       )
       
-      (print { event: "talent-hired", employer: tx-sender, talent: talent, amount: price })
+      (print { event: "content-unlocked", buyer: tx-sender, creator: creator, amount: price })
       (ok true)
     )
   )
 )
 
-;; Toggle profile visibility
+;; Toggle content visibility
 (define-public (set-active (active bool))
   (let
     (
-      (profile (unwrap! (map-get? talent-profiles tx-sender) ERR-NOT-FOUND))
+      (metadata (unwrap! (map-get? content-metadata tx-sender) ERR-NOT-FOUND))
     )
-    (ok (map-set talent-profiles tx-sender
-      (merge profile { is-active: active })
+    (ok (map-set content-metadata tx-sender
+      (merge metadata { is-active: active })
     ))
   )
 )
