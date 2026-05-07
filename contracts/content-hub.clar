@@ -70,7 +70,7 @@
       
       ;; 2. Record the unlock
       (map-set unlock-records { buyer: tx-sender, creator: creator } 
-        { timestamp: block-height, amount: price }
+        { timestamp: stacks-block-height, amount: price }
       )
       
       ;; 3. Increment unlock count
