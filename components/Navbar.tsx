@@ -62,22 +62,22 @@ export function Navbar() {
             <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-stacks-orange to-stacks-amber flex items-center justify-center shadow-lg shadow-stacks-orange/20 group-hover:shadow-stacks-orange/40 transition-shadow duration-300">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-bold text-foreground group-hover:text-stacks-orange-light transition-colors duration-300">
-              PayStream
+            <span className="text-lg font-bold text-white group-hover:text-stacks-orange-light transition-colors duration-300">
+              ContentStream
             </span>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-2">
             <Link href="/">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
                 <Home className="w-4 h-4" />
                 Home
               </button>
             </Link>
 
             <Link href="/explore">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
                 <Compass className="w-4 h-4" />
                 Explore
               </button>
@@ -87,7 +87,7 @@ export function Navbar() {
               <Link href="/create">
                 <button className="btn-stacks flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white font-medium">
                   <Plus className="w-4 h-4" />
-                  <span>Create</span>
+                  <span>Upload Content</span>
                 </button>
               </Link>
             )}
@@ -158,14 +158,14 @@ export function Navbar() {
               <Link href="/explore" onClick={() => setMobileOpen(false)}>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
                   <Compass className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">Explore</span>
+                  <span className="text-sm">Browse Talents</span>
                 </div>
               </Link>
               {address && (
                 <Link href="/create" onClick={() => setMobileOpen(false)}>
                   <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
                     <Plus className="w-4 h-4 text-stacks-orange-light" />
-                    <span className="text-sm">Create Content</span>
+                    <span className="text-sm">Join as Talent</span>
                   </div>
                 </Link>
               )}
