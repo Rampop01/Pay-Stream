@@ -1,13 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { TalentCard } from '@/components/TalentCard';
+import { ContentCard } from '@/components/ContentCard';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), {
   ssr: false,
 });
 import { Skeleton } from '@/components/ui/skeleton';
-import { useTalents } from '@/hooks/useTalents';
+import { useContent } from '@/hooks/useContent';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -23,6 +23,7 @@ import {
   Briefcase,
   Search,
   User,
+  Play,
 } from 'lucide-react';
 
 function LightningBolt({ className = '' }: { className?: string }) {
@@ -53,7 +54,7 @@ function AnimatedCounter({ value, label }: { value: string; label: string }) {
       <div className="text-3xl md:text-4xl font-bold gradient-text-stacks mb-1">
         {value}
       </div>
-      <div className="text-sm text-muted-foreground">{label}</div>
+      <div className="text-sm text-white/40">{label}</div>
     </motion.div>
   );
 }
@@ -80,8 +81,8 @@ function FeatureCard({
       <div className="icon-glow w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
         <Icon className="w-6 h-6 text-stacks-orange-light" />
       </div>
-      <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">
+      <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
+      <p className="text-sm text-white/40 leading-relaxed">
         {description}
       </p>
     </motion.div>
