@@ -14,7 +14,7 @@ export const useWalletStore = create<WalletState>()(
       clearWallet: () => set({ address: null }),
     }),
     {
-      name: 'paystream-wallet-storage',
+      name: 'talentstream-wallet-storage',
     }
   )
 );

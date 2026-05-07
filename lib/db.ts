@@ -16,7 +16,7 @@ async function ensureDataDir() {
       await fs.writeFile(CONTENT_FILE, JSON.stringify([], null, 2));
     }
   } catch (error) {
-    console.error('[x402] Failed to initialize data directory:', error);
+    console.error('[ContentStream] Failed to initialize data directory:', error);
   }
 }
 
@@ -27,20 +27,20 @@ export async function getAllContent(): Promise<Content[]> {
     const data = await fs.readFile(CONTENT_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    console.error('[x402] Failed to read content:', error);
+    console.error('[ContentStream] Failed to read content:', error);
     return [];
   }
 }
 
 // Get single content by ID
 export async function getContentById(id: string): Promise<Content | null> {
-  const content = await getAllContent();
-  return content.find((c) => c.id === id) || null;
+  const contents = await getAllContent();
+  return contents.find((c) => c.id === id) || null;
 }
 
 // Add new content to database
 export async function addContent(
-  content: Omit<Content, 'id' | 'createdAt' | 'views'>
+  content: Omit<Content, 'id' | 'createdAt' | 'totalUnlocks'>
 ): Promise<Content> {
   await ensureDataDir();
   const allContent = await getAllContent();
@@ -50,7 +50,7 @@ export async function addContent(
     ...content,
     id: Date.now().toString(36) + Math.random().toString(36).substr(2),
     createdAt: Date.now(),
-    views: 0,
+    totalUnlocks: 0,
   };
 
   allContent.push(newContent);
@@ -59,7 +59,7 @@ export async function addContent(
   return newContent;
 }
 
-// Update content (for incrementing views, etc)
+// Update content
 export async function updateContent(id: string, updates: Partial<Content>): Promise<Content | null> {
   await ensureDataDir();
   const allContent = await getAllContent();
