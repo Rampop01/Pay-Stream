@@ -24,20 +24,20 @@
   }
 )
 
-;; Tracking hires (Employer -> Talent -> Count)
-(define-map hire-records
-  { employer: principal, talent: principal }
+;; Tracking unlocks (Buyer -> Creator -> Count)
+(define-map unlock-records
+  { buyer: principal, creator: principal }
   { timestamp: uint, amount: uint }
 )
 
 ;; --- Read-Only Functions ---
 
-(define-read-only (get-profile (talent principal))
-  (map-get? talent-profiles talent)
+(define-read-only (get-content-metadata (creator principal))
+  (map-get? content-metadata creator)
 )
 
-(define-read-only (get-hire-record (employer principal) (talent principal))
-  (map-get? hire-records { employer: employer, talent: talent })
+(define-read-only (get-unlock-record (buyer principal) (creator principal))
+  (map-get? unlock-records { buyer: buyer, creator: creator })
 )
 
 ;; --- Public Functions ---
