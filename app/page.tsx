@@ -145,18 +145,18 @@ export default function Page() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <Link href="/wallet">
+              <Link href="/create">
                 <button className="btn-stacks h-12 px-8 rounded-lg text-white font-semibold flex items-center gap-2 text-base">
-                  <span>Join as Talent</span>
+                  <span>Start Creating</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
-              <a href="#talents">
-                <button className="btn-outline-glow h-12 px-8 rounded-lg text-foreground font-medium flex items-center gap-2 text-base">
+              <Link href="/explore">
+                <button className="btn-outline-glow h-12 px-8 rounded-lg text-white font-medium flex items-center gap-2 text-base">
                   <Search className="w-4 h-4" />
-                  <span>Browse Talents</span>
+                  <span>Explore Content</span>
                 </button>
-              </a>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -165,10 +165,10 @@ export default function Page() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
             >
-              <AnimatedCounter value="Clarity" label="Smart Contracts" />
-              <AnimatedCounter value="STX" label="Payment Settlement" />
-              <AnimatedCounter value="100%" label="Talent Revenue" />
-              <AnimatedCounter value="Verified" label="On-Chain Skills" />
+              <AnimatedCounter value="Clarity" label="On-Chain Access" />
+              <AnimatedCounter value="STX" label="Instant Royalties" />
+              <AnimatedCounter value="100%" label="Creator Share" />
+              <AnimatedCounter value="Global" label="Content Distribution" />
             </motion.div>
           </div>
         </div>
