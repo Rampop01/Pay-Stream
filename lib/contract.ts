@@ -52,14 +52,14 @@ export async function registerContentContract({
   });
 }
 
-export async function hireTalentContract({
-  talentAddress,
+export async function unlockContentContract({
+  creatorAddress,
   senderAddress,
   amountInSTX,
   onFinish,
   onCancel
 }: {
-  talentAddress: string;
+  creatorAddress: string;
   senderAddress: string;
   amountInSTX: number;
   onFinish: (data: any) => void;
@@ -75,9 +75,9 @@ export async function hireTalentContract({
     network,
     contractAddress: CONTRACT_ADDRESS,
     contractName: CONTRACT_NAME,
-    functionName: 'hire-talent',
+    functionName: 'unlock-content',
     functionArgs: [
-      principalCV(talentAddress)
+      principalCV(creatorAddress)
     ],
     postConditions: [postCondition],
     postConditionMode: PostConditionMode.Deny,
