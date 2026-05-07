@@ -1,3 +1,4 @@
+;; @version 3
 ;; ContentHub Contract
 ;; A decentralized platform for creators to showcase their content and monetize it.
 ;; Features: Content registration, STX payments for unlocking, and on-chain verification.
