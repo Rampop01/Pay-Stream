@@ -186,21 +186,21 @@ export default function Page() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why <span className="gradient-text-fire">TalentStream</span>?
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Why <span className="gradient-text-fire">ContentStream</span>?
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              We bridge the gap between global talent and employers through decentralized identity and instant, trustless payments.
+            <p className="text-white/40 max-w-xl mx-auto">
+              We bridge the gap between global creators and audiences through decentralized identity and instant, trustless payments.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeatureCard icon={Briefcase} title="Direct Hiring" description="No middlemen, no platform fees. Hire talents directly by interacting with our Clarity smart contracts." delay={0} />
-            <FeatureCard icon={Lock} title="Secure Payments" description="Payments are locked and released through on-chain escrow or direct transfers, secured by Bitcoin's finality." delay={0.1} />
-            <FeatureCard icon={Shield} title="Verified Profiles" description="Talent identities and portfolios are represented on-chain, ensuring authenticity and trust." delay={0.2} />
+            <FeatureCard icon={Play} title="Direct Unlocking" description="No middlemen, no platform fees. Unlock content directly by interacting with our Clarity smart contracts." delay={0} />
+            <FeatureCard icon={Lock} title="Secure Access" description="Content is locked behind on-chain verification, ensuring only authorized buyers can access premium work." delay={0.1} />
+            <FeatureCard icon={Shield} title="Creator Ownership" description="Your content and metadata are registered on-chain, preserving your digital ownership and rights." delay={0.2} />
             <FeatureCard icon={Layers} title="Stacks Native" description="Fully integrated with the Stacks ecosystem. Support for SIP-009 NFTs and SIP-010 tokens." delay={0.3} />
-            <FeatureCard icon={Globe} title="Global Access" description="Connect with elite developers, designers, and creators from all over the world without borders." delay={0.4} />
-            <FeatureCard icon={TrendingUp} title="On-Chain Reputation" description="Every successful hire builds your on-chain reputation, visible to everyone on the Stacks explorer." delay={0.5} />
+            <FeatureCard icon={Globe} title="Global Reach" description="Monetize your work for a global audience without worrying about traditional payment gateway restrictions." delay={0.4} />
+            <FeatureCard icon={TrendingUp} title="On-Chain Earnings" description="Every unlock is recorded on-chain, building your verifiable revenue history on the Stacks explorer." delay={0.5} />
           </div>
         </div>
       </section>
@@ -226,16 +226,16 @@ export default function Page() {
                   How It <span className="text-black/80">Works</span>
                 </h2>
                 <p className="text-white/80 mb-10">
-                  TalentStream leverages Clarity smart contracts to manage profiles and payments securely.
+                  ContentStream leverages Clarity smart contracts to manage access and payments securely.
                 </p>
               </motion.div>
 
               <div className="space-y-8">
                 {[
-                  { step: 1, title: 'Connect Wallet', desc: 'Link your Leather or Xverse wallet to create your professional on-chain identity.' },
-                  { step: 2, title: 'Build Your Profile', desc: 'Register your skills and set your hiring price. Your profile is stored in the TalentHub contract.' },
-                  { step: 3, title: 'Get Hired', desc: 'Employers browse talents and pay STX to hire you. All logic is handled by the smart contract.' },
-                  { step: 4, title: 'Build Reputation', desc: 'Each hire is recorded on-chain, building your decentralized professional score.' },
+                  { step: 1, title: 'Connect Wallet', desc: 'Link your Leather or Xverse wallet to create your creator identity.' },
+                  { step: 2, title: 'Upload & Register', desc: 'Set your title, category, and price. Your content metadata is stored in the ContentHub contract.' },
+                  { step: 3, title: 'Sell Access', desc: 'Audiences browse and pay STX to unlock your content. All logic is handled by the smart contract.' },
+                  { step: 4, title: 'Earn & Grow', desc: 'Receive instant payments and build your on-chain reputation as a successful creator.' },
                 ].map((item, i) => (
                   <motion.div
                     key={item.step}
@@ -273,8 +273,8 @@ export default function Page() {
                     <User className="w-5 h-5 text-stacks-orange-light" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-white">Talent Registration</div>
-                    <div className="text-xs text-white/50 font-mono">(register-profile ...)</div>
+                    <div className="text-sm font-medium text-white">Content Registration</div>
+                    <div className="text-xs text-white/50 font-mono">(register-content ...)</div>
                   </div>
                 </div>
 
@@ -287,8 +287,8 @@ export default function Page() {
                     <Search className="w-5 h-5 text-yellow-300" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-bold text-yellow-300">Employer Discovery</div>
-                    <div className="text-xs text-white/50">Browsing on-chain profiles</div>
+                    <div className="text-sm font-bold text-yellow-300">Audience Discovery</div>
+                    <div className="text-xs text-white/50">Browsing on-chain marketplace</div>
                   </div>
                 </div>
 
@@ -301,8 +301,8 @@ export default function Page() {
                     <Zap className="w-5 h-5 text-stacks-orange-light" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-white">Smart Contract Hire</div>
-                    <div className="text-xs text-white/50">(hire-talent ...)</div>
+                    <div className="text-sm font-medium text-white">Smart Contract Unlock</div>
+                    <div className="text-xs text-white/50">(unlock-content ...)</div>
                   </div>
                 </div>
 
@@ -316,7 +316,7 @@ export default function Page() {
                   </div>
                   <div className="flex-1">
                     <div className="text-sm font-bold text-green-400">On-Chain Proof</div>
-                    <div className="text-xs text-white/50">Payment & Reputation Confirmed</div>
+                    <div className="text-xs text-white/50">Access & Royalty Confirmed</div>
                   </div>
                 </div>
               </div>
@@ -327,8 +327,8 @@ export default function Page() {
 
       <div className="section-divider" />
 
-      {/* FEATURED TALENTS */}
-      <section id="talents" className="relative py-24">
+      {/* FEATURED CONTENT */}
+      <section id="content" className="relative py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -338,11 +338,11 @@ export default function Page() {
             className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4"
           >
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Featured <span className="gradient-text-stacks">Talents</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                Featured <span className="gradient-text-stacks">Creations</span>
               </h2>
-              <p className="text-muted-foreground">
-                Elite professionals ready for your next project
+              <p className="text-white/40">
+                Premium content ready to be unlocked
               </p>
             </div>
             <div className="flex gap-3">
@@ -363,8 +363,8 @@ export default function Page() {
 
           {error && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-6 glass-card rounded-xl border-red-500/20 mb-8">
-              <p className="font-semibold text-red-400 mb-1">Error loading talents</p>
-              <p className="text-sm text-muted-foreground">{error}</p>
+              <p className="font-semibold text-red-400 mb-1">Error loading content</p>
+              <p className="text-sm text-white/40">{error}</p>
             </motion.div>
           )}
 
@@ -372,16 +372,16 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="space-y-2">
-                  <Skeleton className="w-full aspect-[4/3] skeleton-stacks rounded-xl" />
+                  <Skeleton className="w-full aspect-video skeleton-stacks rounded-xl" />
                   <Skeleton className="h-4 w-3/4 skeleton-stacks rounded" />
                   <Skeleton className="h-4 w-1/2 skeleton-stacks rounded" />
                 </div>
               ))}
             </div>
-          ) : talents.length > 0 ? (
+          ) : content.length > 0 ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {talents.slice(0, 4).map((item, index) => (
+                {content.slice(0, 4).map((item, index) => (
                   <motion.div
                     key={item.id}
                     className="h-full"
@@ -390,7 +390,7 @@ export default function Page() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <TalentCard talent={item} />
+                    <ContentCard content={item} />
                   </motion.div>
                 ))}
               </div>
@@ -404,13 +404,13 @@ export default function Page() {
               <div className="icon-glow w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-8 h-8 text-stacks-orange-light" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">No talents registered yet</h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Be the first talent on TalentStream. Showcase your skills and start earning STX.
+              <h3 className="text-xl font-semibold mb-2">No content registered yet</h3>
+              <p className="text-white/40 mb-6 max-w-md mx-auto">
+                Be the first creator on ContentStream. Showcase your work and start earning STX.
               </p>
               <Link href="/create">
                 <button className="btn-stacks h-11 px-6 rounded-lg text-white font-semibold inline-flex items-center gap-2">
-                  <span>Register Profile</span>
+                  <span>Register Content</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
@@ -427,10 +427,10 @@ export default function Page() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-stacks-orange to-stacks-amber flex items-center justify-center">
                 <Zap className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-foreground">TalentStream</span>
-              <span className="text-xs text-muted-foreground">On-Chain Talent Marketplace</span>
+              <span className="font-bold text-white">ContentStream</span>
+              <span className="text-xs text-white/40">On-Chain Content Marketplace</span>
             </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-6 text-sm text-white/40">
               <a href="https://docs.stacks.co/" target="_blank" rel="noopener noreferrer" className="hover:text-stacks-orange-light transition-colors">Stacks Docs</a>
               <a href="https://explorer.hiro.so/" target="_blank" rel="noopener noreferrer" className="hover:text-stacks-orange-light transition-colors">Stacks Explorer</a>
               <span className="text-border">|</span>
@@ -439,6 +439,9 @@ export default function Page() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
     </div>
   );
 }
