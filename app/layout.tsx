@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'PayStream | x402-Stacks Powered Content Monetization',
-  description: 'Stream payments, stream content. Monetize your premium content with instant STX payments powered by x402-stacks on the Stacks blockchain.',
-  keywords: ['x402', 'stacks', 'blockchain', 'content monetization', 'STX', 'payments', 'web3'],
+  title: 'ContentStream | Decentralized Content Marketplace on Stacks',
+  description: 'Monetize your premium content directly on the Stacks blockchain using Clarity smart contracts and STX royalties.',
+  keywords: ['content monetization', 'stacks', 'blockchain', 'creator economy', 'STX', 'payments', 'web3', 'Bitcoin L2'],
 }
 
 export default function RootLayout({
