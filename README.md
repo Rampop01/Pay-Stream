@@ -26,10 +26,10 @@ A production-ready decentralized content monetization platform leveraging Clarit
 
 ## Smart Contract
 
-The core logic resides in `contracts/talent-hub.clar`. It manages:
-- **Profile Registration**: Storing names, bios, skills, and pricing on-chain.
-- **Hiring Logic**: Handling STX transfers from employers to talents.
-- **Reputation Tracking**: Counting successful hires per profile.
+The core logic resides in `contracts/content-hub.clar`. It manages:
+- **Metadata Registration**: Storing titles, descriptions, and pricing on-chain.
+- **Unlocking Logic**: Handling STX transfers from buyers to creators.
+- **Sales Tracking**: Counting successful unlocks per creation.
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ The core logic resides in `contracts/talent-hub.clar`. It manages:
 1. **Clone and install dependencies:**
    ```bash
    git clone <your-repo>
-   cd talent-stream
+   cd content-stream
    npm install --legacy-peer-deps
    ```
 
@@ -56,22 +56,22 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## How It Works
 
-### The Hiring Flow
+### The Monetization Flow
 
 ```
-1. Talent connects wallet and registers profile (Contract Call)
+1. Creator connects wallet and registers content (Contract Call)
    ↓
-2. Employer browses profiles on the TalentStream dashboard
+2. Audience browses creations on the ContentStream explorer
    ↓
-3. Employer clicks "Hire" on a talent profile
+3. Audience clicks "Unlock" on a specific content piece
    ↓
-4. Employer signs a contract call (hire-talent) via Leather/Xverse
+4. Audience signs a contract call (unlock-content) via Leather/Xverse
    ↓
-5. STX is transferred from Employer to Talent on the Stacks blockchain
+5. STX is transferred from Buyer to Creator on the Stacks blockchain
    ↓
-6. Talent's "Total Hires" count increases on-chain
+6. Content's "Total Unlocks" count increases on-chain
    ↓
-7. The hire record is indexed for professional reputation
+7. The purchase record is indexed for creator history
 ```
 
 ## Project Structure
@@ -79,20 +79,20 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 /app
 ├── page.tsx                 # Landing page
-├── /explore/page.tsx        # Talent discovery
-├── /create/page.tsx         # Join as talent page
-├── /talents/[id]/page.tsx   # Profile detail & hiring
-├── /api/talents             # Indexing API for on-chain data
+├── /explore/page.tsx        # Content discovery
+├── /create/page.tsx         # Upload content page
+├── /content/[id]/page.tsx   # Content detail & unlocking
+├── /api/content             # Indexing API for on-chain data
 └── /layout.tsx              # Root layout with premium theme
 
 /components
 ├── Navbar.tsx               # Navigation with wallet status
-├── TalentCard.tsx           # Talent preview card
-├── RegisterTalentForm.tsx   # On-chain profile registration
+├── ContentCard.tsx          # Content preview card
+├── CreateContentForm.tsx    # On-chain registration form
 └── /ui/*                    # shadcn/ui components
 
 /contracts
-└── talent-hub.clar          # Clarity smart contract
+└── content-hub.clar         # Clarity smart contract
 
 /lib
 ├── contract.ts              # Contract interaction layer
@@ -104,7 +104,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Deployment
 
 ### Smart Contract
-Deploy `contracts/talent-hub.clar` to Stacks Testnet or Mainnet using Hiro Explorer or Clarinet.
+Deploy `contracts/content-hub.clar` to Stacks Testnet or Mainnet using Hiro Explorer or Clarinet.
 
 ### Frontend
 Deploy to [Vercel](https://vercel.com):
