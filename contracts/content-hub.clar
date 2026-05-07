@@ -15,9 +15,9 @@
 (define-map content-metadata
   principal
   {
-    title: (string-ascii 64),
+    title: (string-utf8 64),
     description: (string-utf8 256),
-    category: (string-ascii 32),
+    category: (string-utf8 32),
     price: uint, ;; Price in microSTX to unlock content
     total-unlocks: uint,
     is-active: bool
@@ -41,7 +41,7 @@
 )
 
 ;; Register or update content metadata
-(define-public (register-content (title (string-ascii 64)) (description (string-utf8 256)) (category (string-ascii 32)) (price uint))
+(define-public (register-content (title (string-utf8 64)) (description (string-utf8 256)) (category (string-utf8 32)) (price uint))
   (begin
     (ok (map-set content-metadata tx-sender
       {
