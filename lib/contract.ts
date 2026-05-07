@@ -33,7 +33,7 @@ export async function registerContentContract({
   onFinish: (data: any) => void;
   onCancel: () => void;
 }) {
-  const network = 'testnet';
+  const network = 'mainnet';
   
   await openContractCall({
     network,
@@ -65,7 +65,7 @@ export async function unlockContentContract({
   onFinish: (data: any) => void;
   onCancel: () => void;
 }) {
-  const network = 'testnet';
+  const network = 'mainnet';
   const amountInMicrostacks = amountInSTX * 1000000;
 
   // Post condition to ensure STX are transferred

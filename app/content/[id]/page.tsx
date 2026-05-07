@@ -204,7 +204,7 @@ export default function ContentPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-white/40">Network</span>
                   <span className="text-white/80 flex items-center gap-1">
-                    <Globe className="w-3 h-3" /> Testnet
+                    <Globe className="w-3 h-3" /> Mainnet
                   </span>
                 </div>
               </div>
