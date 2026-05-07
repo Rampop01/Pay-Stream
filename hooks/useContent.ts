@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { Content } from '@/lib/types';
 
 /**
- * Hook to fetch and cache content data
- * Used on discovery page and content detail pages
+ * Hook to fetch all content from the marketplace
  */
 export function useContent() {
   const [content, setContent] = useState<Content[]>([]);
@@ -13,20 +12,18 @@ export function useContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchContent = async () => {
+    async function fetchContent() {
       try {
-        setIsLoading(true);
         const response = await fetch('/api/content');
         if (!response.ok) throw new Error('Failed to fetch content');
         const data = await response.json();
         setContent(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+      } catch (err: any) {
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
-    };
+    }
 
     fetchContent();
   }, []);
@@ -43,27 +40,22 @@ export function useContentById(id: string | null) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) {
-      setIsLoading(false);
-      return;
-    }
+    if (!id) return;
 
-    const fetchContent = async () => {
+    async function fetchContentDetail() {
       try {
-        setIsLoading(true);
-        const response = await fetch(`/api/content/${id}?preview=true`);
+        const response = await fetch(`/api/content/${id}`);
         if (!response.ok) throw new Error('Content not found');
         const contentData = await response.json();
         setData(contentData);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+      } catch (err: any) {
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
-    };
+    }
 
-    fetchContent();
+    fetchContentDetail();
   }, [id]);
 
   return { data, isLoading, error };
