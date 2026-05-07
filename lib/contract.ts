@@ -15,8 +15,8 @@ import {
   Pc
 } from '@stacks/transactions';
 
-const CONTRACT_ADDRESS = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM'; // Default dev address
-const CONTRACT_NAME = 'content-hub';
+const CONTRACT_ADDRESS = 'SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M'; // Deployed Mainnet address
+const CONTRACT_NAME = 'content_hub';
 
 export async function registerContentContract({
   title,
