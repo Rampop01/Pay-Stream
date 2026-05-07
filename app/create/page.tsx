@@ -39,11 +39,11 @@ export default function CreatePage() {
           transition={{ duration: 0.5 }}
           className="mb-10"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Create <span className="gradient-text-fire">Premium Content</span>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Upload to <span className="gradient-text-fire">ContentStream</span>
           </h1>
-          <p className="text-muted-foreground">
-            Share your content with the world and earn STX payments
+          <p className="text-white/40">
+            Register your premium creations on the Stacks blockchain and start earning STX
           </p>
         </motion.div>
 
@@ -52,7 +52,7 @@ export default function CreatePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <CreateContentForm onSuccess={handleSuccess} />
+          <CreateContentForm />
         </motion.div>
 
         {submittedId && (
@@ -66,10 +66,10 @@ export default function CreatePage() {
             </div>
             <div className="flex-1">
               <p className="font-semibold text-green-400">
-                Content created successfully!
+                Content registered successfully!
               </p>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                Redirecting to your content
+              <p className="text-sm text-white/40 flex items-center gap-1">
+                Redirecting to your content page
                 <ArrowRight className="w-3 h-3 animate-pulse" />
               </p>
             </div>
