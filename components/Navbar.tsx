@@ -157,15 +157,15 @@ export function Navbar() {
               </Link>
               <Link href="/explore" onClick={() => setMobileOpen(false)}>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
-                  <Compass className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">Browse Talents</span>
+                  <Compass className="w-4 h-4 text-white/40" />
+                  <span className="text-sm">Explore Content</span>
                 </div>
               </Link>
               {address && (
                 <Link href="/create" onClick={() => setMobileOpen(false)}>
                   <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
                     <Plus className="w-4 h-4 text-stacks-orange-light" />
-                    <span className="text-sm">Join as Talent</span>
+                    <span className="text-sm">Upload Content</span>
                   </div>
                 </Link>
               )}
