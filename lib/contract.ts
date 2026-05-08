@@ -1,20 +1,3 @@
-import { 
-  openContractCall, 
-  ContractCallUint64, 
-  ContractCallStringUtf8, 
-  ContractCallList,
-  ContractCallPrincipal
-} from '@stacks/connect';
-import { 
-  AnchorMode, 
-  PostConditionMode, 
-  uintCV, 
-  stringUtf8CV, 
-  listCV, 
-  principalCV,
-  Pc
-} from '@stacks/transactions';
-
 const CONTRACT_ADDRESS = 'SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M'; // Deployed Mainnet address
 const CONTRACT_NAME = 'content_hub';
 
@@ -33,6 +16,8 @@ export async function registerContentContract({
   onFinish: (data: any) => void;
   onCancel: () => void;
 }) {
+  const { openContractCall } = await import('@stacks/connect');
+  const { AnchorMode, stringUtf8CV, uintCV } = await import('@stacks/transactions');
   const network = 'mainnet';
   
   await openContractCall({
@@ -65,6 +50,8 @@ export async function unlockContentContract({
   onFinish: (data: any) => void;
   onCancel: () => void;
 }) {
+  const { openContractCall } = await import('@stacks/connect');
+  const { AnchorMode, PostConditionMode, principalCV, Pc } = await import('@stacks/transactions');
   const network = 'mainnet';
   const amountInMicrostacks = amountInSTX * 1000000;
 
