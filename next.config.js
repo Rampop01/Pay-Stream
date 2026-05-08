@@ -10,7 +10,6 @@ const nextConfig = {
     '@stacks/connect',
     '@stacks/transactions',
     '@stacks/network',
-    'x402-stacks',
   ],
   async headers() {
     return [
