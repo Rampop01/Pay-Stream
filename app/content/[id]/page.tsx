@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
-
-const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContentById } from '@/hooks/useContent';
 import { Play, Share2, ArrowLeft, Sparkles, Zap, ShieldCheck, Globe, Star, Loader2, Lock } from 'lucide-react';
@@ -13,6 +11,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { unlockContentContract } from '@/lib/contract';
 import { useWalletStore } from '@/lib/store';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
 export default function ContentPage() {
   const params = useParams();

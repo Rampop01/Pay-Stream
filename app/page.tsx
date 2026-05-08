@@ -2,10 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { ContentCard } from '@/components/ContentCard';
-
-const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), {
-  ssr: false,
-});
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContent } from '@/hooks/useContent';
 import Link from 'next/link';
@@ -25,6 +21,10 @@ import {
   User,
   Play,
 } from 'lucide-react';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), {
+  ssr: false,
+});
 
 function LightningBolt({ className = '' }: { className?: string }) {
   return (

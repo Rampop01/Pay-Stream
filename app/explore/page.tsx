@@ -1,8 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-
-const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 import { ContentCard } from '@/components/ContentCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContent } from '@/hooks/useContent';
@@ -10,6 +8,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowLeft, Search, Play } from 'lucide-react';
 import { useState } from 'react';
+
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
 export default function ExplorePage() {
   const { content, isLoading, error } = useContent();

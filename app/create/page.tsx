@@ -2,16 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
+const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 const CreateContentForm = dynamic(
   () => import('@/components/CreateContentForm').then((mod) => mod.CreateContentForm),
   { ssr: false }
 );
-import { CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function CreatePage() {
   const router = useRouter();
