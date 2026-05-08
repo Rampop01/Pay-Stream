@@ -29,7 +29,7 @@ export default function WalletPage() {
             Wallet <span className="gradient-text-stacks">Connection</span>
           </h1>
           <p className="text-muted-foreground">
-            Connect your Leather or Xverse wallet to start using PayStream
+            Connect your Leather or Xverse wallet to start using TalentStream
           </p>
         </motion.div>
 
@@ -57,15 +57,15 @@ export default function WalletPage() {
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">2.</span>
-                  Get testnet STX tokens from the faucet
+                  Get STX tokens (Mainnet or Testnet)
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">3.</span>
-                  Browse content on the marketplace
+                  Browse elite talents on the marketplace
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">4.</span>
-                  Click unlock &mdash; confirm payment in your wallet
+                  Hire directly via Clarity smart contracts
                 </li>
               </ol>
             </div>
@@ -75,10 +75,10 @@ export default function WalletPage() {
                 <div className="icon-glow w-9 h-9 rounded-lg flex items-center justify-center">
                   <BookOpen className="w-4 h-4 text-stacks-amber" />
                 </div>
-                <h3 className="font-semibold text-foreground">About x402-stacks</h3>
+                <h3 className="font-semibold text-foreground">About TalentStream</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                PayStream uses the x402-stacks protocol (HTTP 402 Payment Required) to gate premium content behind STX payments. Your wallet signs transactions securely — no private keys stored in the browser.
+                TalentStream leverages the TalentHub Clarity smart contract to manage decentralized professional identities and secure on-chain payments. Your wallet signs transactions directly on the Stacks blockchain.
               </p>
             </div>
 
