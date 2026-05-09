@@ -6,31 +6,42 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useContent } from '@/hooks/useContent';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowLeft, Search, Play } from 'lucide-react';
+import { Sparkles, ArrowLeft, Search, Play, ArrowUpDown } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
+
+export type SortOption = 'recent' | 'price-low' | 'price-high' | 'popular';
 
 export default function ExplorePage() {
   const { content, isLoading, error } = useContent();
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>('recent');
 
   // Get unique categories
   const categories = Array.from(
     new Set(content.map((c) => c.category).filter(Boolean))
   ) as string[];
 
-  // Filter content
-  const filtered = content.filter((item) => {
-    const matchesSearch =
-      !search ||
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory =
-      !selectedCategory || item.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  // Filter and Sort content
+  const filtered = content
+    .filter((item) => {
+      const matchesSearch =
+        !search ||
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.description.toLowerCase().includes(search.toLowerCase());
+      const matchesCategory =
+        !selectedCategory || item.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'recent') return b.createdAt - a.createdAt;
+      if (sortBy === 'price-low') return a.priceInSTX - b.priceInSTX;
+      if (sortBy === 'price-high') return b.priceInSTX - a.priceInSTX;
+      if (sortBy === 'popular') return (b.totalUnlocks || 0) - (a.totalUnlocks || 0);
+      return 0;
+    });
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
@@ -85,15 +96,31 @@ export default function ExplorePage() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="mb-8 space-y-4"
         >
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-            <input
-              type="text"
-              placeholder="Search by title or description..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-11 pl-10 pr-4 rounded-lg bg-white/5 border border-white/10 focus:border-stacks-orange/50 focus:ring-1 focus:ring-stacks-orange/20 text-sm text-white placeholder:text-white/20 outline-none transition-colors"
-            />
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-grow">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+              <input
+                type="text"
+                placeholder="Search by title or description..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full h-11 pl-10 pr-4 rounded-lg bg-white/5 border border-white/10 focus:border-stacks-orange/50 focus:ring-1 focus:ring-stacks-orange/20 text-sm text-white placeholder:text-white/20 outline-none transition-colors"
+              />
+            </div>
+            
+            <div className="relative min-w-[200px]">
+              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+                className="w-full h-11 pl-10 pr-4 rounded-lg bg-white/5 border border-white/10 focus:border-stacks-orange/50 outline-none appearance-none text-sm text-white cursor-pointer transition-colors"
+              >
+                <option value="recent">Most Recent</option>
+                <option value="popular">Most Popular</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+              </select>
+            </div>
           </div>
 
           {categories.length > 0 && (
