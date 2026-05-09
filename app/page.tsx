@@ -20,7 +20,11 @@ import {
   Search,
   User,
   Play,
+  Clock,
+  Flame
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), {
   ssr: false,
@@ -91,7 +95,21 @@ function FeatureCard({
 
 
 export default function Page() {
+  const router = useRouter();
   const { content, isLoading, error } = useContent();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const trendingContent = [...content].sort((a, b) => (b.totalUnlocks || 0) - (a.totalUnlocks || 0)).slice(0, 4);
+  const recentContent = [...content].sort((a, b) => b.createdAt - a.createdAt).slice(0, 4);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/explore?search=${encodeURIComponent(searchQuery)}`);
+    } else {
+      router.push('/explore');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
@@ -134,37 +152,38 @@ export default function Page() {
               className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed"
             >
               The first decentralized content marketplace powered by{' '}
-              <span className="text-stacks-orange-light font-medium">Clarity Smart Contracts</span>{' '}
-              and the{' '}
-              <span className="text-stacks-amber font-medium">Stacks blockchain</span>.
+              <span className="text-stacks-orange-light font-medium">Clarity Smart Contracts</span>.
               Unlock premium creations with instant STX payments.
             </motion.p>
 
-            <motion.div
+            <motion.form
+              onSubmit={handleSearch}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="max-w-xl mx-auto relative group mb-12"
             >
-              <Link href="/create">
-                <button className="btn-stacks h-12 px-8 rounded-lg text-white font-semibold flex items-center gap-2 text-base">
-                  <span>Start Creating</span>
-                  <ArrowRight className="w-4 h-4" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-stacks-orange to-stacks-amber rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+              <div className="relative flex items-center bg-zinc-950 border border-white/10 rounded-xl overflow-hidden p-1">
+                <Search className="w-5 h-5 text-white/30 ml-4 flex-shrink-0" />
+                <input 
+                  type="text" 
+                  placeholder="What do you want to learn or watch today?" 
+                  className="w-full bg-transparent border-none outline-none px-4 py-3 text-white placeholder:text-white/20"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="bg-stacks-orange hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                  Search
                 </button>
-              </Link>
-              <Link href="/explore">
-                <button className="btn-outline-glow h-12 px-8 rounded-lg text-white font-medium flex items-center gap-2 text-base">
-                  <Search className="w-4 h-4" />
-                  <span>Explore Content</span>
-                </button>
-              </Link>
-            </motion.div>
+              </div>
+            </motion.form>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
               <AnimatedCounter value="Clarity" label="On-Chain Access" />
               <AnimatedCounter value="STX" label="Instant Royalties" />
@@ -175,6 +194,90 @@ export default function Page() {
         </div>
 
         <div className="section-divider" />
+      </section>
+
+      {/* TRENDING SECTION */}
+      <section className="relative py-24 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-12">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                <Flame className="w-6 h-6 text-orange-500" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-white tracking-tight">Trending Now</h2>
+                <p className="text-white/40 text-sm italic">Most unlocked content this week</p>
+              </div>
+            </div>
+            <Link href="/explore?sort=popular" className="text-stacks-orange-light hover:underline font-medium text-sm flex items-center gap-1 group">
+              Explore All <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <Skeleton key={i} className="aspect-video w-full rounded-xl skeleton-stacks" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {trendingContent.map((item, i) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <ContentCard content={item} />
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* RECENTLY ADDED SECTION */}
+      <section className="relative py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-12">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center">
+                <Clock className="w-6 h-6 text-blue-400" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-white tracking-tight">Recently Added</h2>
+                <p className="text-white/40 text-sm italic">Fresh drops from top creators</p>
+              </div>
+            </div>
+            <Link href="/explore?sort=recent" className="text-blue-400 hover:underline font-medium text-sm flex items-center gap-1 group">
+              New Arrivals <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <Skeleton key={i} className="aspect-video w-full rounded-xl skeleton-stacks" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {recentContent.map((item, i) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <ContentCard content={item} />
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
 
       {/* FEATURES SECTION */}
@@ -328,95 +431,27 @@ export default function Page() {
 
       <div className="section-divider" />
 
-      {/* FEATURED CONTENT */}
-      <section id="content" className="relative py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* JOIN SECTION */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4"
+            className="glass-card p-12 rounded-3xl border border-white/10 relative"
           >
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Featured <span className="gradient-text-stacks">Creations</span>
-              </h2>
-              <p className="text-white/40">
-                Premium content ready to be unlocked
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <Link href="/explore">
-                <button className="btn-outline-glow h-10 px-6 rounded-lg text-sm font-medium flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
-                  View All
-                </button>
-              </Link>
+            <div className="orb orb-orange w-64 h-64 -top-20 -left-20 opacity-30" />
+            <h2 className="text-4xl font-bold mb-6">Ready to join the revolution?</h2>
+            <p className="text-white/50 mb-10 text-lg">Whether you're a creator looking to monetize your audience or a fan seeking premium content, ContentStream is your home.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/create">
-                <button className="btn-stacks h-10 px-6 rounded-lg text-white text-sm font-medium flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  Join Now
-                </button>
+                <button className="btn-stacks h-12 px-10 rounded-xl text-white font-bold text-lg">Start Creating</button>
+              </Link>
+              <Link href="/explore">
+                <button className="btn-outline-glow h-12 px-10 rounded-xl text-white font-medium text-lg">Explore All</button>
               </Link>
             </div>
           </motion.div>
-
-          {error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-6 glass-card rounded-xl border-red-500/20 mb-8">
-              <p className="font-semibold text-red-400 mb-1">Error loading content</p>
-              <p className="text-sm text-white/40">{error}</p>
-            </motion.div>
-          )}
-
-          {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="space-y-2">
-                  <Skeleton className="w-full aspect-video skeleton-stacks rounded-xl" />
-                  <Skeleton className="h-4 w-3/4 skeleton-stacks rounded" />
-                  <Skeleton className="h-4 w-1/2 skeleton-stacks rounded" />
-                </div>
-              ))}
-            </div>
-          ) : content.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {content.slice(0, 4).map((item, index) => (
-                  <motion.div
-                    key={item.id}
-                    className="h-full"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <ContentCard content={item} />
-                  </motion.div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20 glass-card rounded-2xl"
-            >
-              <div className="icon-glow w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-8 h-8 text-stacks-orange-light" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">No content registered yet</h3>
-              <p className="text-white/40 mb-6 max-w-md mx-auto">
-                Be the first creator on ContentStream. Showcase your work and start earning STX.
-              </p>
-              <Link href="/create">
-                <button className="btn-stacks h-11 px-6 rounded-lg text-white font-semibold inline-flex items-center gap-2">
-                  <span>Register Content</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </Link>
-            </motion.div>
-          )}
         </div>
       </section>
 
