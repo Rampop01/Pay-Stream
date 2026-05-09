@@ -166,3 +166,44 @@ export async function addReport(report: { contentId: string; reason: string; rep
 
   await fs.writeFile(REPORTS_FILE, JSON.stringify(reports, null, 2));
 }
+
+// --- Profile Management ---
+
+const PROFILES_FILE = path.join(process.cwd(), 'data/profiles.json');
+
+export interface UserProfile {
+  address: string;
+  name?: string;
+  avatarUrl?: string;
+  bio?: string;
+  updatedAt: number;
+}
+
+export async function getProfile(address: string): Promise<UserProfile | null> {
+  await ensureDataDir();
+  try {
+    const data = await fs.readFile(PROFILES_FILE, 'utf-8');
+    const profiles: UserProfile[] = JSON.parse(data);
+    return profiles.find((p) => p.address === address) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export async function updateProfile(profile: UserProfile): Promise<void> {
+  await ensureDataDir();
+  let profiles: UserProfile[] = [];
+  try {
+    const data = await fs.readFile(PROFILES_FILE, 'utf-8');
+    profiles = JSON.parse(data);
+  } catch (e) {}
+
+  const index = profiles.findIndex((p) => p.address === profile.address);
+  if (index >= 0) {
+    profiles[index] = { ...profiles[index], ...profile, updatedAt: Date.now() };
+  } else {
+    profiles.push({ ...profile, updatedAt: Date.now() });
+  }
+
+  await fs.writeFile(PROFILES_FILE, JSON.stringify(profiles, null, 2));
+}
