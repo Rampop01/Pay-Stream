@@ -18,11 +18,14 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { EditContentModal } from '@/components/EditContentModal';
 
 export default function CreatorDashboard() {
   const { address } = useWalletStore();
   const [content, setContent] = useState<Content[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedContent, setSelectedContent] = useState<Content | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     if (address) {
@@ -207,7 +210,13 @@ export default function CreatorDashboard() {
                           <Link href={`/content/${item.id}`} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white">
                             <ExternalLink className="w-4 h-4" />
                           </Link>
-                          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white">
+                          <button 
+                            onClick={() => {
+                              setSelectedContent(item);
+                              setIsEditModalOpen(true);
+                            }}
+                            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white"
+                          >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button 
@@ -225,6 +234,13 @@ export default function CreatorDashboard() {
             )}
           </div>
         </div>
+
+        <EditContentModal 
+          content={selectedContent}
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          onUpdate={fetchCreatorContent}
+        />
       </main>
     </div>
   );
