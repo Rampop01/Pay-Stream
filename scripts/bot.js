@@ -1,4 +1,4 @@
-const { makeContractCall, broadcastTransaction, AnchorMode, PostConditionMode, uintCV, cvToJSON, callReadOnlyFunction, standardPrincipalCV, stringUtf8CV, Pc } = require('@stacks/transactions');
+const { makeContractCall, broadcastTransaction, AnchorMode, PostConditionMode, uintCV, cvToJSON, fetchCallReadOnlyFunction, standardPrincipalCV, stringUtf8CV, Pc } = require('@stacks/transactions');
 const { STACKS_MAINNET } = require('@stacks/network');
 const fs = require('fs');
 const path = require('path');
@@ -107,7 +107,7 @@ async function doUnlockContent(bot, botIndex) {
     // Query the price first
     let priceMicroSTX = 1000000; // default fallback
     try {
-        const result = await callReadOnlyFunction({
+        const result = await fetchCallReadOnlyFunction({
             network: NETWORK,
             contractAddress: CONTRACT_ADDRESS,
             contractName: CONTRACT_NAME,
@@ -184,16 +184,8 @@ async function performRandomActivity() {
 function scheduleNext() {
     let nextSecs;
     const pattern = Math.random();
-    const currentHour = new Date().getHours();
-    
-    // Simulate night time (1 AM to 6 AM)
-    const isNightTime = currentHour >= 1 && currentHour <= 6;
 
-    if (isNightTime && pattern < 0.8) {
-        // 80% chance to sleep during night hours (30 mins - 2 hours)
-        nextSecs = 1800 + Math.floor(Math.random() * 5400);
-        console.log(`🌙 Night time. Taking a long sleep...`);
-    } else if (pattern < 0.1) {
+    if (pattern < 0.1) {
         // 10%: Long break (8-15 min) — user went AFK
         nextSecs = 480 + Math.floor(Math.random() * 420);
     } else if (pattern < 0.3) {
