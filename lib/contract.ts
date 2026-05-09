@@ -1,4 +1,5 @@
 import { StacksMainnet } from '@stacks/network';
+import { toast } from 'sonner';
 
 const CONTRACT_ADDRESS = 'SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M'; // Deployed Mainnet address
 const CONTRACT_NAME = 'content_hub';
@@ -42,6 +43,31 @@ export async function registerContentContract({
   });
 }
 
+export async function getOnChainPrice(creatorAddress: string): Promise<bigint | null> {
+  try {
+    const { fetchCallReadOnlyFunction, standardPrincipalCV, cvToJSON } = await import('@stacks/transactions');
+    const network = new StacksMainnet();
+    
+    const result = await fetchCallReadOnlyFunction({
+      network,
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: 'get-content-metadata',
+      functionArgs: [standardPrincipalCV(creatorAddress)],
+      senderAddress: CONTRACT_ADDRESS,
+    });
+
+    const json = cvToJSON(result);
+    if (json.value && json.value.value && json.value.value.price) {
+      return BigInt(json.value.value.price.value);
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching on-chain price:', error);
+    return null;
+  }
+}
+
 export async function unlockContentContract({
   creatorAddress,
   senderAddress,
@@ -58,9 +84,17 @@ export async function unlockContentContract({
   const { openContractCall } = await import('@stacks/connect');
   const { AnchorMode, PostConditionMode, principalCV, Pc } = await import('@stacks/transactions');
   const network = new StacksMainnet();
-  const amountInMicrostacks = BigInt(Math.round(amountInSTX * 1000000));
+  
+  // Verify on-chain first
+  const onChainPrice = await getOnChainPrice(creatorAddress);
+  if (onChainPrice === null) {
+    toast.error("Content creator not found on-chain. Please ensure they have registered.");
+    onCancel();
+    return;
+  }
 
-  console.log(`[Contract] Unlocking content from ${creatorAddress} for ${amountInMicrostacks} microSTX`);
+  const amountInMicrostacks = onChainPrice;
+  console.log(`[Contract] On-chain price found: ${amountInMicrostacks} microSTX`);
 
   // Post condition to ensure STX are transferred
   const postCondition = Pc.principal(senderAddress).willSendEq(amountInMicrostacks).ustx();
