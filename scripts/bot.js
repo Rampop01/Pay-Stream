@@ -143,7 +143,7 @@ async function doUnlockContent(bot, botIndex) {
         anchorMode: AnchorMode.Any,
         postConditions: [postCondition],
         postConditionMode: PostConditionMode.Deny,
-        fee: 50000n
+        fee: 3000n
     });
 }
 
