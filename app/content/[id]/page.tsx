@@ -19,9 +19,14 @@ export default function ContentPage() {
   const params = useParams();
   const contentId = params.id as string;
   const { data: content, isLoading, error } = useContentById(contentId);
+  const { content: allContent } = useContent();
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const { address } = useWalletStore();
+
+  const relatedContent = allContent
+    .filter((c) => c.category === content?.category && c.id !== contentId)
+    .slice(0, 3);
 
   const handleUnlock = async () => {
     if (!address) {
@@ -257,6 +262,31 @@ export default function ContentPage() {
                 This content uses Stacks smart contracts to handle access. When you unlock, STX is sent directly to the creator's wallet.
               </p>
             </motion.div>
+
+            {/* Related Content */}
+            {relatedContent.length > 0 && (
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="space-y-4"
+              >
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider">More from {content.category}</h3>
+                <div className="space-y-3">
+                  {relatedContent.map((item) => (
+                    <Link key={item.id} href={`/content/${item.id}`} className="flex gap-3 group">
+                      <div className="w-20 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-white/5 group-hover:border-stacks-orange/30 transition-colors">
+                        <img src={item.thumbnailUrl} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm font-bold text-white group-hover:text-stacks-orange transition-colors truncate">{item.title}</div>
+                        <div className="text-[10px] text-white/40">{item.priceInSTX} STX</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </main>
