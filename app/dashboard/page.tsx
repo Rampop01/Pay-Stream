@@ -45,6 +45,25 @@ export default function CreatorDashboard() {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to remove this content? This action cannot be undone.')) return;
+
+    try {
+      const res = await fetch(`/api/content/${id}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        toast.success('Content removed successfully');
+        fetchCreatorContent();
+      } else {
+        toast.error('Failed to remove content');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error('An error occurred while deleting');
+    }
+  };
+
   const totalUnlocks = content.reduce((sum, item) => sum + (item.totalUnlocks || 0), 0);
   const totalEarnings = content.reduce((sum, item) => sum + ((item.totalUnlocks || 0) * item.priceInSTX), 0);
   const avgPrice = content.length > 0 ? (content.reduce((sum, item) => sum + item.priceInSTX, 0) / content.length).toFixed(1) : 0;
@@ -191,7 +210,10 @@ export default function CreatorDashboard() {
                           <button className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white">
                             <Edit2 className="w-4 h-4" />
                           </button>
-                          <button className="p-2 hover:bg-red-500/10 rounded-lg transition-colors text-white/60 hover:text-red-500">
+                          <button 
+                            onClick={() => handleDelete(item.id)}
+                            className="p-2 hover:bg-red-500/10 rounded-lg transition-colors text-white/60 hover:text-red-500"
+                          >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
