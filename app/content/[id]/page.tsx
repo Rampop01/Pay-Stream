@@ -211,6 +211,39 @@ export default function ContentPage() {
               </div>
             </motion.div>
 
+            {/* Social Sharing */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 }}
+              className="glass-card rounded-2xl p-6 border-white/10"
+            >
+              <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2 uppercase tracking-wider">
+                <Share2 className="w-4 h-4 text-stacks-orange" /> Share with Friends
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  onClick={() => {
+                    const url = encodeURIComponent(window.location.href);
+                    const text = encodeURIComponent(`Check out this premium content on ContentStream!`);
+                    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+                  }}
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-xs font-bold"
+                >
+                  Twitter / X
+                </button>
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    toast.success('Link copied to clipboard!');
+                  }}
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-xs font-bold"
+                >
+                  Copy Link
+                </button>
+              </div>
+            </motion.div>
+
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
