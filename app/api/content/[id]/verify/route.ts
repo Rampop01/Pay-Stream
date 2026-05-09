@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getContentById, updateContent } from '@/lib/db';
+import { getContentById, updateContent, recordUnlock } from '@/lib/db';
 
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const { txId } = await request.json();
+    const { txId, buyerAddress } = await request.json();
     
     // In a real app, we would verify the txId on the Stacks blockchain
     // For now, we'll simulate verification and increment the unlock count
@@ -16,9 +16,21 @@ export async function POST(
       return NextResponse.json({ error: 'Content not found' }, { status: 404 });
     }
     
-    const updatedContent = await updateContent(params.id, {
-      totalUnlocks: (content.totalUnlocks || 0) + 1
-    });
+    // Record the unlock for the buyer's library
+    if (buyerAddress) {
+      await recordUnlock({
+        contentId: params.id,
+        buyerAddress,
+        txId,
+        amount: (content.priceInSTX * 1000000).toString(),
+        timestamp: Date.now()
+      });
+    } else {
+      // Just increment if buyer address not provided (backwards compat)
+      await updateContent(params.id, {
+        totalUnlocks: (content.totalUnlocks || 0) + 1
+      });
+    }
     
     return NextResponse.json({ 
       success: true, 
