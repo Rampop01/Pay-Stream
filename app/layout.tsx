@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
+import { PageTransition } from "@/components/PageTransition"
 
 import './globals.css'
 
@@ -29,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body className={`${inter.variable} font-sans antialiased bg-background text-foreground noise-overlay`}>
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
         <Toaster
           theme="dark"
           position="bottom-right"
