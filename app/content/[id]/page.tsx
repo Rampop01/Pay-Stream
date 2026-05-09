@@ -41,7 +41,7 @@ export default function ContentPage() {
           const response = await fetch(`/api/content/${contentId}/verify`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ txId: data.txId }),
+            body: JSON.stringify({ txId: data.txId, buyerAddress: address }),
           });
 
           if (response.ok) {
