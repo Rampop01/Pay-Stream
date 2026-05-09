@@ -18,6 +18,7 @@ export default function ExplorePage() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>('recent');
+  const [visibleItems, setVisibleItems] = useState(8);
 
   // Get unique categories
   const categories = Array.from(
@@ -25,7 +26,7 @@ export default function ExplorePage() {
   ) as string[];
 
   // Filter and Sort content
-  const filtered = content
+  const allFiltered = content
     .filter((item) => {
       const matchesSearch =
         !search ||
@@ -42,6 +43,13 @@ export default function ExplorePage() {
       if (sortBy === 'popular') return (b.totalUnlocks || 0) - (a.totalUnlocks || 0);
       return 0;
     });
+
+  const filtered = allFiltered.slice(0, visibleItems);
+  const hasMore = visibleItems < allFiltered.length;
+
+  const loadMore = () => {
+    setVisibleItems(prev => prev + 8);
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
@@ -218,6 +226,17 @@ export default function ExplorePage() {
               </Link>
             )}
           </motion.div>
+        )}
+
+        {hasMore && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={loadMore}
+              className="px-8 py-3 rounded-xl glass border border-white/10 text-white font-bold hover:bg-white/5 transition-all"
+            >
+              Load More Content
+            </button>
+          </div>
         )}
       </main>
     </div>
