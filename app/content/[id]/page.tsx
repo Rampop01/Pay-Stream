@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { unlockContentContract } from '@/lib/contract';
 import { useWalletStore } from '@/lib/store';
+import ReactMarkdown from 'react-markdown';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
@@ -165,9 +166,9 @@ export default function ContentPage() {
                 </span>
               </div>
               <h1 className="text-4xl font-bold text-white mb-4">{content.title}</h1>
-              <p className="text-lg text-white/60 leading-relaxed whitespace-pre-wrap">
-                {content.description}
-              </p>
+              <div className="prose prose-invert max-w-none text-white/60 leading-relaxed">
+                <ReactMarkdown>{content.description}</ReactMarkdown>
+              </div>
             </motion.div>
           </div>
 
