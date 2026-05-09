@@ -14,11 +14,13 @@ import {
   Trash2, 
   PlusCircle,
   Loader2,
-  TrendingUp
+  TrendingUp,
+  User
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { EditContentModal } from '@/components/EditContentModal';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function CreatorDashboard() {
   const { address } = useWalletStore();
@@ -152,9 +154,18 @@ export default function CreatorDashboard() {
 
           <div className="overflow-x-auto">
             {isLoading ? (
-              <div className="p-20 flex flex-col items-center justify-center gap-4 text-white/40">
-                <Loader2 className="w-8 h-8 animate-spin" />
-                <p>Loading your content empire...</p>
+              <div className="p-6 space-y-4">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <Skeleton className="w-12 h-12 rounded-lg skeleton-stacks" />
+                    <div className="flex-grow space-y-2">
+                      <Skeleton className="h-4 w-1/3 skeleton-stacks" />
+                      <Skeleton className="h-3 w-1/4 skeleton-stacks" />
+                    </div>
+                    <Skeleton className="h-4 w-20 skeleton-stacks" />
+                    <Skeleton className="h-4 w-20 skeleton-stacks" />
+                  </div>
+                ))}
               </div>
             ) : content.length === 0 ? (
               <div className="p-20 text-center flex flex-col items-center gap-6">
