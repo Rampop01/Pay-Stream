@@ -78,3 +78,17 @@ export async function updateContent(id: string, updates: Partial<Content>): Prom
 
   return allContent[index];
 }
+
+// Delete content
+export async function deleteContent(id: string): Promise<boolean> {
+  await ensureDataDir();
+  const allContent = await getAllContent();
+
+  const initialLength = allContent.length;
+  const filteredContent = allContent.filter((c) => c.id !== id);
+
+  if (filteredContent.length === initialLength) return false;
+
+  await fs.writeFile(CONTENT_FILE, JSON.stringify(filteredContent, null, 2));
+  return true;
+}
