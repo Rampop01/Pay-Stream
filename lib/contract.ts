@@ -21,6 +21,9 @@ export async function registerContentContract({
   const { openContractCall } = await import('@stacks/connect');
   const { AnchorMode, stringUtf8CV, uintCV } = await import('@stacks/transactions');
   const network = new StacksMainnet();
+  const priceInMicrostacks = BigInt(price);
+
+  console.log(`[Contract] Registering content: "${title}" for ${priceInMicrostacks} microSTX`);
   
   await openContractCall({
     network,
@@ -31,7 +34,7 @@ export async function registerContentContract({
       stringUtf8CV(title),
       stringUtf8CV(description),
       stringUtf8CV(category),
-      uintCV(price)
+      uintCV(priceInMicrostacks)
     ],
     anchorMode: AnchorMode.Any,
     onFinish,
