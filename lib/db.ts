@@ -143,3 +143,26 @@ export async function addComment(contentId: string, comment: Omit<Comment, 'id' 
   await updateContent(contentId, { comments });
   return newComment;
 }
+
+// --- Report Management ---
+
+const REPORTS_FILE = path.join(process.cwd(), 'data/reports.json');
+
+export async function addReport(report: { contentId: string; reason: string; reporterAddress: string }): Promise<void> {
+  await ensureDataDir();
+  let reports = [];
+  try {
+    const data = await fs.readFile(REPORTS_FILE, 'utf-8');
+    reports = JSON.parse(data);
+  } catch (e) {
+    // File doesn't exist yet
+  }
+
+  reports.push({
+    ...report,
+    id: Math.random().toString(36).substring(2, 9),
+    timestamp: Date.now()
+  });
+
+  await fs.writeFile(REPORTS_FILE, JSON.stringify(reports, null, 2));
+}
