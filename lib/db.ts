@@ -4,16 +4,25 @@ import { Content } from './types';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
+const UNLOCKS_FILE = path.join(DATA_DIR, 'unlocks.json');
 
 // Ensure data directory and files exist
 async function ensureDataDir() {
   try {
     await fs.mkdir(DATA_DIR, { recursive: true });
+    
+    // Ensure content file
     try {
       await fs.access(CONTENT_FILE);
     } catch {
-      // File doesn't exist, create with initial empty array
       await fs.writeFile(CONTENT_FILE, JSON.stringify([], null, 2));
+    }
+
+    // Ensure unlocks file
+    try {
+      await fs.access(UNLOCKS_FILE);
+    } catch {
+      await fs.writeFile(UNLOCKS_FILE, JSON.stringify([], null, 2));
     }
   } catch (error) {
     console.error('[ContentStream] Failed to initialize data directory:', error);
@@ -91,4 +100,27 @@ export async function deleteContent(id: string): Promise<boolean> {
 
   await fs.writeFile(CONTENT_FILE, JSON.stringify(filteredContent, null, 2));
   return true;
+}
+
+// --- Unlock Management ---
+
+export async function recordUnlock(record: PurchaseRecord): Promise<void> {
+  await ensureDataDir();
+  const data = await fs.readFile(UNLOCKS_FILE, 'utf-8');
+  const unlocks = JSON.parse(data);
+  
+  unlocks.push(record);
+  await fs.writeFile(UNLOCKS_FILE, JSON.stringify(unlocks, null, 2));
+
+  // Also increment totalUnlocks in content table
+  await updateContent(record.contentId, { 
+    totalUnlocks: (await getContentById(record.contentId))?.totalUnlocks || 0 + 1 
+  });
+}
+
+export async function getUnlocksByBuyer(address: string): Promise<PurchaseRecord[]> {
+  await ensureDataDir();
+  const data = await fs.readFile(UNLOCKS_FILE, 'utf-8');
+  const unlocks: PurchaseRecord[] = JSON.parse(data);
+  return unlocks.filter((u) => u.buyerAddress === address);
 }
