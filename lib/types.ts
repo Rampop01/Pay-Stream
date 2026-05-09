@@ -1,6 +1,14 @@
 // Core content data model for ContentStream
 export type ContentCategory = 'Video' | 'Art' | 'Music' | 'Education' | 'Other';
 
+export interface Comment {
+  id: string;
+  contentId: string;
+  userAddress: string;
+  text: string;
+  createdAt: number;
+}
+
 export interface Content {
   id: string;
   title: string;
@@ -13,6 +21,7 @@ export interface Content {
   creatorName: string;
   createdAt: number;
   totalUnlocks: number;
+  comments?: Comment[];
 }
 
 // Purchase record stored after successful transactions
