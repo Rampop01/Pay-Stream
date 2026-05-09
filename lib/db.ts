@@ -124,3 +124,22 @@ export async function getUnlocksByBuyer(address: string): Promise<PurchaseRecord
   const unlocks: PurchaseRecord[] = JSON.parse(data);
   return unlocks.filter((u) => u.buyerAddress === address);
 }
+
+// --- Comment Management ---
+
+export async function addComment(contentId: string, comment: Omit<Comment, 'id' | 'createdAt'>): Promise<Comment> {
+  const content = await getContentById(contentId);
+  if (!content) throw new Error('Content not found');
+
+  const newComment: Comment = {
+    ...comment,
+    id: Math.random().toString(36).substring(2, 9),
+    createdAt: Date.now()
+  };
+
+  const comments = content.comments || [];
+  comments.push(newComment);
+
+  await updateContent(contentId, { comments });
+  return newComment;
+}
