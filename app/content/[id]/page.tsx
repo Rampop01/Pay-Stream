@@ -13,6 +13,7 @@ import { unlockContentContract } from '@/lib/contract';
 import { useWalletStore } from '@/lib/store';
 import ReactMarkdown from 'react-markdown';
 import { CommentsSection } from '@/components/CommentsSection';
+import { UnlockSuccess } from '@/components/UnlockSuccess';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
@@ -23,6 +24,7 @@ export default function ContentPage() {
   const { content: allContent } = useContent();
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const { address } = useWalletStore();
 
   const relatedContent = allContent
@@ -53,6 +55,7 @@ export default function ContentPage() {
 
           if (response.ok) {
             setIsUnlocked(true);
+            setShowSuccess(true);
             toast.success('Content unlocked successfully!');
           } else {
             toast.error('Failed to verify transaction');
@@ -100,6 +103,8 @@ export default function ContentPage() {
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
       <Navbar />
+
+      <UnlockSuccess isVisible={showSuccess} onClose={() => setShowSuccess(false)} />
       
       {/* Background Orbs */}
       <div className="orb orb-orange w-[500px] h-[500px] -top-24 -right-24 opacity-20" />
