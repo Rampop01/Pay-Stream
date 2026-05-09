@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { unlockContentContract } from '@/lib/contract';
 import { useWalletStore } from '@/lib/store';
 import ReactMarkdown from 'react-markdown';
+import { CommentsSection } from '@/components/CommentsSection';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
@@ -175,6 +176,8 @@ export default function ContentPage() {
                 <ReactMarkdown>{content.description}</ReactMarkdown>
               </div>
             </motion.div>
+
+            <CommentsSection contentId={contentId} initialComments={content.comments} />
           </div>
 
           {/* Sidebar */}
