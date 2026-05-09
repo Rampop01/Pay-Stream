@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContentById } from '@/hooks/useContent';
-import { Play, Share2, ArrowLeft, Sparkles, Zap, ShieldCheck, Globe, Star, Loader2, Lock } from 'lucide-react';
+import { Play, Share2, ArrowLeft, Sparkles, Zap, ShieldCheck, Globe, Star, Loader2, Lock, Flag } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -217,6 +217,30 @@ export default function ContentPage() {
                   </span>
                 </div>
               </div>
+
+              <button 
+                onClick={async () => {
+                  const reason = window.prompt("Reason for reporting this content:");
+                  if (!reason) return;
+                  if (!address) {
+                    toast.error("Please connect wallet to report");
+                    return;
+                  }
+                  try {
+                    const res = await fetch(`/api/content/${contentId}/report`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ reason, reporterAddress: address }),
+                    });
+                    if (res.ok) toast.success("Thank you for your report. Our team will review it.");
+                  } catch (e) {
+                    toast.error("Failed to submit report");
+                  }
+                }}
+                className="mt-6 w-full flex items-center justify-center gap-2 py-2 text-xs text-white/20 hover:text-red-400 transition-colors"
+              >
+                <Flag className="w-3 h-3" /> Report Content
+              </button>
             </motion.div>
 
             {/* Social Sharing */}
