@@ -32,6 +32,12 @@ export async function getAllContent(): Promise<Content[]> {
   }
 }
 
+// Get content by creator address
+export async function getContentByCreator(address: string): Promise<Content[]> {
+  const contents = await getAllContent();
+  return contents.filter((c) => c.creatorAddress === address);
+}
+
 // Get single content by ID
 export async function getContentById(id: string): Promise<Content | null> {
   const contents = await getAllContent();
