@@ -1,15 +1,34 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useWalletStore } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { Zap, BookOpen, HelpCircle, ExternalLink } from 'lucide-react';
+import { Zap, BookOpen, HelpCircle, ExternalLink, Coins } from 'lucide-react';
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 const WalletConnectPanel = dynamic(() => import('@/components/WalletConnectPanel').then((mod) => mod.WalletConnectPanel), { ssr: false });
 
 export default function WalletPage() {
   const { address } = useWalletStore();
+  const [balance, setBalance] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (address) {
+      fetchBalance();
+    }
+  }, [address]);
+
+  const fetchBalance = async () => {
+    try {
+      const res = await fetch(`https://api.mainnet.hiro.so/extended/v1/address/${address}/balances`);
+      const data = await res.json();
+      const stxBalance = (parseInt(data.stx.balance) / 1000000).toFixed(2);
+      setBalance(stxBalance);
+    } catch (e) {
+      console.error('Balance fetch error:', e);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -29,13 +48,40 @@ export default function WalletPage() {
             Wallet <span className="gradient-text-stacks">Connection</span>
           </h1>
           <p className="text-muted-foreground">
-            Connect your Leather or Xverse wallet to start using TalentStream
+            Connect your Stacks wallet to start using ContentStream
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <WalletConnectPanel />
-
+          <div className="space-y-6">
+            <WalletConnectPanel />
+            
+            {address && balance !== null && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="glass-card rounded-xl p-6 border-stacks-orange/20 bg-stacks-orange/5"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-stacks-orange/10 flex items-center justify-center text-stacks-orange">
+                      <Coins className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Available Balance</div>
+                      <div className="text-2xl font-black text-foreground">{balance} STX</div>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={fetchBalance}
+                    className="p-2 hover:bg-white/5 rounded-lg transition-colors text-stacks-orange"
+                  >
+                    <Zap className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </div>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -43,7 +89,7 @@ export default function WalletPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="glass-card mirror-card rounded-xl p-6">
+            <div className="glass-card rounded-xl p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="icon-glow w-9 h-9 rounded-lg flex items-center justify-center">
                   <Zap className="w-4 h-4 text-stacks-orange-light" />
@@ -57,32 +103,32 @@ export default function WalletPage() {
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">2.</span>
-                  Get STX tokens (Mainnet or Testnet)
+                  Get STX tokens (Mainnet recommended)
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">3.</span>
-                  Browse elite talents on the marketplace
+                  Browse premium content on the marketplace
                 </li>
                 <li className="flex gap-3">
                   <span className="text-stacks-orange-light font-bold">4.</span>
-                  Hire directly via Clarity smart contracts
+                  Unlock instantly via Clarity smart contracts
                 </li>
               </ol>
             </div>
 
-            <div className="glass-card mirror-card rounded-xl p-6">
+            <div className="glass-card rounded-xl p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="icon-glow w-9 h-9 rounded-lg flex items-center justify-center">
                   <BookOpen className="w-4 h-4 text-stacks-amber" />
                 </div>
-                <h3 className="font-semibold text-foreground">About TalentStream</h3>
+                <h3 className="font-semibold text-foreground">About ContentStream</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                TalentStream leverages the TalentHub Clarity smart contract to manage decentralized professional identities and secure on-chain payments. Your wallet signs transactions directly on the Stacks blockchain.
+                ContentStream leverages the ContentHub Clarity smart contract to manage decentralized content ownership and secure on-chain payments. Your wallet signs transactions directly on the Stacks blockchain.
               </p>
             </div>
 
-            <div className="glass-card mirror-card rounded-xl p-6">
+            <div className="glass-card rounded-xl p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="icon-glow w-9 h-9 rounded-lg flex items-center justify-center">
                   <HelpCircle className="w-4 h-4 text-stacks-orange" />
