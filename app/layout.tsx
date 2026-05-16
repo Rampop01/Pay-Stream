@@ -15,6 +15,30 @@ export const metadata: Metadata = {
   title: 'ContentStream | Decentralized Content Marketplace on Stacks',
   description: 'Monetize your premium content directly on the Stacks blockchain using Clarity smart contracts and STX royalties.',
   keywords: ['content monetization', 'stacks', 'blockchain', 'creator economy', 'STX', 'payments', 'web3', 'Bitcoin L2'],
+  authors: [{ name: 'ContentStream Team' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://contentstream.app',
+    title: 'ContentStream | On-Chain Content Economy',
+    description: 'Decentralized marketplace for premium content creators on Stacks.',
+    siteName: 'ContentStream',
+    images: [
+      {
+        url: 'https://contentstream.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'ContentStream Preview',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ContentStream | On-Chain Content Economy',
+    description: 'Monetize your work directly on Stacks.',
+    images: ['https://contentstream.app/og-image.png'],
+    creator: '@contentstream',
+  },
   verification: {
     other: {
       'talentapp:project_verification': '12c042959fb5fd3658d6ef9e391035afb5e04be7b1e17a1377beb866f4e37123334b664b4922a25035bbb39b46836256ba66becbec5f03b7235a5625dc066a4f',

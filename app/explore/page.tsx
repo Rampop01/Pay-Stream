@@ -47,8 +47,13 @@ export default function ExplorePage() {
   const filtered = allFiltered.slice(0, visibleItems);
   const hasMore = visibleItems < allFiltered.length;
 
-  const loadMore = () => {
-    setVisibleItems(prev => prev + 8);
+  const categoryIcons: Record<string, string> = {
+    'Education': '🎓',
+    'Entertainment': '🎬',
+    'Technology': '💻',
+    'Art': '🎨',
+    'Finance': '📈',
+    'Music': '🎵',
   };
 
   return (
@@ -82,17 +87,16 @@ export default function ExplorePage() {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              Discover <span className="gradient-text-stacks">Content</span>
+              Discover <span className="gradient-text-stacks">Premium Content</span>
             </h1>
             <p className="text-white/40">
-              {filtered.length} premium {filtered.length === 1 ? 'creation' : 'creations'}{' '}
-              available to unlock
+              Browse {content.length} decentralized creations on Stacks
             </p>
           </div>
           <Link href="/create">
-            <button className="btn-stacks h-10 px-6 rounded-lg text-white text-sm font-medium flex items-center gap-2">
+            <button className="btn-stacks h-11 px-6 rounded-xl text-white text-sm font-bold flex items-center gap-2 hover-glow">
               <Sparkles className="w-4 h-4" />
-              Upload Content
+              Start Earning
             </button>
           </Link>
         </motion.div>
@@ -102,62 +106,77 @@ export default function ExplorePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="mb-8 space-y-4"
+          className="mb-10 space-y-6"
         >
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="relative flex-grow group">
+              <div className="absolute inset-0 bg-stacks-orange/5 rounded-xl blur-lg group-focus-within:bg-stacks-orange/10 transition-all opacity-0 group-focus-within:opacity-100" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-stacks-orange transition-colors" />
               <input
                 type="text"
-                placeholder="Search by title or description..."
+                placeholder="Search premium videos, courses, music..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full h-11 pl-10 pr-4 rounded-lg bg-white/5 border border-white/10 focus:border-stacks-orange/50 focus:ring-1 focus:ring-stacks-orange/20 text-sm text-white placeholder:text-white/20 outline-none transition-colors"
+                className="relative w-full h-14 pl-12 pr-12 rounded-xl bg-white/5 border border-white/10 focus:border-stacks-orange/40 focus:ring-0 text-base text-white placeholder:text-white/20 outline-none transition-all"
               />
+              {search && (
+                <button 
+                  onClick={() => setSearch('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
+                >
+                  <span className="text-white/40 text-xs">✕</span>
+                </button>
+              )}
             </div>
             
-            <div className="relative min-w-[200px]">
-              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+            <div className="relative min-w-[240px]">
+              <ArrowUpDown className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="w-full h-11 pl-10 pr-4 rounded-lg bg-white/5 border border-white/10 focus:border-stacks-orange/50 outline-none appearance-none text-sm text-white cursor-pointer transition-colors"
+                className="w-full h-14 pl-12 pr-10 rounded-xl bg-white/5 border border-white/10 focus:border-stacks-orange/40 outline-none appearance-none text-sm font-bold text-white cursor-pointer transition-all hover:bg-white/[0.07]"
               >
-                <option value="recent">Most Recent</option>
-                <option value="popular">Most Popular</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="recent">Sort by: Newest First</option>
+                <option value="popular">Sort by: Most Popular</option>
+                <option value="price-low">Sort by: Price (Low to High)</option>
+                <option value="price-high">Sort by: Price (High to Low)</option>
               </select>
             </div>
           </div>
 
-          {categories.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/20 mr-2">Categories:</span>
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`h-9 px-5 rounded-full text-xs font-bold transition-all ${!selectedCategory
+                  ? 'bg-stacks-orange text-white shadow-lg shadow-stacks-orange/30'
+                  : 'bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10'
+                }`}
+            >
+              Everything
+            </button>
+            {categories.map((cat) => (
               <button
-                onClick={() => setSelectedCategory(null)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${!selectedCategory
-                    ? 'bg-stacks-orange text-white'
-                    : 'bg-white/5 border border-white/10 text-white/40 hover:text-white'
+                key={cat}
+                onClick={() => setSelectedCategory(selectedCategory === cat ? null : cat)}
+                className={`h-9 px-5 rounded-full text-xs font-bold transition-all flex items-center gap-2 ${selectedCategory === cat
+                    ? 'bg-stacks-orange text-white shadow-lg shadow-stacks-orange/30'
+                    : 'bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10'
                   }`}
               >
-                All
+                <span>{categoryIcons[cat] || '📦'}</span>
+                {cat}
               </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() =>
-                    setSelectedCategory(selectedCategory === cat ? null : cat)
-                  }
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${selectedCategory === cat
-                      ? 'bg-stacks-orange text-white'
-                      : 'bg-white/5 border border-white/10 text-white/40 hover:text-white'
-                    }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          )}
+            ))}
+            {(search || selectedCategory) && (
+              <button 
+                onClick={() => { setSearch(''); setSelectedCategory(null); }}
+                className="text-[10px] font-black uppercase tracking-widest text-stacks-orange hover:text-stacks-orange-light transition-colors ml-2"
+              >
+                Clear All
+              </button>
+            )}
+          </div>
         </motion.div>
 
         {/* Grid */}

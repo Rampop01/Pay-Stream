@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { ContentCard } from '@/components/ContentCard';
+import { Footer } from '@/components/Footer';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContent } from '@/hooks/useContent';
 import Link from 'next/link';
@@ -124,7 +125,32 @@ export default function Page() {
         <div className="orb orb-amber w-[500px] h-[500px] top-10 -right-40 opacity-35" />
         <div className="orb orb-warm w-[350px] h-[350px] bottom-0 left-1/3 opacity-25" />
 
-        {/* Lightning bolts */}
+        {/* Trending Section */}
+        <section className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-black flex items-center gap-2">
+              <Sparkles className="w-6 h-6 text-stacks-orange" />
+              Trending Now
+            </h2>
+            <Link href="/explore?sort=popular" className="text-sm font-bold text-stacks-orange hover:underline">
+              View all popular
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {isLoading ? (
+              [...Array(4)].map((_, i) => (
+                <div key={i} className="space-y-4">
+                  <Skeleton className="w-full aspect-video rounded-2xl skeleton-stacks" />
+                  <Skeleton className="h-4 w-3/4 rounded skeleton-stacks" />
+                </div>
+              ))
+            ) : content.filter(c => (c.totalUnlocks || 0) > 0).slice(0, 4).map((item) => (
+              <ContentCard key={item.id} content={item} />
+            ))}
+          </div>
+        </section>
+
+        {/* Features Section */}
         <div className="absolute top-20 left-[10%] lightning-flash" style={{ filter: 'drop-shadow(0 0 12px rgba(252,100,50,0.8))' }}>
           <LightningBolt className="w-12 h-12 text-stacks-orange/70" />
         </div>
@@ -455,26 +481,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="relative border-t border-border/50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-stacks-orange to-stacks-amber flex items-center justify-center">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-bold text-white">ContentStream</span>
-              <span className="text-xs text-white/40">On-Chain Content Marketplace</span>
-            </div>
-            <div className="flex items-center gap-6 text-sm text-white/40">
-              <a href="https://docs.stacks.co/" target="_blank" rel="noopener noreferrer" className="hover:text-stacks-orange-light transition-colors">Stacks Docs</a>
-              <a href="https://explorer.hiro.so/" target="_blank" rel="noopener noreferrer" className="hover:text-stacks-orange-light transition-colors">Stacks Explorer</a>
-              <span className="text-border">|</span>
-              <span>Built on Bitcoin via Stacks</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

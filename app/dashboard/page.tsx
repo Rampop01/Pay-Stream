@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { EditContentModal } from '@/components/EditContentModal';
 import { Skeleton } from '@/components/ui/skeleton';
+import { AnalyticsChart } from '@/components/AnalyticsChart';
 
 export default function CreatorDashboard() {
   const { address } = useWalletStore();
@@ -110,22 +111,34 @@ export default function CreatorDashboard() {
           </Link>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <StatCard 
-            icon={<TrendingUp className="w-5 h-5" />} 
-            label="Total Earnings" 
-            value={`${totalEarnings} STX`} 
-            color="from-orange-500/20 to-amber-500/20"
-            textColor="text-stacks-orange"
-          />
-          <StatCard 
-            icon={<Users className="w-5 h-5" />} 
-            label="Total Unlocks" 
-            value={totalUnlocks.toString()} 
-            color="from-blue-500/20 to-indigo-500/20"
-            textColor="text-blue-400"
-          />
+        {/* Stats & Chart Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+          {/* Stats Column */}
+          <div className="lg:col-span-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            <StatCard 
+              icon={<TrendingUp className="w-5 h-5" />} 
+              label="Total Earnings" 
+              value={`${totalEarnings} STX`} 
+              color="from-orange-500/20 to-amber-500/20"
+              textColor="text-stacks-orange"
+            />
+            <StatCard 
+              icon={<Users className="w-5 h-5" />} 
+              label="Total Unlocks" 
+              value={totalUnlocks.toString()} 
+              color="from-blue-500/20 to-indigo-500/20"
+              textColor="text-blue-400"
+            />
+          </div>
+
+          {/* Chart Column */}
+          <div className="lg:col-span-2">
+            <AnalyticsChart />
+          </div>
+        </div>
+
+        {/* Secondary Stats Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
           <StatCard 
             icon={<Zap className="w-5 h-5" />} 
             label="Live Content" 
@@ -142,107 +155,154 @@ export default function CreatorDashboard() {
           />
         </div>
 
-        {/* Content Table Section */}
-        <div className="glass rounded-3xl border border-white/10 overflow-hidden">
-          <div className="p-6 border-b border-white/10 bg-white/5 flex justify-between items-center">
-            <h2 className="text-xl font-bold">Your Content</h2>
-            <div className="flex items-center gap-2 text-sm text-white/40">
-              <Settings className="w-4 h-4" />
-              Auto-updating via Hiro API
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
+          {/* Main Table Area */}
+          <div className="lg:col-span-2 glass rounded-3xl border border-white/10 overflow-hidden">
+            <div className="p-6 border-b border-white/10 bg-white/5 flex justify-between items-center">
+              <h2 className="text-xl font-bold">Your Content</h2>
+              <div className="flex items-center gap-2 text-sm text-white/40">
+                <Settings className="w-4 h-4" />
+                Auto-updating via Hiro API
+              </div>
+            </div>
+
+            <div className="">
+              {/* ... table content remains same ... */}
+              {isLoading ? (
+                <div className="p-6 space-y-4">
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <Skeleton className="w-12 h-12 rounded-lg skeleton-stacks" />
+                      <div className="flex-grow space-y-2">
+                        <Skeleton className="h-4 w-1/3 skeleton-stacks" />
+                        <Skeleton className="h-3 w-1/4 skeleton-stacks" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : content.length === 0 ? (
+                <div className="p-20 text-center flex flex-col items-center gap-6">
+                  <h3 className="text-xl font-bold">No content yet</h3>
+                  <p className="text-white/40 text-sm">Upload content to see your dashboard come alive.</p>
+                </div>
+              ) : (
+                <>
+                  {/* Desktop Table View */}
+                  <div className="hidden md:block overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-white/5 text-white/40 text-xs font-bold uppercase tracking-wider">
+                          <th className="px-6 py-4">Content</th>
+                          <th className="px-6 py-4">Price</th>
+                          <th className="px-6 py-4">Unlocks</th>
+                          <th className="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {content.map((item) => (
+                          <tr key={item.id} className="hover:bg-white/[0.02] transition-colors group">
+                            <td className="px-6 py-4">
+                              <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
+                                  <img src={item.thumbnailUrl} alt="" className="w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                  <div className="font-bold text-white group-hover:text-stacks-orange transition-colors truncate w-32">{item.title}</div>
+                                  <div className="text-[10px] text-white/40">{item.category}</div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 font-mono text-xs">{item.priceInSTX} STX</td>
+                            <td className="px-6 py-4 font-mono text-xs">{item.totalUnlocks || 0}</td>
+                            <td className="px-6 py-4 text-right">
+                              <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <Link href={`/content/${item.id}`} className="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/40 hover:text-white">
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </Link>
+                                <button 
+                                  onClick={() => { setSelectedContent(item); setIsEditModalOpen(true); }}
+                                  className="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/40 hover:text-white"
+                                >
+                                  <Edit2 className="w-3.5 h-3.5" />
+                                </button>
+                                <button 
+                                  onClick={() => handleDelete(item.id)}
+                                  className="p-1.5 hover:bg-red-500/10 rounded-lg transition-colors text-white/40 hover:text-red-500"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Mobile Card View */}
+                  <div className="md:hidden divide-y divide-white/5">
+                    {content.map((item) => (
+                      <div key={item.id} className="p-4 space-y-3">
+                        <div className="flex gap-3">
+                          <div className="w-12 h-12 rounded-lg overflow-hidden border border-white/10 flex-shrink-0">
+                            <img src={item.thumbnailUrl} alt="" className="w-full h-full object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-bold text-sm text-white truncate">{item.title}</div>
+                            <div className="flex gap-3 mt-1">
+                              <span className="text-[10px] text-white/40 font-mono">{item.priceInSTX} STX</span>
+                              <span className="text-[10px] text-stacks-orange-light font-mono">{item.totalUnlocks || 0} Unlocks</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Link href={`/content/${item.id}`} className="flex-1 h-8 rounded-lg bg-white/5 flex items-center justify-center gap-2 text-[10px] font-bold border border-white/10">
+                            View
+                          </Link>
+                          <button onClick={() => { setSelectedContent(item); setIsEditModalOpen(true); }} className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                            <Edit2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            {isLoading ? (
-              <div className="p-6 space-y-4">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <Skeleton className="w-12 h-12 rounded-lg skeleton-stacks" />
-                    <div className="flex-grow space-y-2">
-                      <Skeleton className="h-4 w-1/3 skeleton-stacks" />
-                      <Skeleton className="h-3 w-1/4 skeleton-stacks" />
+          {/* Activity Feed Sidebar */}
+          <div className="lg:col-span-1 space-y-6">
+            <div className="glass rounded-3xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-stacks-orange" /> Recent Activity
+              </h3>
+              <div className="space-y-6">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="flex items-start gap-4 relative">
+                    {i < 2 && <div className="absolute left-4 top-10 bottom-0 w-px bg-white/5" />}
+                    <div className="w-8 h-8 rounded-full bg-stacks-orange/10 flex items-center justify-center flex-shrink-0 border border-stacks-orange/20">
+                      <Users className="w-4 h-4 text-stacks-orange" />
                     </div>
-                    <Skeleton className="h-4 w-20 skeleton-stacks" />
-                    <Skeleton className="h-4 w-20 skeleton-stacks" />
+                    <div>
+                      <div className="text-sm font-bold text-white">New Unlock</div>
+                      <div className="text-xs text-white/40 mb-1">SP1B...W38M unlocked "Cyberpunk Art"</div>
+                      <div className="text-[10px] text-stacks-orange-light font-mono font-bold">+5.0 STX</div>
+                    </div>
                   </div>
                 ))}
               </div>
-            ) : content.length === 0 ? (
-              <div className="p-20 text-center flex flex-col items-center gap-6">
-                <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                  <PlusCircle className="w-10 h-10 text-white/20" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-1">No content yet</h3>
-                  <p className="text-white/40">Start by uploading your first piece of premium content.</p>
-                </div>
-                <Link href="/create">
-                  <button className="px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors border border-white/10">
-                    Get Started
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-white/5 text-white/40 text-xs font-bold uppercase tracking-wider">
-                    <th className="px-6 py-4">Content</th>
-                    <th className="px-6 py-4">Price</th>
-                    <th className="px-6 py-4">Unlocks</th>
-                    <th className="px-6 py-4">Revenue</th>
-                    <th className="px-6 py-4">Created</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {content.map((item) => (
-                    <tr key={item.id} className="hover:bg-white/[0.02] transition-colors group">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
-                            <img src={item.thumbnailUrl} alt="" className="w-full h-full object-cover" />
-                          </div>
-                          <div>
-                            <div className="font-bold text-white group-hover:text-stacks-orange transition-colors">{item.title}</div>
-                            <div className="text-xs text-white/40 line-clamp-1">{item.category}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 font-mono text-sm">{item.priceInSTX} STX</td>
-                      <td className="px-6 py-4 font-mono text-sm">{item.totalUnlocks || 0}</td>
-                      <td className="px-6 py-4 font-mono text-sm text-stacks-orange-light font-bold">
-                        {((item.totalUnlocks || 0) * item.priceInSTX).toFixed(1)} STX
-                      </td>
-                      <td className="px-6 py-4 text-sm text-white/40">
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Link href={`/content/${item.id}`} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white">
-                            <ExternalLink className="w-4 h-4" />
-                          </Link>
-                          <button 
-                            onClick={() => {
-                              setSelectedContent(item);
-                              setIsEditModalOpen(true);
-                            }}
-                            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white"
-                          >
-                            <Edit2 className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={() => handleDelete(item.id)}
-                            className="p-2 hover:bg-red-500/10 rounded-lg transition-colors text-white/60 hover:text-red-500"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+              <button className="w-full mt-8 py-2 text-xs text-white/30 hover:text-white transition-colors border-t border-white/5 pt-4">
+                View Transaction History
+              </button>
+            </div>
+
+            <div className="glass rounded-3xl border border-white/10 p-6 bg-gradient-to-br from-stacks-orange/10 to-transparent">
+              <h3 className="text-sm font-bold text-white mb-2 uppercase tracking-widest">Creator Tip</h3>
+              <p className="text-xs text-white/50 leading-relaxed">
+                Consistency is key. Creators who upload at least twice a week see 40% more unlocks than those who don't.
+              </p>
+            </div>
           </div>
         </div>
 

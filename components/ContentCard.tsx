@@ -39,10 +39,16 @@ export function ContentCard({ content }: ContentCardProps) {
           </div>
 
           {/* Category */}
-          <div className="absolute top-3 left-3 z-10">
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
             <div className="px-2 py-1 rounded-full text-[9px] font-semibold bg-white/10 backdrop-blur-md border border-white/15 text-white/90">
               {content.category}
             </div>
+            {content.totalUnlocks && content.totalUnlocks > 10 && (
+              <div className="px-2 py-1 rounded-full text-[9px] font-black bg-stacks-orange text-white flex items-center gap-1 shadow-lg shadow-stacks-orange/40">
+                <Sparkles className="w-2.5 h-2.5 fill-white" />
+                TRENDING
+              </div>
+            )}
           </div>
         </div>
 

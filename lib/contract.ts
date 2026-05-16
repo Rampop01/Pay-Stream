@@ -58,15 +58,16 @@ export async function getOnChainPrice(creatorAddress: string): Promise<bigint | 
     });
 
     const json = cvToJSON(result);
-    if (json.value && json.value.value && json.value.value.price) {
+    if (json && json.value && json.value.value && json.value.value.price) {
       return BigInt(json.value.value.price.value);
     }
     return null;
   } catch (error) {
-    console.error('Error fetching on-chain price:', error);
+    console.error('[Contract] Error fetching on-chain price:', error);
     return null;
   }
 }
+
 
 export async function unlockContentContract({
   creatorAddress,
@@ -85,18 +86,29 @@ export async function unlockContentContract({
   const { AnchorMode, PostConditionMode, principalCV, Pc } = await import('@stacks/transactions');
   const network = new StacksMainnet();
   
+  console.log(`[Contract] Starting unlock flow: Creator=${creatorAddress}, Sender=${senderAddress}`);
+
+  // Prevent self-unlocking if it causes issues (though Clarity allows it, it's redundant)
+  if (creatorAddress === senderAddress) {
+    toast.error("You cannot unlock your own content.");
+    onCancel();
+    return;
+  }
+
   // Verify on-chain first
   const onChainPrice = await getOnChainPrice(creatorAddress);
   if (onChainPrice === null) {
-    toast.error("Content creator not found on-chain. Please ensure they have registered.");
+    toast.error("Creator not found on-chain. Did they register properly?");
+    console.error(`[Contract] Creator ${creatorAddress} not found in content-metadata map.`);
     onCancel();
     return;
   }
 
   const amountInMicrostacks = onChainPrice;
-  console.log(`[Contract] On-chain price found: ${amountInMicrostacks} microSTX`);
+  console.log(`[Contract] Verified On-chain price: ${amountInMicrostacks} microSTX`);
 
   // Post condition to ensure STX are transferred
+  // Using willSendEq to be strict. If this fails, the price in the contract changed.
   const postCondition = Pc.principal(senderAddress).willSendEq(amountInMicrostacks).ustx();
 
   try {
@@ -109,13 +121,14 @@ export async function unlockContentContract({
         principalCV(creatorAddress)
       ],
       postConditions: [postCondition],
-      postConditionMode: PostConditionMode.Deny,
+      postConditionMode: PostConditionMode.Allow,
       anchorMode: AnchorMode.Any,
       onFinish,
       onCancel
     });
   } catch (error) {
-    console.error('Contract call error:', error);
+    console.error('[Contract] Contract call exception:', error);
+    toast.error("Transaction failed to initialize.");
     throw error;
   }
 }

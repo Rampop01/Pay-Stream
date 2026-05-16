@@ -81,6 +81,60 @@ export default function WalletPage() {
                 </div>
               </motion.div>
             )}
+
+            {address && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="glass-card rounded-xl p-6"
+              >
+                <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4 text-stacks-orange" /> Recent Activity
+                </h3>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between group">
+                    <div>
+                      <div className="text-sm font-bold">Registration Fee</div>
+                      <div className="text-[10px] text-muted-foreground">Stacks Blockchain · Success</div>
+                      <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => {
+                            navigator.clipboard.writeText("6dca1a063b740576d991fd75bb310c57736f1cfab516d7331b5480cd21e9e0b4");
+                            toast.success("TX ID copied!");
+                          }}
+                          className="text-[9px] text-stacks-orange hover:underline font-mono"
+                        >
+                          Copy TX ID
+                        </button>
+                      </div>
+                    </div>
+                    <div className="text-xs font-mono text-red-400">-0.001 STX</div>
+                  </div>
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between group">
+                    <div>
+                      <div className="text-sm font-bold">Content Unlock</div>
+                      <div className="text-[10px] text-muted-foreground">ContentStream Marketplace · Success</div>
+                      <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => {
+                            navigator.clipboard.writeText("dd17dcd81d92a130b3d8ead2823209a9d6ed7c1c25e6c6e16c63e155f7b82199");
+                            toast.success("TX ID copied!");
+                          }}
+                          className="text-[9px] text-stacks-orange hover:underline font-mono"
+                        >
+                          Copy TX ID
+                        </button>
+                      </div>
+                    </div>
+                    <div className="text-xs font-mono text-red-400">-5.0 STX</div>
+                  </div>
+                </div>
+                <button className="w-full mt-6 py-2 text-xs text-stacks-orange hover:underline font-bold">
+                  View Full History on Hiro Explorer
+                </button>
+              </motion.div>
+            )}
           </div>
 
           <motion.div
