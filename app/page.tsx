@@ -24,6 +24,9 @@ import {
   Clock,
   Flame
 } from 'lucide-react';
+import { PlatformStats } from '@/components/PlatformStats';
+import { TopTalent } from '@/components/TopTalent';
+import { TalentLeaderboard } from '@/components/TalentLeaderboard';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -125,31 +128,6 @@ export default function Page() {
         <div className="orb orb-amber w-[500px] h-[500px] top-10 -right-40 opacity-35" />
         <div className="orb orb-warm w-[350px] h-[350px] bottom-0 left-1/3 opacity-25" />
 
-        {/* Trending Section */}
-        <section className="mb-20">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-stacks-orange" />
-              Trending Now
-            </h2>
-            <Link href="/explore?sort=popular" className="text-sm font-bold text-stacks-orange hover:underline">
-              View all popular
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {isLoading ? (
-              [...Array(4)].map((_, i) => (
-                <div key={i} className="space-y-4">
-                  <Skeleton className="w-full aspect-video rounded-2xl skeleton-stacks" />
-                  <Skeleton className="h-4 w-3/4 rounded skeleton-stacks" />
-                </div>
-              ))
-            ) : content.filter(c => (c.totalUnlocks || 0) > 0).slice(0, 4).map((item) => (
-              <ContentCard key={item.id} content={item} />
-            ))}
-          </div>
-        </section>
-
         {/* Features Section */}
         <div className="absolute top-20 left-[10%] lightning-flash" style={{ filter: 'drop-shadow(0 0 12px rgba(252,100,50,0.8))' }}>
           <LightningBolt className="w-12 h-12 text-stacks-orange/70" />
@@ -221,6 +199,8 @@ export default function Page() {
 
         <div className="section-divider" />
       </section>
+
+      <PlatformStats />
 
       {/* TRENDING SECTION */}
       <section className="relative py-24 bg-white/[0.01]">
@@ -452,6 +432,33 @@ export default function Page() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      <TopTalent />
+
+      <section className="relative py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16">
+          <div className="flex flex-col justify-center">
+            <h2 className="text-4xl font-black mb-6">Built for the <span className="text-stacks-orange">Best</span>.</h2>
+            <p className="text-white/40 text-lg leading-relaxed mb-8">
+              Our marketplace isn't just about content—it's about people. We provide the tools for the world's best developers, designers, and creators to monetize their skills on Bitcoin.
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex -space-x-4">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="w-12 h-12 rounded-full border-4 border-black bg-white/10 flex items-center justify-center text-[10px] font-bold">
+                    User
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm">
+                <div className="font-bold text-white">Join 2,500+ creators</div>
+                <div className="text-white/30 text-[10px] uppercase tracking-widest">Already monetizing on-chain</div>
+              </div>
+            </div>
+          </div>
+          <TalentLeaderboard />
         </div>
       </section>
 
