@@ -16,10 +16,12 @@ import {
   Bookmark,
   Settings,
   X,
-  Check
+  Check,
+  User
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface UnlockedContent extends Content {
   purchasedAt: number;
@@ -37,6 +39,8 @@ export default function ProfilePage() {
   const [library, setLibrary] = useState<UnlockedContent[]>([]);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'library' | 'history' | 'settings' | 'portfolio'>('library');
+  const [stats, setStats] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState<UserProfile>({ name: '', bio: '' });
 
@@ -44,8 +48,19 @@ export default function ProfilePage() {
     if (address) {
       fetchLibrary();
       fetchProfile();
+      fetchStats();
     }
   }, [address]);
+
+  const fetchStats = async () => {
+    try {
+      const res = await fetch(`/api/profile/stats?address=${address}`);
+      if (res.ok) {
+        const data = await res.json();
+        setStats(data);
+      }
+    } catch (e) {}
+  };
 
   const fetchProfile = async () => {
     try {
@@ -134,16 +149,37 @@ export default function ProfilePage() {
               {profile?.bio && (
                 <p className="text-white/60 max-w-2xl leading-relaxed">{profile.bio}</p>
               )}
+              
+              {/* Creator Stats Mini-Dashboard */}
+              <div className="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 min-w-[120px]">
+                  <div className="text-[10px] font-bold text-white/30 uppercase mb-1">Total Earned</div>
+                  {stats ? (
+                    <div className="text-lg font-black text-stacks-orange">
+                      {stats.totalEarned?.toFixed(1) || '0.0'} STX
+                    </div>
+                  ) : (
+                    <div className="h-6 w-16 bg-white/5 animate-pulse rounded mt-1" />
+                  )}
+                </div>
+                <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 min-w-[120px]">
+                  <div className="text-[10px] font-bold text-white/30 uppercase mb-1">Items Sold</div>
+                  {stats ? (
+                    <div className="text-lg font-black text-white">{stats.itemsSold || '0'}</div>
+                  ) : (
+                    <div className="h-6 w-10 bg-white/5 animate-pulse rounded mt-1" />
+                  )}
+                </div>
+                <div className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 min-w-[120px]">
+                  <div className="text-[10px] font-bold text-white/30 uppercase mb-1">Reputation</div>
+                  {stats ? (
+                    <div className="text-lg font-black text-blue-400">{stats.reputation || '100'}%</div>
+                  ) : (
+                    <div className="h-6 w-12 bg-white/5 animate-pulse rounded mt-1" />
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Bookmark className="w-5 h-5 text-blue-400" />
-            </div>
-            <h2 className="text-2xl font-bold">My Library</h2>
           </div>
         </div>
 
@@ -203,29 +239,159 @@ export default function ProfilePage() {
           )}
         </AnimatePresence>
 
-        {isLoading ? (
-          <div className="py-20 flex flex-col items-center justify-center gap-4 text-white/40">
-            <Loader2 className="w-10 h-10 animate-spin text-stacks-orange" />
-            <p className="font-medium">Syncing your library from the blockchain...</p>
-          </div>
-        ) : library.length === 0 ? (
-          <div className="py-32 text-center glass rounded-3xl border border-white/10 max-w-3xl mx-auto px-10">
-            <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-white/10 mx-auto mb-6">
-              <Zap className="w-10 h-10 text-white/20" />
+        {/* Tab Navigation */}
+        <div className="flex gap-8 mb-10 border-b border-white/5">
+          <button 
+            onClick={() => setActiveTab('library')}
+            className={`pb-4 text-sm font-bold transition-all ${activeTab === 'library' ? 'text-stacks-orange border-b-2 border-stacks-orange' : 'text-white/40 hover:text-white'}`}
+          >
+            My Library
+          </button>
+          <button 
+            onClick={() => setActiveTab('portfolio')}
+            className={`pb-4 text-sm font-bold transition-all ${activeTab === 'portfolio' ? 'text-stacks-orange border-b-2 border-stacks-orange' : 'text-white/40 hover:text-white'}`}
+          >
+            Portfolio
+          </button>
+          <button 
+            onClick={() => setActiveTab('history')}
+            className={`pb-4 text-sm font-bold transition-all ${activeTab === 'history' ? 'text-stacks-orange border-b-2 border-stacks-orange' : 'text-white/40 hover:text-white'}`}
+          >
+            Purchase History
+          </button>
+          <button 
+            onClick={() => setActiveTab('settings')}
+            className={`pb-4 text-sm font-bold transition-all ${activeTab === 'settings' ? 'text-stacks-orange border-b-2 border-stacks-orange' : 'text-white/40 hover:text-white'}`}
+          >
+            Settings
+          </button>
+        </div>
+
+        {activeTab === 'library' ? (
+          <>
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-2">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                  <Bookmark className="w-5 h-5 text-blue-400" />
+                </div>
+                <h2 className="text-2xl font-bold">Unlocked Content</h2>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold mb-3">Your library is empty</h3>
-            <p className="text-white/40 mb-8 max-w-md mx-auto">You haven't unlocked any content yet. Explore the marketplace to find exclusive videos, art, and educational materials.</p>
-            <Link href="/explore">
-              <button className="btn-stacks px-8 py-3 rounded-xl font-bold">
-                Start Exploring
-              </button>
-            </Link>
+
+            {isLoading ? (
+              <div className="py-20 flex flex-col items-center justify-center gap-4 text-white/40">
+                <Loader2 className="w-10 h-10 animate-spin text-stacks-orange" />
+                <p className="font-medium">Syncing your library from the blockchain...</p>
+              </div>
+            ) : library.length === 0 ? (
+              <div className="py-32 text-center glass rounded-3xl border border-white/10 max-w-3xl mx-auto px-10">
+                <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-white/10 mx-auto mb-6">
+                  <Zap className="w-10 h-10 text-white/20" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3">Your library is empty</h3>
+                <p className="text-white/40 mb-8 max-w-md mx-auto">You haven't unlocked any content yet. Explore the marketplace to find exclusive videos, art, and educational materials.</p>
+                <Link href="/explore">
+                  <button className="btn-stacks px-8 py-3 rounded-xl font-bold">
+                    Start Exploring
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {library.map((item) => (
+                  <LibraryCard key={item.id} content={item} />
+                ))}
+              </div>
+            )}
+          </>
+        ) : activeTab === 'history' ? (
+          <div className="glass rounded-3xl border border-white/10 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-white/5 text-white/40 text-[10px] font-black uppercase tracking-widest">
+                    <th className="px-8 py-5">Content</th>
+                    <th className="px-8 py-5">Amount</th>
+                    <th className="px-8 py-5">Transaction</th>
+                    <th className="px-8 py-5">Date</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {[...Array(2)].map((_, i) => (
+                    <tr key={i} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-8 py-6">
+                        <div className="font-bold text-white">Cyberpunk Digital Art</div>
+                        <div className="text-[10px] text-white/30">Art & Collectibles</div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="font-mono text-sm text-stacks-orange-light font-bold">5.0 STX</div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="flex items-center gap-2 font-mono text-[10px] text-white/40 group cursor-pointer" onClick={() => toast.success("TX ID copied!")}>
+                          <span className="truncate w-32">dd17dcd8...2199</span>
+                          <ExternalLink className="w-3 h-3 group-hover:text-stacks-orange transition-colors" />
+                        </div>
+                      </td>
+                      <td className="px-8 py-6 text-sm text-white/40">
+                        May 12, 2024
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {library.map((item) => (
-              <LibraryCard key={item.id} content={item} />
-            ))}
+          <div className="max-w-2xl mx-auto space-y-8">
+            <div className="glass p-8 rounded-3xl border border-white/10">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <Settings className="w-5 h-5 text-stacks-orange" />
+                Platform Preferences
+              </h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
+                  <div>
+                    <div className="text-sm font-bold">Email Notifications</div>
+                    <div className="text-[10px] text-white/40">Receive alerts for new unlocks and messages</div>
+                  </div>
+                  <div className="w-12 h-6 rounded-full bg-stacks-orange/20 border border-stacks-orange/40 relative cursor-pointer">
+                    <div className="absolute right-1 top-1 w-4 h-4 rounded-full bg-stacks-orange" />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
+                  <div>
+                    <div className="text-sm font-bold">Public Profile</div>
+                    <div className="text-[10px] text-white/40">Allow others to see your library and activity</div>
+                  </div>
+                  <div className="w-12 h-6 rounded-full bg-white/10 border border-white/20 relative cursor-pointer">
+                    <div className="absolute left-1 top-1 w-4 h-4 rounded-full bg-white/20" />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
+                  <div>
+                    <div className="text-sm font-bold">Marketing Analytics</div>
+                    <div className="text-[10px] text-white/40">Share anonymous usage data to improve platform</div>
+                  </div>
+                  <div className="w-12 h-6 rounded-full bg-stacks-orange/20 border border-stacks-orange/40 relative cursor-pointer">
+                    <div className="absolute right-1 top-1 w-4 h-4 rounded-full bg-stacks-orange" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 pt-6 border-t border-white/5 flex justify-end gap-4">
+                <button className="px-6 py-2 rounded-xl text-xs font-bold text-white/40 hover:text-white transition-colors">Discard</button>
+                <button className="px-6 py-2 rounded-xl bg-stacks-orange text-white text-xs font-bold shadow-lg shadow-stacks-orange/20">Save Preferences</button>
+              </div>
+            </div>
+
+            <div className="glass p-8 rounded-3xl border border-red-500/10 bg-red-500/5">
+              <h3 className="text-xl font-bold mb-2 text-red-500">Danger Zone</h3>
+              <p className="text-xs text-white/40 mb-6">Permanently delete your profile data from our servers. This will not affect your on-chain ownership records.</p>
+              <button className="px-6 py-2 rounded-xl border border-red-500/30 text-red-500 text-xs font-bold hover:bg-red-500 hover:text-white transition-all">Delete Profile Data</button>
+            </div>
           </div>
         )}
       </main>
