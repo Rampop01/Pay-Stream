@@ -1,4 +1,4 @@
-import { StacksMainnet } from '@stacks/network';
+import { STACKS_MAINNET } from '@stacks/network';
 import { toast } from 'sonner';
 
 const CONTRACT_ADDRESS = 'SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M'; // Deployed Mainnet address
@@ -21,7 +21,7 @@ export async function registerContentContract({
 }) {
   const { openContractCall } = await import('@stacks/connect');
   const { AnchorMode, stringUtf8CV, uintCV } = await import('@stacks/transactions');
-  const network = new StacksMainnet();
+  const network = STACKS_MAINNET;
   const priceInMicrostacks = BigInt(price);
 
   console.log(`[Contract] Registering content: "${title}" for ${priceInMicrostacks} microSTX`);
@@ -46,7 +46,7 @@ export async function registerContentContract({
 export async function getOnChainPrice(creatorAddress: string): Promise<bigint | null> {
   try {
     const { fetchCallReadOnlyFunction, standardPrincipalCV, cvToJSON } = await import('@stacks/transactions');
-    const network = new StacksMainnet();
+    const network = STACKS_MAINNET;
     
     const result = await fetchCallReadOnlyFunction({
       network,
@@ -84,7 +84,7 @@ export async function unlockContentContract({
 }) {
   const { openContractCall } = await import('@stacks/connect');
   const { AnchorMode, PostConditionMode, principalCV, Pc } = await import('@stacks/transactions');
-  const network = new StacksMainnet();
+  const network = STACKS_MAINNET;
   
   console.log(`[Contract] Starting unlock flow: Creator=${creatorAddress}, Sender=${senderAddress}`);
 
