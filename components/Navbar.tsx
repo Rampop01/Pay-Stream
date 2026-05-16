@@ -6,6 +6,7 @@ import { Wallet, Plus, Home, Zap, Menu, X, LogOut, Compass, Layout, User } from 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { NotificationCenter } from './NotificationCenter';
 
 export function Navbar() {
   const { address, setAddress, clearWallet } = useWalletStore();
@@ -69,14 +70,14 @@ export function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-2">
             <Link href="/">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                 <Home className="w-4 h-4" />
                 Home
               </button>
             </Link>
 
             <Link href="/explore">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                 <Compass className="w-4 h-4" />
                 Explore
               </button>
@@ -85,19 +86,19 @@ export function Navbar() {
             {address && (
               <>
                 <Link href="/profile">
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                     <User className="w-4 h-4" />
                     My Library
                   </button>
                 </Link>
                 <Link href="/dashboard">
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                     <Layout className="w-4 h-4" />
                     Dashboard
                   </button>
                 </Link>
                 <Link href="/create">
-                  <button className="btn-stacks flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white font-medium ml-2">
+                  <button className="btn-stacks hover-glow flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white font-medium ml-2">
                     <Plus className="w-4 h-4" />
                     <span>Upload</span>
                   </button>
@@ -106,8 +107,10 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Wallet + mobile toggle */}
+          {/* Wallet + notifications + mobile toggle */}
           <div className="flex items-center gap-3">
+            {address && <NotificationCenter />}
+            
             {address ? (
               <>
                 <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg glass border border-stacks-orange/10">
