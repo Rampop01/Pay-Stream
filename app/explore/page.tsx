@@ -235,7 +235,7 @@ export default function ExplorePage() {
             <p className="text-white/40 mb-6 max-w-md mx-auto">
               {search || selectedCategory
                 ? 'Try a different search or category filter.'
-                : 'Be the first creator on ContentStream. Showcase your work and start earning STX.'}
+                : 'Be the first creator on PayStream. Showcase your work and start earning STX.'}
             </p>
             {!search && !selectedCategory && (
               <Link href="/create">

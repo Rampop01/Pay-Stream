@@ -14,7 +14,7 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl bg-stacks-orange flex items-center justify-center shadow-lg shadow-stacks-orange/20 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="w-5 h-5 text-white fill-white" />
               </div>
-              <span className="text-xl font-black tracking-tighter text-white">ContentStream</span>
+              <span className="text-xl font-black tracking-tighter text-white">PayStream</span>
             </Link>
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
               The world's first decentralized content marketplace powered by Bitcoin L2. 
@@ -67,7 +67,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[10px] text-white/20 font-medium">
-            © 2024 ContentStream Protocol. Built with Stacks + Clarity.
+            © 2024 PayStream Protocol. Built with Stacks + Clarity.
           </p>
           <div className="flex items-center gap-1 text-[10px] text-white/20">
             Made with <Heart className="w-2 h-2 text-red-500 fill-red-500" /> by the Bitcoin Dev Community

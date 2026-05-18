@@ -1,6 +1,6 @@
 {
-  "name": "ContentStream",
-  "short_name": "Stream",
+  "name": "PayStream",
+  "short_name": "PayStream",
   "description": "On-chain content marketplace built on Bitcoin via Stacks",
   "start_url": "/",
   "display": "standalone",

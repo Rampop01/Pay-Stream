@@ -297,7 +297,7 @@ export default function Page() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Why <span className="gradient-text-fire">ContentStream</span>?
+              Why <span className="gradient-text-fire">PayStream</span>?
             </h2>
             <p className="text-white/40 max-w-xl mx-auto">
               We bridge the gap between global creators and audiences through decentralized identity and instant, trustless payments.
@@ -336,7 +336,7 @@ export default function Page() {
                   How It <span className="text-black/80">Works</span>
                 </h2>
                 <p className="text-white/80 mb-10">
-                  ContentStream leverages Clarity smart contracts to manage access and payments securely.
+                  PayStream leverages Clarity smart contracts to manage access and payments securely.
                 </p>
               </motion.div>
 
@@ -475,7 +475,7 @@ export default function Page() {
           >
             <div className="orb orb-orange w-64 h-64 -top-20 -left-20 opacity-30" />
             <h2 className="text-4xl font-bold mb-6">Ready to join the revolution?</h2>
-            <p className="text-white/50 mb-10 text-lg">Whether you're a creator looking to monetize your audience or a fan seeking premium content, ContentStream is your home.</p>
+            <p className="text-white/50 mb-10 text-lg">Whether you're a creator looking to monetize your audience or a fan seeking premium content, PayStream is your home.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/create">
                 <button className="btn-stacks h-12 px-10 rounded-xl text-white font-bold text-lg">Start Creating</button>

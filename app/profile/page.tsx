@@ -114,7 +114,7 @@ export default function ProfilePage() {
           <div className="glass p-12 rounded-3xl border border-white/10 max-w-2xl mx-auto">
             <Library className="w-16 h-16 text-stacks-orange mx-auto mb-6 opacity-20" />
             <h1 className="text-3xl font-bold mb-4">Your Content Library</h1>
-            <p className="text-white/60 mb-8 text-lg">Connect your wallet to access all the premium content you've unlocked on ContentStream.</p>
+            <p className="text-white/60 mb-8 text-lg">Connect your wallet to access all the premium content you've unlocked on PayStream.</p>
           </div>
         </div>
       </div>

@@ -70,7 +70,7 @@ export function MilestoneManager({ milestones, totalBudget }: { milestones: Mile
       <div className="p-6 rounded-2xl bg-stacks-orange/5 border border-stacks-orange/20 flex items-center gap-4">
         <Shield className="w-8 h-8 text-stacks-orange opacity-40" />
         <p className="text-[11px] text-white/50 leading-relaxed">
-          Payments for each milestone are held in the **ContentStream Escrow Contract**. 
+          Payments for each milestone are held in the **PayStream Escrow Contract**. 
           Funds are only released to the creator once you approve the work or the milestone is completed.
         </p>
       </div>

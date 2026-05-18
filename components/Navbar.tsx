@@ -63,7 +63,7 @@ export function Navbar() {
               <Zap className="w-5 h-5 text-white" />
             </div>
             <span className="text-lg font-bold text-white group-hover:text-stacks-orange-light transition-colors duration-300">
-              ContentStream
+              PayStream
             </span>
           </Link>
 

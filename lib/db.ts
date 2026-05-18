@@ -25,7 +25,7 @@ async function ensureDataDir() {
       await fs.writeFile(UNLOCKS_FILE, JSON.stringify([], null, 2));
     }
   } catch (error) {
-    console.error('[ContentStream] Failed to initialize data directory:', error);
+    console.error('[PayStream] Failed to initialize data directory:', error);
   }
 }
 
@@ -36,7 +36,7 @@ export async function getAllContent(): Promise<Content[]> {
     const data = await fs.readFile(CONTENT_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    console.error('[ContentStream] Failed to read content:', error);
+    console.error('[PayStream] Failed to read content:', error);
     return [];
   }
 }

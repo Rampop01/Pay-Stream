@@ -39,7 +39,7 @@ export default function CreatePage() {
           className="mb-10"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Upload to <span className="gradient-text-fire">ContentStream</span>
+            Upload to <span className="gradient-text-fire">PayStream</span>
           </h1>
           <p className="text-white/40">
             Register your premium creations on the Stacks blockchain and start earning STX

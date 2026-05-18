@@ -48,7 +48,7 @@ export default function WalletPage() {
             Wallet <span className="gradient-text-stacks">Connection</span>
           </h1>
           <p className="text-muted-foreground">
-            Connect your Stacks wallet to start using ContentStream
+            Connect your Stacks wallet to start using PayStream
           </p>
         </motion.div>
 
@@ -114,7 +114,7 @@ export default function WalletPage() {
                   <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between group">
                     <div>
                       <div className="text-sm font-bold">Content Unlock</div>
-                      <div className="text-[10px] text-muted-foreground">ContentStream Marketplace · Success</div>
+                      <div className="text-[10px] text-muted-foreground">PayStream Marketplace · Success</div>
                       <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button 
                           onClick={() => {
@@ -175,10 +175,10 @@ export default function WalletPage() {
                 <div className="icon-glow w-9 h-9 rounded-lg flex items-center justify-center">
                   <BookOpen className="w-4 h-4 text-stacks-amber" />
                 </div>
-                <h3 className="font-semibold text-foreground">About ContentStream</h3>
+                <h3 className="font-semibold text-foreground">About PayStream</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                ContentStream leverages the ContentHub Clarity smart contract to manage decentralized content ownership and secure on-chain payments. Your wallet signs transactions directly on the Stacks blockchain.
+                PayStream leverages the ContentHub Clarity smart contract to manage decentralized content ownership and secure on-chain payments. Your wallet signs transactions directly on the Stacks blockchain.
               </p>
             </div>
 

@@ -12,32 +12,32 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'ContentStream | Decentralized Content Marketplace on Stacks',
+  title: 'PayStream | Decentralized Content Marketplace on Stacks',
   description: 'Monetize your premium content directly on the Stacks blockchain using Clarity smart contracts and STX royalties.',
   keywords: ['content monetization', 'stacks', 'blockchain', 'creator economy', 'STX', 'payments', 'web3', 'Bitcoin L2'],
-  authors: [{ name: 'ContentStream Team' }],
+  authors: [{ name: 'PayStream Team' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://contentstream.app',
-    title: 'ContentStream | On-Chain Content Economy',
+    url: 'https://paystream.app',
+    title: 'PayStream | On-Chain Content Economy',
     description: 'Decentralized marketplace for premium content creators on Stacks.',
-    siteName: 'ContentStream',
+    siteName: 'PayStream',
     images: [
       {
-        url: 'https://contentstream.app/og-image.png',
+        url: 'https://paystream.app/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'ContentStream Preview',
+        alt: 'PayStream Preview',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ContentStream | On-Chain Content Economy',
+    title: 'PayStream | On-Chain Content Economy',
     description: 'Monetize your work directly on Stacks.',
-    images: ['https://contentstream.app/og-image.png'],
-    creator: '@contentstream',
+    images: ['https://paystream.app/og-image.png'],
+    creator: '@paystream',
   },
   verification: {
     other: {

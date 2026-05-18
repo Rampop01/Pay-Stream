@@ -1,4 +1,4 @@
-// Core content data model for ContentStream
+// Core content data model for PayStream
 export type ContentCategory = 'Video' | 'Art' | 'Music' | 'Education' | 'Other';
 
 export interface Comment {

@@ -262,7 +262,7 @@ export default function ContentPage() {
                 <button 
                   onClick={() => {
                     const url = encodeURIComponent(window.location.href);
-                    const text = encodeURIComponent(`Check out this premium content on ContentStream!`);
+                    const text = encodeURIComponent(`Check out this premium content on PayStream!`);
                     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
                   }}
                   className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-xs font-bold"
