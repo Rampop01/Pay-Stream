@@ -48,3 +48,5 @@ export function cn(...inputs: ClassValue[]) {
 // feat: improve error boundaries for components - verification check
 
 // refactor: consolidate animation variants - verification check
+
+// style: refine focus ring outlines - verification check
