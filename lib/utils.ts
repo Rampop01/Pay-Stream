@@ -22,3 +22,5 @@ export function cn(...inputs: ClassValue[]) {
 // chore(deps): update internal dependencies - verification check
 
 // refactor(wallet): optimize balance calculation - verification check
+
+// style(home): update hero section typography - verification check
