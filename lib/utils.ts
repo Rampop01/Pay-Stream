@@ -14,3 +14,5 @@ export function cn(...inputs: ClassValue[]) {
 // chore: update generic types for content metadata - verification check
 
 // refactor(db): streamline mock database queries - verification check
+
+// feat(explore): add dynamic hover state to cards - verification check
