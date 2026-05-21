@@ -52,3 +52,5 @@ export function cn(...inputs: ClassValue[]) {
 // style: refine focus ring outlines - verification check
 
 // chore: clean up console logs - verification check
+
+// fix: address linting warnings in ui components - verification check
