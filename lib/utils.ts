@@ -10,3 +10,5 @@ export function cn(...inputs: ClassValue[]) {
 // style(navbar): enhance mobile navigation layout - verification check
 
 // fix(footer): correct alignment of social icons - verification check
+
+// chore: update generic types for content metadata - verification check
