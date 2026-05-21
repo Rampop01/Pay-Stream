@@ -20,3 +20,5 @@ export function cn(...inputs: ClassValue[]) {
 // style(profile): improve avatar rendering logic - verification check
 
 // chore(deps): update internal dependencies - verification check
+
+// refactor(wallet): optimize balance calculation - verification check
