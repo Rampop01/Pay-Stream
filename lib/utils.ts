@@ -36,3 +36,5 @@ export function cn(...inputs: ClassValue[]) {
 // refactor: extract common layout wrapper - verification check
 
 // style(dashboard): improve chart responsiveness - verification check
+
+// fix: resolve hydration mismatch on initial load - verification check
