@@ -46,3 +46,5 @@ export function cn(...inputs: ClassValue[]) {
 // style(components): standardise border radius - verification check
 
 // feat: improve error boundaries for components - verification check
+
+// refactor: consolidate animation variants - verification check
