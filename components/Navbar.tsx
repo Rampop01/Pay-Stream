@@ -70,14 +70,14 @@ export function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-2">
             <Link href="/">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
+              <button aria-label="Home page" className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                 <Home className="w-4 h-4" />
                 Home
               </button>
             </Link>
 
             <Link href="/explore">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
+              <button aria-label="Explore content" className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white glass-hover transition-all duration-200">
                 <Compass className="w-4 h-4" />
                 Explore
               </button>
