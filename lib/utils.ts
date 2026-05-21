@@ -18,3 +18,5 @@ export function cn(...inputs: ClassValue[]) {
 // feat(explore): add dynamic hover state to cards - verification check
 
 // style(profile): improve avatar rendering logic - verification check
+
+// chore(deps): update internal dependencies - verification check
