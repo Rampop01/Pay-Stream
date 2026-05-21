@@ -21,23 +21,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://paystream.app',
     title: 'PayStream | On-Chain Content Economy',
-    description: 'Decentralized marketplace for premium content creators on Stacks.',
+    description: 'Decentralized marketplace for premium content creators on the Stacks L2 network.',
     siteName: 'PayStream',
     images: [
       {
         url: 'https://paystream.app/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'PayStream Preview',
+        alt: 'PayStream - Monetize your work directly on Stacks',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PayStream | On-Chain Content Economy',
-    description: 'Monetize your work directly on Stacks.',
+    description: 'Monetize your premium digital work directly on Stacks via Clarity smart contracts.',
     images: ['https://paystream.app/og-image.png'],
-    creator: '@paystream',
+    creator: '@PayStreamApp',
   },
   verification: {
     other: {
