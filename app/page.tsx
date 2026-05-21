@@ -172,12 +172,13 @@ export default function Page() {
                 <Search className="w-5 h-5 text-white/30 ml-4 flex-shrink-0" />
                 <input 
                   type="text" 
-                  placeholder="What do you want to learn or watch today?" 
+                  aria-label="Search content"
+                  placeholder="What do you want to learn, watch, or build today?" 
                   className="w-full bg-transparent border-none outline-none px-4 py-3 text-white placeholder:text-white/20"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="submit" className="bg-stacks-orange hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                <button type="submit" aria-label="Submit search" className="bg-stacks-orange hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-bold transition-colors">
                   Search
                 </button>
               </div>
