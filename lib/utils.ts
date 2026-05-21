@@ -30,3 +30,5 @@ export function cn(...inputs: ClassValue[]) {
 // refactor(hooks): clean up unused imports in custom hooks - verification check
 
 // style(theme): tweak primary color saturation - verification check
+
+// docs: add inline comments for token unlock logic - verification check
