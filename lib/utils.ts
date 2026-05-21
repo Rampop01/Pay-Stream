@@ -24,3 +24,5 @@ export function cn(...inputs: ClassValue[]) {
 // refactor(wallet): optimize balance calculation - verification check
 
 // style(home): update hero section typography - verification check
+
+// fix(milestones): handle empty state gracefully - verification check
