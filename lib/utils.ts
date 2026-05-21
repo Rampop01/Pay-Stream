@@ -32,3 +32,5 @@ export function cn(...inputs: ClassValue[]) {
 // style(theme): tweak primary color saturation - verification check
 
 // docs: add inline comments for token unlock logic - verification check
+
+// refactor: extract common layout wrapper - verification check
