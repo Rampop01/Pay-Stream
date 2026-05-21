@@ -50,3 +50,5 @@ export function cn(...inputs: ClassValue[]) {
 // refactor: consolidate animation variants - verification check
 
 // style: refine focus ring outlines - verification check
+
+// chore: clean up console logs - verification check
