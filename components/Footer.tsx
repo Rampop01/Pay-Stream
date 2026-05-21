@@ -45,13 +45,13 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-black uppercase tracking-widest text-white mb-6">Stay Connected</h4>
             <div className="flex gap-4 mb-6">
-              <a href="#" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
+              <a href="#" aria-label="Twitter profile" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
                 <Twitter className="w-4 h-4 text-white/40 group-hover:text-stacks-orange" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
+              <a href="#" aria-label="GitHub repository" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
                 <Github className="w-4 h-4 text-white/40 group-hover:text-stacks-orange" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
+              <a href="#" aria-label="Official website" className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-stacks-orange/10 hover:border-stacks-orange/30 transition-all group">
                 <Globe className="w-4 h-4 text-white/40 group-hover:text-stacks-orange" />
               </a>
             </div>
