@@ -38,3 +38,5 @@ export function cn(...inputs: ClassValue[]) {
 // style(dashboard): improve chart responsiveness - verification check
 
 // fix: resolve hydration mismatch on initial load - verification check
+
+// chore: remove legacy styling attributes - verification check
