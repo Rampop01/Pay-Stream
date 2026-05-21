@@ -44,3 +44,5 @@ export function cn(...inputs: ClassValue[]) {
 // refactor(api): optimize data fetching caching - verification check
 
 // style(components): standardise border radius - verification check
+
+// feat: improve error boundaries for components - verification check
