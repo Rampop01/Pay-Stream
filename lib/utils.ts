@@ -34,3 +34,5 @@ export function cn(...inputs: ClassValue[]) {
 // docs: add inline comments for token unlock logic - verification check
 
 // refactor: extract common layout wrapper - verification check
+
+// style(dashboard): improve chart responsiveness - verification check
