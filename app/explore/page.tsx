@@ -20,6 +20,10 @@ export default function ExplorePage() {
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [visibleItems, setVisibleItems] = useState(8);
 
+  const loadMore = () => {
+    setVisibleItems(prev => prev + 8);
+  };
+
   // Get unique categories
   const categories = Array.from(
     new Set(content.map((c) => c.category).filter(Boolean))
