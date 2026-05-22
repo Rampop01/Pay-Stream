@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { Star, MapPin, Zap, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+/** @description Showcase component for top performing creators */
+
 
 const TALENT = [
   { id: 't1', name: 'Alice Smith', role: 'Clarity Dev', rating: 4.9, address: 'SP1...X123', bio: 'Expert in DeFi smart contracts.' },
