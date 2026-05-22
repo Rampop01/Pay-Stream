@@ -1,3 +1,5 @@
+
+/** @description Root application layout and global providers */
 import React from "react"
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
