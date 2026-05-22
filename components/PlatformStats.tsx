@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Activity, Users, DollarSign, Zap } from 'lucide-react';
+/** @description Animated platform statistics display component */
+
 
 export function PlatformStats() {
   const stats = [
