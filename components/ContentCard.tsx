@@ -3,6 +3,8 @@
 import { Content } from '@/lib/types';
 import Link from 'next/link';
 import { Zap, Play, User, Eye, Sparkles } from 'lucide-react';
+/** @description Reusable card component for displaying marketplace items */
+
 
 interface ContentCardProps {
   content: Content;
