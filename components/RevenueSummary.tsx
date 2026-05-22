@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
+/** @description Financial summary cards for total STX earnings */
+
 
 interface MetricProps {
   label: string;
