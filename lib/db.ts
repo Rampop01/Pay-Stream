@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { Content } from './types';
+/** @description Client interface for database interactions */
+
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
