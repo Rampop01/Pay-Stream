@@ -7,6 +7,8 @@ import { Footer } from '@/components/Footer';
 import { Send, User, MessageSquare, Loader2, Search, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+/** @description Direct messaging and creator communication interface */
+
 
 interface Message {
   id: string;
