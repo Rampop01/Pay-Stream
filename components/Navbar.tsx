@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { NotificationCenter } from './NotificationCenter';
+/** @description Global top navigation bar component */
+
 
 export function Navbar() {
   const { address, setAddress, clearWallet } = useWalletStore();
