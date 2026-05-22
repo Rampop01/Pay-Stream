@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import { useWalletStore } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Zap, BookOpen, HelpCircle, ExternalLink, Coins } from 'lucide-react';
+/** @description Wallet management and royalty withdrawal interface */
+
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 const WalletConnectPanel = dynamic(() => import('@/components/WalletConnectPanel').then((mod) => mod.WalletConnectPanel), { ssr: false });
