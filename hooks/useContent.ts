@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Content } from '@/lib/types';
+/** @description React hook for fetching and managing content state */
+
 
 /**
  * Hook to fetch all content from the marketplace
