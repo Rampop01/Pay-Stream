@@ -29,6 +29,8 @@ import { TopTalent } from '@/components/TopTalent';
 import { TalentLeaderboard } from '@/components/TalentLeaderboard';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+/** @description Main landing page and hero section */
+
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), {
   ssr: false,
