@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowLeft, Search, Play, ArrowUpDown } from 'lucide-react';
 import { useState } from 'react';
+/** @description Content discovery and marketplace exploration page */
+
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
