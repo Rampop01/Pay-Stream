@@ -5,6 +5,8 @@ import { Bell, Check, Trash2, Clock, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useWalletStore } from '@/lib/store';
 import { toast } from 'sonner';
+/** @description Dropdown component for real-time user notifications */
+
 
 interface Notification {
   id: string;
