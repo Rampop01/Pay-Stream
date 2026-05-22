@@ -1,3 +1,5 @@
+
+/** @description Shared TypeScript interfaces and type definitions */
 // Core content data model for PayStream
 export type ContentCategory = 'Video' | 'Art' | 'Music' | 'Education' | 'Other';
 
