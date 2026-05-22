@@ -6,6 +6,8 @@ import { useWalletStore } from '@/lib/store';
 import { MessageSquare, Send, User, Clock, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
+/** @description Interactive comments interface for content discussions */
+
 
 interface CommentsSectionProps {
   contentId: string;
