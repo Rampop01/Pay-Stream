@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Wallet, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { connect, disconnect } from '@stacks/connect';
+/** @description UI panel for connecting Stacks wallets */
+
 
 
 export function WalletConnectPanel() {
