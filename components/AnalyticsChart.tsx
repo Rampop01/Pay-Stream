@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+/** @description Data visualization component for creator analytics */
+
 
 export function AnalyticsChart() {
   // Mock data for the last 7 days
