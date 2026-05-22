@@ -14,6 +14,8 @@ import { useWalletStore } from '@/lib/store';
 import ReactMarkdown from 'react-markdown';
 import { CommentsSection } from '@/components/CommentsSection';
 import { UnlockSuccess } from '@/components/UnlockSuccess';
+/** @description Dynamic content viewing and unlock interface */
+
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 
