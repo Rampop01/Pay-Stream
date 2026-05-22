@@ -6,6 +6,8 @@ import { Navbar } from '@/components/Navbar';
 import { Shield, Flag, CheckCircle, XCircle, Eye, Trash2, AlertTriangle, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+/** @description Administrative control panel and moderation tools */
+
 
 interface Report {
   id: string;
