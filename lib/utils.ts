@@ -1,3 +1,5 @@
+
+/** @description Core utility functions and styling helpers */
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
