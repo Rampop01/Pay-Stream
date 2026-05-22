@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Send, X, Shield, Clock, Zap, Star } from 'lucide-react';
 import { toast } from 'sonner';
+/** @description Modal interface for requesting custom creator commissions */
+
 
 interface CommissionModalProps {
   isOpen: boolean;
