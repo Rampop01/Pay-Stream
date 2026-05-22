@@ -6,6 +6,8 @@ import { registerContentContract } from '@/lib/contract';
 import { useWalletStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Loader2, Sparkles, Zap, Image as ImageIcon, Type, Layout } from 'lucide-react';
+/** @description Form component for registering new content on-chain */
+
 
 export function CreateContentForm() {
   const router = useRouter();
