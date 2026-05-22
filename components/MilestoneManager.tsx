@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { CheckCircle2, Clock, DollarSign, ArrowRight, Shield, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+/** @description Component for tracking and managing creator milestones */
+
 
 interface Milestone {
   id: string;
