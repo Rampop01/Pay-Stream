@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+/** @description Content registration and upload interface */
+
 
 const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Navbar), { ssr: false });
 const CreateContentForm = dynamic(
