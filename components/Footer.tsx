@@ -1,5 +1,7 @@
 import { Zap, Github, Twitter, Globe, Heart } from 'lucide-react';
 import Link from 'next/link';
+/** @description Global footer and social links component */
+
 
 export function Footer() {
   return (
