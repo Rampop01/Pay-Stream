@@ -22,6 +22,8 @@ import {
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
+/** @description User library and unlocked content view */
+
 
 interface UnlockedContent extends Content {
   purchasedAt: number;
