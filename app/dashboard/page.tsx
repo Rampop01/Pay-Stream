@@ -22,6 +22,8 @@ import { toast } from 'sonner';
 import { EditContentModal } from '@/components/EditContentModal';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AnalyticsChart } from '@/components/AnalyticsChart';
+/** @description Creator dashboard and analytics view */
+
 
 export default function CreatorDashboard() {
   const { address } = useWalletStore();
