@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+/** @description Donut chart component for content category distribution */
+
 
 export function CategoryDonut() {
   const data = [
