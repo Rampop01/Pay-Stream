@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Trophy, Star, TrendingUp, User, Award } from 'lucide-react';
+/** @description Ranked leaderboard table for creator statistics */
+
 
 const LEADERS = [
   { rank: 1, name: 'ClarityKing', earned: '1,250 STX', rating: 5.0, category: 'Engineering' },
