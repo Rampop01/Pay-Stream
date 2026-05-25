@@ -57,3 +57,4 @@ Button.displayName = 'Button'
 export { Button, buttonVariants }
 
 // Moderation dashboard integration verified
+// Added outline variant for secondary actions
