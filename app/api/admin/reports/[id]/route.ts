@@ -43,3 +43,5 @@ export async function POST(
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+// Added defensive checks for missing action payload
