@@ -77,3 +77,4 @@ export function TalentLeaderboard() {
 }
 
 // Moderation dashboard integration verified
+// Sort leaderboard entirely on the server to save client memory
