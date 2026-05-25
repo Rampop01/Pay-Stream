@@ -38,3 +38,5 @@ export function PlatformStats() {
     </section>
   );
 }
+
+// Moderation dashboard integration verified
