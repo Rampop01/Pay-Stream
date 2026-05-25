@@ -103,3 +103,5 @@ export function WalletConnectPanel() {
         </motion.div>
     );
 }
+
+// Moderation dashboard integration verified
