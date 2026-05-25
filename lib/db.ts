@@ -150,23 +150,55 @@ export async function addComment(contentId: string, comment: Omit<Comment, 'id' 
 
 const REPORTS_FILE = path.join(process.cwd(), 'data/reports.json');
 
-export async function addReport(report: { contentId: string; reason: string; reporterAddress: string }): Promise<void> {
+export interface Report {
+  id: string;
+  contentId: string;
+  contentTitle: string;
+  reporter: string;
+  reason: string;
+  timestamp: number;
+  status: 'pending' | 'resolved' | 'dismissed';
+}
+
+export async function getReports(): Promise<Report[]> {
   await ensureDataDir();
-  let reports = [];
   try {
     const data = await fs.readFile(REPORTS_FILE, 'utf-8');
-    reports = JSON.parse(data);
+    return JSON.parse(data);
   } catch (e) {
-    // File doesn't exist yet
+    return [];
   }
+}
+
+export async function addReport(report: { contentId: string; reason: string; reporterAddress: string }): Promise<void> {
+  await ensureDataDir();
+  const reports = await getReports();
+  
+  const content = await getContentById(report.contentId);
 
   reports.push({
-    ...report,
     id: Math.random().toString(36).substring(2, 9),
-    timestamp: Date.now()
+    contentId: report.contentId,
+    contentTitle: content?.title || 'Unknown Content',
+    reporter: report.reporterAddress,
+    reason: report.reason,
+    timestamp: Date.now(),
+    status: 'pending'
   });
 
   await fs.writeFile(REPORTS_FILE, JSON.stringify(reports, null, 2));
+}
+
+export async function updateReportStatus(reportId: string, status: 'resolved' | 'dismissed'): Promise<boolean> {
+  await ensureDataDir();
+  const reports = await getReports();
+  const index = reports.findIndex((r) => r.id === reportId);
+  
+  if (index === -1) return false;
+  
+  reports[index].status = status;
+  await fs.writeFile(REPORTS_FILE, JSON.stringify(reports, null, 2));
+  return true;
 }
 
 // --- Profile Management ---

@@ -24,6 +24,7 @@ export interface Content {
   createdAt: number;
   totalUnlocks: number;
   comments?: Comment[];
+  status?: 'active' | 'hidden';
 }
 
 // Purchase record stored after successful transactions

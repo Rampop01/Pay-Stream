@@ -48,7 +48,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleAction = async (reportId: string, action: 'resolve' | 'dismiss') => {
+  const handleAction = async (reportId: string, action: 'resolve' | 'dismiss' | 'hide_content' | 'ban_creator') => {
     try {
       const res = await fetch(`/api/admin/reports/${reportId}`, {
         method: 'POST',
@@ -161,18 +161,31 @@ export default function AdminPage() {
                       </td>
                       <td className="px-8 py-6 text-right">
                         <div className="flex items-center justify-end gap-2">
-                          <button 
-                            onClick={() => handleAction(report.id, 'resolve')}
-                            className="p-2 rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white transition-all"
-                          >
-                            <CheckCircle className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={() => handleAction(report.id, 'dismiss')}
-                            className="p-2 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
-                          >
-                            <XCircle className="w-4 h-4" />
-                          </button>
+                          {report.status === 'pending' && (
+                            <>
+                              <button 
+                                onClick={() => handleAction(report.id, 'hide_content')}
+                                title="Hide Content"
+                                className="p-2 rounded-lg bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-white transition-all"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              <button 
+                                onClick={() => handleAction(report.id, 'ban_creator')}
+                                title="Ban Creator"
+                                className="p-2 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                              <button 
+                                onClick={() => handleAction(report.id, 'dismiss')}
+                                title="Dismiss Report"
+                                className="p-2 rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white transition-all"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                              </button>
+                            </>
+                          )}
                         </div>
                       </td>
                     </motion.tr>

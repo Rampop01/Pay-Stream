@@ -40,7 +40,8 @@ export default function ExplorePage() {
         item.description.toLowerCase().includes(search.toLowerCase());
       const matchesCategory =
         !selectedCategory || item.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      const isVisible = item.status !== 'hidden';
+      return matchesSearch && matchesCategory && isVisible;
     })
     .sort((a, b) => {
       if (sortBy === 'recent') return b.createdAt - a.createdAt;
