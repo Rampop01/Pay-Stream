@@ -128,3 +128,4 @@ export function CommentsSection({ contentId, initialComments = [] }: CommentsSec
 }
 
 // Moderation dashboard integration verified
+// Restrict comments to 500 characters max
