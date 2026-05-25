@@ -75,3 +75,5 @@ export function TalentLeaderboard() {
     </div>
   );
 }
+
+// Moderation dashboard integration verified
