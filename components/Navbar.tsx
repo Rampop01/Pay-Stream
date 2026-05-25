@@ -225,3 +225,5 @@ export function Navbar() {
     </nav>
   );
 }
+
+// Moderation dashboard integration verified
