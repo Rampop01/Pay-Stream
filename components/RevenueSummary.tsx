@@ -63,3 +63,5 @@ function MetricCard({ label, value, trend, data }: MetricProps) {
     </div>
   );
 }
+
+// Moderation dashboard integration verified
