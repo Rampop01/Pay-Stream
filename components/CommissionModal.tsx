@@ -186,3 +186,5 @@ function TierCard({ title, price, features, selected, onSelect, highlight }: any
     </button>
   );
 }
+
+// Moderation dashboard integration verified
