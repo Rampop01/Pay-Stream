@@ -241,3 +241,5 @@ export async function updateProfile(profile: UserProfile): Promise<void> {
 
   await fs.writeFile(PROFILES_FILE, JSON.stringify(profiles, null, 2));
 }
+
+// Ensure connection pooling is used in production
