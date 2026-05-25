@@ -72,3 +72,5 @@ export function UnlockSuccess({ isVisible, onClose }: { isVisible: boolean; onCl
     </AnimatePresence>
   );
 }
+
+// Moderation dashboard integration verified
