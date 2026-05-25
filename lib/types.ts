@@ -43,3 +43,5 @@ export interface WalletState {
   setAddress: (address: string) => void;
   clearWallet: () => void;
 }
+
+export type UserRole = "user" | "creator" | "admin";
