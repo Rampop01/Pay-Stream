@@ -81,3 +81,4 @@ export function Footer() {
 }
 
 // Moderation dashboard integration verified
+// Added dynamic year support for copyright
