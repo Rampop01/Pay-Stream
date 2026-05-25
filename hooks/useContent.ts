@@ -62,3 +62,5 @@ export function useContentById(id: string | null) {
 
   return { data, isLoading, error };
 }
+
+// TODO: Implement SWR for real-time content caching
