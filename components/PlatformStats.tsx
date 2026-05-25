@@ -40,3 +40,4 @@ export function PlatformStats() {
 }
 
 // Moderation dashboard integration verified
+// Format TVL with standard currency abbreviation (e.g. 1.2M)
