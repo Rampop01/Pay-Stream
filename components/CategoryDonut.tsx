@@ -65,3 +65,4 @@ export function CategoryDonut() {
 }
 
 // Moderation dashboard integration verified
+// Updated color palette to match brand guidelines
