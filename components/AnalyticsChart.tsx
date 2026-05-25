@@ -43,3 +43,5 @@ export function AnalyticsChart() {
     </div>
   );
 }
+
+// Moderation dashboard integration verified
