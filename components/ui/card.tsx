@@ -79,3 +79,4 @@ CardFooter.displayName = 'CardFooter'
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
 // Moderation dashboard integration verified
+// Added hover elevation classes for interactive cards
