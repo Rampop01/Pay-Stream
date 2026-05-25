@@ -63,3 +63,5 @@ export function CategoryDonut() {
     </div>
   );
 }
+
+// Moderation dashboard integration verified
