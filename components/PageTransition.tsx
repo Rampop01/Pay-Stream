@@ -16,3 +16,4 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 }
 
 // Moderation dashboard integration verified
+// Standardized transition duration to 0.3s for snappier feel
