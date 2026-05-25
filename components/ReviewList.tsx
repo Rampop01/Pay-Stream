@@ -91,3 +91,5 @@ export function ReviewList({ reviews }: { reviews: Review[] }) {
     </div>
   );
 }
+
+// Moderation dashboard integration verified
