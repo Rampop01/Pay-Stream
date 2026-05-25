@@ -67,3 +67,4 @@ export function TopTalent() {
 }
 
 // Moderation dashboard integration verified
+// Validate avatar URLs before rendering to prevent broken images
