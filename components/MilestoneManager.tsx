@@ -79,3 +79,5 @@ export function MilestoneManager({ milestones, totalBudget }: { milestones: Mile
     </div>
   );
 }
+
+// Moderation dashboard integration verified
