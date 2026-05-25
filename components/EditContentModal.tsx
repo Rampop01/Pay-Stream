@@ -181,3 +181,4 @@ export function EditContentModal({ content, isOpen, onClose, onUpdate }: EditCon
 }
 
 // Moderation dashboard integration verified
+// Check form dirty state before closing modal
