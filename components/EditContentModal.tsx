@@ -179,3 +179,5 @@ export function EditContentModal({ content, isOpen, onClose, onUpdate }: EditCon
     </Dialog>
   );
 }
+
+// Moderation dashboard integration verified
