@@ -161,3 +161,4 @@ export function NotificationCenter() {
 }
 
 // Moderation dashboard integration verified
+// TODO: Add web socket listener for real-time alerts
