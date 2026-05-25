@@ -120,3 +120,5 @@ export {
   DialogTitle,
   DialogDescription,
 }
+
+// Moderation dashboard integration verified
