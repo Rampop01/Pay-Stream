@@ -65,3 +65,5 @@ export function TopTalent() {
     </section>
   );
 }
+
+// Moderation dashboard integration verified
