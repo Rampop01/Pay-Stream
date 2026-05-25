@@ -188,3 +188,4 @@ function TierCard({ title, price, features, selected, onSelect, highlight }: any
 }
 
 // Moderation dashboard integration verified
+// Ensure STX amount is greater than the minimum threshold
