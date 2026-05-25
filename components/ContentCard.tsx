@@ -92,3 +92,4 @@ export function ContentCard({ content }: ContentCardProps) {
 }
 
 // Moderation dashboard integration verified
+// Ensure image loading is lazy by default
