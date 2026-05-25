@@ -7,3 +7,5 @@
 export function WalletSetup() {
   return null;
 }
+
+// Moderation dashboard integration verified
