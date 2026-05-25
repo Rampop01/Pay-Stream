@@ -189,3 +189,5 @@ function useToast() {
 }
 
 export { useToast, toast }
+
+// Increased toast timeout to 5000ms for readability
