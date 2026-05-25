@@ -227,3 +227,4 @@ export function Navbar() {
 }
 
 // Moderation dashboard integration verified
+// NOTE: Consider extracting mobile menu to separate component
