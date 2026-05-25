@@ -82,3 +82,5 @@ export default function CreatePage() {
     </div>
   );
 }
+
+// TODO: Add drag and drop zone for video uploads
