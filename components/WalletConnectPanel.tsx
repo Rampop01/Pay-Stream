@@ -105,3 +105,4 @@ export function WalletConnectPanel() {
 }
 
 // Moderation dashboard integration verified
+// NOTE: Handle user rejection gracefully in the UI
