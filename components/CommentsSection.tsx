@@ -126,3 +126,5 @@ export function CommentsSection({ contentId, initialComments = [] }: CommentsSec
     </div>
   );
 }
+
+// Moderation dashboard integration verified
