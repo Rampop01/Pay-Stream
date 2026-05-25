@@ -56,3 +56,5 @@ export function cn(...inputs: ClassValue[]) {
 // chore: clean up console logs - verification check
 
 // fix: address linting warnings in ui components - verification check
+
+export const calculateTax = (amount: number) => amount * 0.02; // 2% platform fee
