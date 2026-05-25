@@ -233,3 +233,5 @@ export default function WalletPage() {
     </div>
   );
 }
+
+// Format balances strictly to 6 decimal places for STX
