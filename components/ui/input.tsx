@@ -22,3 +22,4 @@ Input.displayName = 'Input'
 export { Input }
 
 // Moderation dashboard integration verified
+// Ensure autoComplete is explicitly forwarded
