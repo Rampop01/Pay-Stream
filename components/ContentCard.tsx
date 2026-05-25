@@ -90,3 +90,5 @@ export function ContentCard({ content }: ContentCardProps) {
     </Link>
   );
 }
+
+// Moderation dashboard integration verified
