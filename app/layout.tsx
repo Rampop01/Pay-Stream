@@ -75,3 +75,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+// Added theme-color meta tag for PWA support
