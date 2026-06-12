@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Star, TrendingUp, User, Award } from 'lucide-react';
+import { Trophy, Star, TrendingUp, User, Award, Zap } from 'lucide-react';
+import { StakingModal } from './StakingModal';
 /** @description Ranked leaderboard table for creator statistics */
 
 
@@ -14,8 +16,16 @@ const LEADERS = [
 ];
 
 export function TalentLeaderboard() {
+  const [stakingCreator, setStakingCreator] = useState<{name: string, address: string} | null>(null);
+
   return (
     <div className="glass p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden">
+      <StakingModal 
+        isOpen={!!stakingCreator}
+        onClose={() => setStakingCreator(null)}
+        creatorName={stakingCreator?.name || ''}
+        creatorAddress={stakingCreator?.address || ''}
+      />
       <div className="absolute top-0 right-0 p-8 opacity-10">
         <Trophy className="w-32 h-32 text-stacks-orange" />
       </div>
@@ -59,11 +69,19 @@ export function TalentLeaderboard() {
               </div>
             </div>
 
-            <div className="text-right">
-              <div className="text-sm font-black text-white">{leader.earned}</div>
-              <div className="flex items-center justify-end gap-1 text-[9px] text-stacks-orange font-bold">
-                <Star className="w-2.5 h-2.5 fill-current" /> {leader.rating}
+            <div className="text-right flex items-center gap-4">
+              <div>
+                <div className="text-sm font-black text-white">{leader.earned}</div>
+                <div className="flex items-center justify-end gap-1 text-[9px] text-stacks-orange font-bold">
+                  <Star className="w-2.5 h-2.5 fill-current" /> {leader.rating}
+                </div>
               </div>
+              <button 
+                onClick={() => setStakingCreator({ name: leader.name, address: `SP${Math.random().toString(36).substring(2, 6).toUpperCase()}` })}
+                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-xl bg-purple-500/20 text-purple-400 hover:bg-purple-500 hover:text-white border border-purple-500/30 flex items-center gap-1 text-[10px] font-bold uppercase"
+              >
+                <Zap className="w-3 h-3" /> Stake
+              </button>
             </div>
           </motion.div>
         ))}
