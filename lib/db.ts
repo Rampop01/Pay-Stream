@@ -7,6 +7,7 @@ import { Content } from './types';
 const DATA_DIR = path.join(process.cwd(), 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
 const UNLOCKS_FILE = path.join(DATA_DIR, 'unlocks.json');
+const STAKES_FILE = path.join(DATA_DIR, 'stakes.json');
 
 // Ensure data directory and files exist
 async function ensureDataDir() {
@@ -25,6 +26,13 @@ async function ensureDataDir() {
       await fs.access(UNLOCKS_FILE);
     } catch {
       await fs.writeFile(UNLOCKS_FILE, JSON.stringify([], null, 2));
+    }
+
+    // Ensure stakes file
+    try {
+      await fs.access(STAKES_FILE);
+    } catch {
+      await fs.writeFile(STAKES_FILE, JSON.stringify([], null, 2));
     }
   } catch (error) {
     console.error('[PayStream] Failed to initialize data directory:', error);
