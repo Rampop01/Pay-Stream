@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { PageTransition } from "@/components/PageTransition"
+import LiveActivityFeed from "@/components/LiveActivityFeed"
 
 import './globals.css'
 
@@ -56,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body className={`${inter.variable} font-sans antialiased bg-background text-foreground noise-overlay`}>
+        <LiveActivityFeed />
         <PageTransition>
           {children}
         </PageTransition>
