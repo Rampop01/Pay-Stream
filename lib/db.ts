@@ -250,4 +250,32 @@ export async function updateProfile(profile: UserProfile): Promise<void> {
   await fs.writeFile(PROFILES_FILE, JSON.stringify(profiles, null, 2));
 }
 
+// --- Staking Management ---
+
+export async function getStakes(): Promise<import('./types').Stake[]> {
+  await ensureDataDir();
+  try {
+    const data = await fs.readFile(STAKES_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function addStake(stake: Omit<import('./types').Stake, 'id' | 'createdAt'>): Promise<import('./types').Stake> {
+  await ensureDataDir();
+  const stakes = await getStakes();
+  
+  const newStake: import('./types').Stake = {
+    ...stake,
+    id: `stake_${Math.random().toString(36).substring(2, 9)}`,
+    createdAt: Date.now()
+  };
+  
+  stakes.push(newStake);
+  await fs.writeFile(STAKES_FILE, JSON.stringify(stakes, null, 2));
+  
+  return newStake;
+}
+
 // Ensure connection pooling is used in production

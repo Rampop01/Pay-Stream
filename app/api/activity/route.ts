@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getContent } from '@/lib/db';
+import { getAllContent } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const allContent = await getContent();
+    const allContent = await getAllContent();
     
     // Generate realistic simulated activity
     const activities = [];
