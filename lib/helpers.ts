@@ -20,3 +20,5 @@ export const utilityFn7 = () => { return 7; };
 export const utilityFn8 = () => { return 8; };
 
 export const utilityFn9 = () => { return 9; };
+
+export const utilityFn10 = () => { return 10; };
