@@ -1,5 +1,13 @@
 
 /** @description Shared TypeScript interfaces and type definitions */
+
+export interface Stake {
+  id: string;
+  creatorAddress: string;
+  stakerAddress: string;
+  amountSTX: number;
+  createdAt: number;
+}
 // Core content data model for PayStream
 export type ContentCategory = 'Video' | 'Art' | 'Music' | 'Education' | 'Other';
 
