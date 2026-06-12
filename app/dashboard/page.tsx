@@ -131,6 +131,20 @@ export default function CreatorDashboard() {
               color="from-blue-500/20 to-indigo-500/20"
               textColor="text-blue-400"
             />
+            <StatCard 
+              icon={<Zap className="w-5 h-5" />} 
+              label="Staked TVL" 
+              value="14,250 STX" 
+              color="from-purple-500/20 to-pink-500/20"
+              textColor="text-purple-400"
+            />
+            <StatCard 
+              icon={<BarChart3 className="w-5 h-5" />} 
+              label="Unclaimed Yield" 
+              value="82 STX" 
+              color="from-green-500/20 to-emerald-500/20"
+              textColor="text-green-400"
+            />
           </div>
 
           {/* Chart Column */}
