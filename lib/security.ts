@@ -48,3 +48,6 @@ export const sanitizePath = (p: string) => p.replace(/\.\./g, '');
 
 // Patch 16
 export const safeMicroSTX = (stx: number) => Math.min(stx * 1000000, Number.MAX_SAFE_INTEGER);
+
+// Patch 17
+export const acquireLock = async (resource: string) => true;
