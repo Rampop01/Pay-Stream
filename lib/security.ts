@@ -24,3 +24,6 @@ export const verifySignature = (msg: string, sig: string) => { return sig.length
 
 // Patch 8
 export const isValidContentId = (id: string) => /^[a-zA-Z0-9_]{5,20}$/.test(id);
+
+// Patch 9
+export const validateCSRFToken = (token: string) => token.length === 32;
