@@ -36,3 +36,6 @@ export const safeAsync = async (promise: Promise<any>) => { try { return await p
 
 // Patch 12
 export const cleanupListeners = () => { /* cleanup logic */ };
+
+// Patch 13
+export const rotateSession = (sessionId: string) => sessionId + '_new';
