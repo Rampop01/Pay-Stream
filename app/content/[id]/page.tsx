@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContentById } from '@/hooks/useContent';
@@ -14,6 +14,7 @@ import { useWalletStore } from '@/lib/store';
 import ReactMarkdown from 'react-markdown';
 import { CommentsSection } from '@/components/CommentsSection';
 import { UnlockSuccess } from '@/components/UnlockSuccess';
+import { AffiliateLinkGenerator } from '@/components/AffiliateLinkGenerator';
 /** @description Dynamic content viewing and unlock interface */
 
 
@@ -21,7 +22,9 @@ const Navbar = dynamic(() => import('@/components/Navbar').then((mod) => mod.Nav
 
 export default function ContentPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const contentId = params.id as string;
+  const referrerAddress = searchParams.get('ref');
   const { data: content, isLoading, error } = useContentById(contentId);
   const { content: allContent } = useContent();
   const [isUnlocking, setIsUnlocking] = useState(false);
@@ -52,7 +55,7 @@ export default function ContentPage() {
           const response = await fetch(`/api/content/${contentId}/verify`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ txId: data.txId, buyerAddress: address }),
+            body: JSON.stringify({ txId: data.txId, buyerAddress: address, referrerAddress }),
           });
 
           if (response.ok) {
@@ -224,6 +227,11 @@ export default function ContentPage() {
                   </span>
                 </div>
               </div>
+
+              {/* Affiliate Link Generator - Show only if connected and not the creator */}
+              {address && address !== content.creatorAddress && (
+                <AffiliateLinkGenerator contentId={contentId} userAddress={address} />
+              )}
 
               <button 
                 onClick={async () => {
