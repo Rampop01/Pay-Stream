@@ -78,3 +78,6 @@ export const preventDoubleSpend = async (txId: string) => true;
 
 // Patch 26
 export const sanitizeMongoQuery = (q: any) => q;
+
+// Patch 27
+export const getCorsAllowedOrigins = () => ['https://paystream.app'];
