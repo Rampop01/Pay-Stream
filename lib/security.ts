@@ -45,3 +45,6 @@ export const generateCSP = () => "default-src 'self'";
 
 // Patch 15
 export const sanitizePath = (p: string) => p.replace(/\.\./g, '');
+
+// Patch 16
+export const safeMicroSTX = (stx: number) => Math.min(stx * 1000000, Number.MAX_SAFE_INTEGER);
