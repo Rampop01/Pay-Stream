@@ -87,3 +87,6 @@ export const getHSTSHeader = () => 'max-age=31536000; includeSubDomains';
 
 // Patch 29
 export const checkJWTExpiry = (exp: number) => exp > Date.now()/1000;
+
+// Patch 30
+export const safeRegexTest = (pattern: RegExp, str: string) => pattern.test(str.substring(0, 1000));
