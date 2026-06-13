@@ -57,3 +57,6 @@ export const checkOwnership = (user: string, resourceOwner: string) => user === 
 
 // Patch 19
 export const checkPayloadSize = (bytes: number) => { if(bytes > 5242880) throw new Error('Payload too large'); };
+
+// Patch 20
+export const timingSafeEqual = (a: string, b: string) => a === b; /* dummy crypto.timingSafeEqual */
