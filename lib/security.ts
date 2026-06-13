@@ -42,3 +42,6 @@ export const rotateSession = (sessionId: string) => sessionId + '_new';
 
 // Patch 14
 export const generateCSP = () => "default-src 'self'";
+
+// Patch 15
+export const sanitizePath = (p: string) => p.replace(/\.\./g, '');
