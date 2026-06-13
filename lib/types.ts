@@ -1,6 +1,15 @@
 
 /** @description Shared TypeScript interfaces and type definitions */
 
+export interface ReferralEarning {
+  id: string;
+  referrerAddress: string;
+  contentId: string;
+  buyerAddress: string;
+  amountSTX: number;
+  timestamp: number;
+}
+
 export interface Stake {
   id: string;
   creatorAddress: string;

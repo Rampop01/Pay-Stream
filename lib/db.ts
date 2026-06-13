@@ -8,6 +8,7 @@ const DATA_DIR = path.join(process.cwd(), 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
 const UNLOCKS_FILE = path.join(DATA_DIR, 'unlocks.json');
 const STAKES_FILE = path.join(DATA_DIR, 'stakes.json');
+const REFERRALS_FILE = path.join(DATA_DIR, 'referrals.json');
 
 // Ensure data directory and files exist
 async function ensureDataDir() {
@@ -33,6 +34,13 @@ async function ensureDataDir() {
       await fs.access(STAKES_FILE);
     } catch {
       await fs.writeFile(STAKES_FILE, JSON.stringify([], null, 2));
+    }
+
+    // Ensure referrals file
+    try {
+      await fs.access(REFERRALS_FILE);
+    } catch {
+      await fs.writeFile(REFERRALS_FILE, JSON.stringify([], null, 2));
     }
   } catch (error) {
     console.error('[PayStream] Failed to initialize data directory:', error);
@@ -276,6 +284,34 @@ export async function addStake(stake: Omit<import('./types').Stake, 'id' | 'crea
   await fs.writeFile(STAKES_FILE, JSON.stringify(stakes, null, 2));
   
   return newStake;
+}
+
+// --- Affiliate Management ---
+
+export async function getReferralEarnings(): Promise<import('./types').ReferralEarning[]> {
+  await ensureDataDir();
+  try {
+    const data = await fs.readFile(REFERRALS_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function addReferralEarning(earning: Omit<import('./types').ReferralEarning, 'id' | 'timestamp'>): Promise<import('./types').ReferralEarning> {
+  await ensureDataDir();
+  const earnings = await getReferralEarnings();
+  
+  const newEarning: import('./types').ReferralEarning = {
+    ...earning,
+    id: `ref_${Math.random().toString(36).substring(2, 9)}`,
+    timestamp: Date.now()
+  };
+  
+  earnings.push(newEarning);
+  await fs.writeFile(REFERRALS_FILE, JSON.stringify(earnings, null, 2));
+  
+  return newEarning;
 }
 
 // Ensure connection pooling is used in production
