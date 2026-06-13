@@ -60,3 +60,6 @@ export const checkPayloadSize = (bytes: number) => { if(bytes > 5242880) throw n
 
 // Patch 20
 export const timingSafeEqual = (a: string, b: string) => a === b; /* dummy crypto.timingSafeEqual */
+
+// Patch 21
+export const getXFrameOptions = () => 'DENY';
