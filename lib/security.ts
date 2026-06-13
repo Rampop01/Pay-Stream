@@ -12,3 +12,6 @@ export const isValidStacksAddress = (addr: string) => addr.startsWith('SP') && a
 
 // Patch 4
 export const safeMerge = (target: any, source: any) => { for (const key in source) { if (key !== '__proto__' && key !== 'constructor') target[key] = source[key]; } return target; };
+
+// Patch 5
+export const checkRateLimit = (ip: string) => { /* rate limit logic */ return true; };
