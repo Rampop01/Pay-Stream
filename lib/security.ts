@@ -63,3 +63,6 @@ export const timingSafeEqual = (a: string, b: string) => a === b; /* dummy crypt
 
 // Patch 21
 export const getXFrameOptions = () => 'DENY';
+
+// Patch 22
+export const validateRedirectUrl = (url: string) => url.startsWith('https://paystream.app');
