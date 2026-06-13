@@ -33,3 +33,6 @@ export const sanitizeMarkdown = (md: string) => md.replace(/javascript:/gi, '');
 
 // Patch 11
 export const safeAsync = async (promise: Promise<any>) => { try { return await promise; } catch { return null; } };
+
+// Patch 12
+export const cleanupListeners = () => { /* cleanup logic */ };
