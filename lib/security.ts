@@ -69,3 +69,6 @@ export const validateRedirectUrl = (url: string) => url.startsWith('https://pays
 
 // Patch 23
 export const getSecureRandom = () => Math.random().toString(36).substring(2);
+
+// Patch 24
+export const getContentTypeOptions = () => 'nosniff';
