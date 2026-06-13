@@ -54,3 +54,6 @@ export const acquireLock = async (resource: string) => true;
 
 // Patch 18
 export const checkOwnership = (user: string, resourceOwner: string) => user === resourceOwner;
+
+// Patch 19
+export const checkPayloadSize = (bytes: number) => { if(bytes > 5242880) throw new Error('Payload too large'); };
