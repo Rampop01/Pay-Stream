@@ -27,3 +27,6 @@ export const isValidContentId = (id: string) => /^[a-zA-Z0-9_]{5,20}$/.test(id);
 
 // Patch 9
 export const validateCSRFToken = (token: string) => token.length === 32;
+
+// Patch 10
+export const sanitizeMarkdown = (md: string) => md.replace(/javascript:/gi, '');
