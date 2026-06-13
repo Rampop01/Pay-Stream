@@ -15,3 +15,6 @@ export const safeMerge = (target: any, source: any) => { for (const key in sourc
 
 // Patch 5
 export const checkRateLimit = (ip: string) => { /* rate limit logic */ return true; };
+
+// Patch 6
+export const validateSTXAmount = (amount: number) => { if (amount <= 0) throw new Error('Invalid amount'); return true; };
