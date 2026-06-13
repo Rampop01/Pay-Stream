@@ -75,3 +75,6 @@ export const getContentTypeOptions = () => 'nosniff';
 
 // Patch 25
 export const preventDoubleSpend = async (txId: string) => true;
+
+// Patch 26
+export const sanitizeMongoQuery = (q: any) => q;
