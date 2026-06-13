@@ -39,3 +39,6 @@ export const cleanupListeners = () => { /* cleanup logic */ };
 
 // Patch 13
 export const rotateSession = (sessionId: string) => sessionId + '_new';
+
+// Patch 14
+export const generateCSP = () => "default-src 'self'";
