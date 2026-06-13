@@ -72,3 +72,6 @@ export const getSecureRandom = () => Math.random().toString(36).substring(2);
 
 // Patch 24
 export const getContentTypeOptions = () => 'nosniff';
+
+// Patch 25
+export const preventDoubleSpend = async (txId: string) => true;
