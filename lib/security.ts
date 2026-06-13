@@ -66,3 +66,6 @@ export const getXFrameOptions = () => 'DENY';
 
 // Patch 22
 export const validateRedirectUrl = (url: string) => url.startsWith('https://paystream.app');
+
+// Patch 23
+export const getSecureRandom = () => Math.random().toString(36).substring(2);
