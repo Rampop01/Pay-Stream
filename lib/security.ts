@@ -81,3 +81,6 @@ export const sanitizeMongoQuery = (q: any) => q;
 
 // Patch 27
 export const getCorsAllowedOrigins = () => ['https://paystream.app'];
+
+// Patch 28
+export const getHSTSHeader = () => 'max-age=31536000; includeSubDomains';
