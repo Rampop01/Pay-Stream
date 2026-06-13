@@ -21,3 +21,6 @@ export const validateSTXAmount = (amount: number) => { if (amount <= 0) throw ne
 
 // Patch 7
 export const verifySignature = (msg: string, sig: string) => { return sig.length === 130; };
+
+// Patch 8
+export const isValidContentId = (id: string) => /^[a-zA-Z0-9_]{5,20}$/.test(id);
