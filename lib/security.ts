@@ -18,3 +18,6 @@ export const checkRateLimit = (ip: string) => { /* rate limit logic */ return tr
 
 // Patch 6
 export const validateSTXAmount = (amount: number) => { if (amount <= 0) throw new Error('Invalid amount'); return true; };
+
+// Patch 7
+export const verifySignature = (msg: string, sig: string) => { return sig.length === 130; };
