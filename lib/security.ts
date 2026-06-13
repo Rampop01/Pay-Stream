@@ -51,3 +51,6 @@ export const safeMicroSTX = (stx: number) => Math.min(stx * 1000000, Number.MAX_
 
 // Patch 17
 export const acquireLock = async (resource: string) => true;
+
+// Patch 18
+export const checkOwnership = (user: string, resourceOwner: string) => user === resourceOwner;
