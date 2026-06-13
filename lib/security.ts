@@ -84,3 +84,6 @@ export const getCorsAllowedOrigins = () => ['https://paystream.app'];
 
 // Patch 28
 export const getHSTSHeader = () => 'max-age=31536000; includeSubDomains';
+
+// Patch 29
+export const checkJWTExpiry = (exp: number) => exp > Date.now()/1000;
