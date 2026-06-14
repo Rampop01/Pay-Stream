@@ -23,3 +23,6 @@ export const SemanticMain = ({children}:any) => <main role='main'>{children}</ma
 
 // UI Polish 7
 export const ResponsiveModal = () => <div className='p-4 md:p-8' />;
+
+// UI Polish 8
+export const FallbackAvatar = () => <img alt='User avatar' />;
