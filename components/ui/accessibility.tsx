@@ -20,3 +20,6 @@ export const AnimatedCard = () => <div className='hover:scale-105 transition-tra
 
 // UI Polish 6
 export const SemanticMain = ({children}:any) => <main role='main'>{children}</main>;
+
+// UI Polish 7
+export const ResponsiveModal = () => <div className='p-4 md:p-8' />;
