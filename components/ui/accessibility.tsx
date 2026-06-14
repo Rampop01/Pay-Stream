@@ -17,3 +17,6 @@ export const SrOnly = ({children}:any) => <span className='sr-only'>{children}</
 
 // UI Polish 5
 export const AnimatedCard = () => <div className='hover:scale-105 transition-transform' />;
+
+// UI Polish 6
+export const SemanticMain = ({children}:any) => <main role='main'>{children}</main>;
