@@ -14,3 +14,6 @@ export const FocusableLink = () => <a href='#' className='focus-visible:ring-2' 
 
 // UI Polish 4
 export const SrOnly = ({children}:any) => <span className='sr-only'>{children}</span>;
+
+// UI Polish 5
+export const AnimatedCard = () => <div className='hover:scale-105 transition-transform' />;
