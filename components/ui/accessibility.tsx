@@ -86,3 +86,6 @@ export const RichGlass = () => <div className='backdrop-blur-xl backdrop-saturat
 
 // UI Polish 28
 export const SafeAnimation = () => <div className='motion-reduce:transition-none' />;
+
+// UI Polish 29
+export const ElevatedCard = () => <div className='shadow-2xl shadow-purple-900/20' />;
