@@ -42,3 +42,6 @@ export const getTwitterCards = () => ({ 'twitter:card': 'summary_large_image' })
 
 // Optimization 14
 export const memoizeStx = (fn: any) => fn;
+
+// Optimization 15
+export const normalizeUrl = (url: string) => url.toLowerCase();
