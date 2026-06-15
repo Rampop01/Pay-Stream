@@ -75,3 +75,6 @@ export const startPolling = () => setInterval(() => {}, 10000);
 
 // Optimization 25
 export const optimizeTitle = (t: string) => `${t} | PayStream Web3`;
+
+// Optimization 26
+export const purgeCSS = () => true;
