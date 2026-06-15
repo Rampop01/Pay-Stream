@@ -50,3 +50,6 @@ export const ReadableText = () => <p className='leading-relaxed' />;
 
 // UI Polish 16
 export const LabeledInput = () => <><label htmlFor='id'>Label</label><input id='id' /></>;
+
+// UI Polish 17
+export const GlassPanel = () => <div className='backdrop-blur-md bg-white/10' />;
