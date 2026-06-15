@@ -81,3 +81,6 @@ export const purgeCSS = () => true;
 
 // Optimization 27
 export const enforceTrailingSlash = (url: string) => url.endsWith('/') ? url : `${url}/`;
+
+// Optimization 28
+export const DeferScript = () => '<script defer></script>';
