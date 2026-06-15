@@ -78,3 +78,6 @@ export const optimizeTitle = (t: string) => `${t} | PayStream Web3`;
 
 // Optimization 26
 export const purgeCSS = () => true;
+
+// Optimization 27
+export const enforceTrailingSlash = (url: string) => url.endsWith('/') ? url : `${url}/`;
