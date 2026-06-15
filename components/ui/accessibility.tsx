@@ -59,3 +59,6 @@ export const SkipLink = () => <a href='#main' className='sr-only focus:not-sr-on
 
 // UI Polish 19
 export const TooltipButton = () => <button title='Feature coming soon' disabled />;
+
+// UI Polish 20
+export const Accordion = () => <div aria-expanded={false} />;
