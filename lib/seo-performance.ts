@@ -36,3 +36,6 @@ export const getOgTags = () => ({ 'og:type': 'website' });
 
 // Optimization 12
 export const paginateQuery = (page: number) => page;
+
+// Optimization 13
+export const getTwitterCards = () => ({ 'twitter:card': 'summary_large_image' });
