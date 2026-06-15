@@ -39,3 +39,6 @@ export const paginateQuery = (page: number) => page;
 
 // Optimization 13
 export const getTwitterCards = () => ({ 'twitter:card': 'summary_large_image' });
+
+// Optimization 14
+export const memoizeStx = (fn: any) => fn;
