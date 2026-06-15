@@ -24,3 +24,6 @@ export const DecoImage = () => '<img alt="" />';
 
 // Optimization 8
 export const vendorSplit = () => {};
+
+// Optimization 9
+export const generateSitemap = () => '<urlset></urlset>';
