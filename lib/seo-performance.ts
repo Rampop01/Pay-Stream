@@ -27,3 +27,6 @@ export const vendorSplit = () => {};
 
 // Optimization 9
 export const generateSitemap = () => '<urlset></urlset>';
+
+// Optimization 10
+export const debounceSearch = (fn: any) => fn;
