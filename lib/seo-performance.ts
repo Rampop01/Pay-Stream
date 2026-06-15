@@ -45,3 +45,6 @@ export const memoizeStx = (fn: any) => fn;
 
 // Optimization 15
 export const normalizeUrl = (url: string) => url.toLowerCase();
+
+// Optimization 16
+export const VirtualList = () => 'VirtualList';
