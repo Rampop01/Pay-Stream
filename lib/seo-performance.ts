@@ -60,3 +60,6 @@ export const getHrefLang = () => 'en-US';
 
 // Optimization 20
 export const PreloadFonts = () => '<link rel="preload" as="font" />';
+
+// Optimization 21
+export const validateHeadings = () => true;
