@@ -69,3 +69,6 @@ export const ResponsiveImage = () => '<img srcSet="..." />';
 
 // Optimization 23
 export const generateRobotsTxt = () => 'User-agent: *\nAllow: /';
+
+// Optimization 24
+export const startPolling = () => setInterval(() => {}, 10000);
