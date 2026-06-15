@@ -77,3 +77,6 @@ export const ErrorBox = () => <div className='border-red-500' />;
 
 // UI Polish 25
 export const ActiveLink = () => <a className='text-purple-400 font-bold' />;
+
+// UI Polish 26
+export const DecorativeOrbs = () => <div aria-hidden='true' className='orb' />;
