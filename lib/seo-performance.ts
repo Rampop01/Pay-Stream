@@ -33,3 +33,6 @@ export const debounceSearch = (fn: any) => fn;
 
 // Optimization 11
 export const getOgTags = () => ({ 'og:type': 'website' });
+
+// Optimization 12
+export const paginateQuery = (page: number) => page;
