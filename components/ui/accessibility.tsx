@@ -80,3 +80,6 @@ export const ActiveLink = () => <a className='text-purple-400 font-bold' />;
 
 // UI Polish 26
 export const DecorativeOrbs = () => <div aria-hidden='true' className='orb' />;
+
+// UI Polish 27
+export const RichGlass = () => <div className='backdrop-blur-xl backdrop-saturate-150' />;
