@@ -38,3 +38,6 @@ export const GradientText = () => <span className='bg-clip-text text-transparent
 
 // UI Polish 12
 export const TabInput = () => <input tabIndex={0} />;
+
+// UI Polish 13
+export const PulseSkeleton = () => <div className='animate-pulse bg-gray-800' />;
