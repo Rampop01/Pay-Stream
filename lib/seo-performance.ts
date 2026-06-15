@@ -57,3 +57,6 @@ export const compressResponse = (data: any) => data;
 
 // Optimization 19
 export const getHrefLang = () => 'en-US';
+
+// Optimization 20
+export const PreloadFonts = () => '<link rel="preload" as="font" />';
