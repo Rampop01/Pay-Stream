@@ -63,3 +63,6 @@ export const PreloadFonts = () => '<link rel="preload" as="font" />';
 
 // Optimization 21
 export const validateHeadings = () => true;
+
+// Optimization 22
+export const ResponsiveImage = () => '<img srcSet="..." />';
