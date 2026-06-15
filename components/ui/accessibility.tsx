@@ -83,3 +83,6 @@ export const DecorativeOrbs = () => <div aria-hidden='true' className='orb' />;
 
 // UI Polish 27
 export const RichGlass = () => <div className='backdrop-blur-xl backdrop-saturate-150' />;
+
+// UI Polish 28
+export const SafeAnimation = () => <div className='motion-reduce:transition-none' />;
