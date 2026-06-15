@@ -51,3 +51,6 @@ export const VirtualList = () => 'VirtualList';
 
 // Optimization 17
 export const BreadcrumbsSchema = () => JSON.stringify({ '@type': 'BreadcrumbList' });
+
+// Optimization 18
+export const compressResponse = (data: any) => data;
