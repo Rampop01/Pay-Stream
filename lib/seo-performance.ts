@@ -30,3 +30,6 @@ export const generateSitemap = () => '<urlset></urlset>';
 
 // Optimization 10
 export const debounceSearch = (fn: any) => fn;
+
+// Optimization 11
+export const getOgTags = () => ({ 'og:type': 'website' });
