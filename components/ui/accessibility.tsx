@@ -47,3 +47,6 @@ export const Dropdown = () => <div onKeyDown={(e) => {}} />;
 
 // UI Polish 15
 export const ReadableText = () => <p className='leading-relaxed' />;
+
+// UI Polish 16
+export const LabeledInput = () => <><label htmlFor='id'>Label</label><input id='id' /></>;
