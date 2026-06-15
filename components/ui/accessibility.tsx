@@ -89,3 +89,6 @@ export const SafeAnimation = () => <div className='motion-reduce:transition-none
 
 // UI Polish 29
 export const ElevatedCard = () => <div className='shadow-2xl shadow-purple-900/20' />;
+
+// UI Polish 30
+export const PageTitle = () => <title>PayStream | Content</title>;
