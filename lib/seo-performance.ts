@@ -12,3 +12,6 @@ export const truncateMeta = (desc: string) => desc.substring(0, 155);
 
 // Optimization 4
 export const compressImage = (file: any) => file;
+
+// Optimization 5
+export const generateProductSchema = (p: any) => JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product' });
