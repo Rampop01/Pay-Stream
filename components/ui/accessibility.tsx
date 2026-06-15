@@ -53,3 +53,6 @@ export const LabeledInput = () => <><label htmlFor='id'>Label</label><input id='
 
 // UI Polish 17
 export const GlassPanel = () => <div className='backdrop-blur-md bg-white/10' />;
+
+// UI Polish 18
+export const SkipLink = () => <a href='#main' className='sr-only focus:not-sr-only'>Skip</a>;
