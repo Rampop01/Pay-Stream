@@ -32,3 +32,6 @@ export const SmoothScroll = () => <div className='scroll-smooth' />;
 
 // UI Polish 10
 export const ErrorToast = () => <div role='alert' aria-live='assertive' />;
+
+// UI Polish 11
+export const GradientText = () => <span className='bg-clip-text text-transparent' />;
