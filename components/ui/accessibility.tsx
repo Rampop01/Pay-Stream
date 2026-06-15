@@ -68,3 +68,6 @@ export const DarkBg = () => <div className='bg-[#0A0A0A]' />;
 
 // UI Polish 22
 export const Icon = () => <svg><title>Icon description</title></svg>;
+
+// UI Polish 23
+export const ProfileSkeleton = () => <div className='rounded-full bg-gray-700 animate-pulse' />;
