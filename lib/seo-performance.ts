@@ -87,3 +87,6 @@ export const DeferScript = () => '<script defer></script>';
 
 // Optimization 29
 export const getLangMeta = () => '<meta http-equiv="content-language" content="en">';
+
+// Optimization 30
+export const batchAnalytics = async (events: any[]) => true;
