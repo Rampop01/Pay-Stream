@@ -62,3 +62,6 @@ export const TooltipButton = () => <button title='Feature coming soon' disabled 
 
 // UI Polish 20
 export const Accordion = () => <div aria-expanded={false} />;
+
+// UI Polish 21
+export const DarkBg = () => <div className='bg-[#0A0A0A]' />;
