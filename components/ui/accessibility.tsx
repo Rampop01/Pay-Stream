@@ -35,3 +35,6 @@ export const ErrorToast = () => <div role='alert' aria-live='assertive' />;
 
 // UI Polish 11
 export const GradientText = () => <span className='bg-clip-text text-transparent' />;
+
+// UI Polish 12
+export const TabInput = () => <input tabIndex={0} />;
