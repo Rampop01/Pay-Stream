@@ -54,3 +54,6 @@ export const BreadcrumbsSchema = () => JSON.stringify({ '@type': 'BreadcrumbList
 
 // Optimization 18
 export const compressResponse = (data: any) => data;
+
+// Optimization 19
+export const getHrefLang = () => 'en-US';
