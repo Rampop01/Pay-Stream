@@ -18,3 +18,6 @@ export const generateProductSchema = (p: any) => JSON.stringify({ '@context': 'h
 
 // Optimization 6
 export const cacheTopCreators = async () => true;
+
+// Optimization 7
+export const DecoImage = () => '<img alt="" />';
