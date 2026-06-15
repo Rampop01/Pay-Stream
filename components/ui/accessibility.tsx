@@ -74,3 +74,6 @@ export const ProfileSkeleton = () => <div className='rounded-full bg-gray-700 an
 
 // UI Polish 24
 export const ErrorBox = () => <div className='border-red-500' />;
+
+// UI Polish 25
+export const ActiveLink = () => <a className='text-purple-400 font-bold' />;
