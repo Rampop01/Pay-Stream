@@ -56,3 +56,6 @@ export const GlassPanel = () => <div className='backdrop-blur-md bg-white/10' />
 
 // UI Polish 18
 export const SkipLink = () => <a href='#main' className='sr-only focus:not-sr-only'>Skip</a>;
+
+// UI Polish 19
+export const TooltipButton = () => <button title='Feature coming soon' disabled />;
