@@ -29,3 +29,6 @@ export const FallbackAvatar = () => <img alt='User avatar' />;
 
 // UI Polish 9
 export const SmoothScroll = () => <div className='scroll-smooth' />;
+
+// UI Polish 10
+export const ErrorToast = () => <div role='alert' aria-live='assertive' />;
