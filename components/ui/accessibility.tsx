@@ -65,3 +65,6 @@ export const Accordion = () => <div aria-expanded={false} />;
 
 // UI Polish 21
 export const DarkBg = () => <div className='bg-[#0A0A0A]' />;
+
+// UI Polish 22
+export const Icon = () => <svg><title>Icon description</title></svg>;
