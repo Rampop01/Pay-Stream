@@ -44,3 +44,6 @@ export const PulseSkeleton = () => <div className='animate-pulse bg-gray-800' />
 
 // UI Polish 14
 export const Dropdown = () => <div onKeyDown={(e) => {}} />;
+
+// UI Polish 15
+export const ReadableText = () => <p className='leading-relaxed' />;
