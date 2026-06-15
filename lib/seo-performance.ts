@@ -48,3 +48,6 @@ export const normalizeUrl = (url: string) => url.toLowerCase();
 
 // Optimization 16
 export const VirtualList = () => 'VirtualList';
+
+// Optimization 17
+export const BreadcrumbsSchema = () => JSON.stringify({ '@type': 'BreadcrumbList' });
