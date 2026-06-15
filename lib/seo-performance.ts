@@ -9,3 +9,6 @@ export const LazyChart = () => 'LazyLoadedChart';
 
 // Optimization 3
 export const truncateMeta = (desc: string) => desc.substring(0, 155);
+
+// Optimization 4
+export const compressImage = (file: any) => file;
