@@ -21,3 +21,6 @@ export const cacheTopCreators = async () => true;
 
 // Optimization 7
 export const DecoImage = () => '<img alt="" />';
+
+// Optimization 8
+export const vendorSplit = () => {};
