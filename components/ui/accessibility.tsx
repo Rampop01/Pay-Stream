@@ -71,3 +71,6 @@ export const Icon = () => <svg><title>Icon description</title></svg>;
 
 // UI Polish 23
 export const ProfileSkeleton = () => <div className='rounded-full bg-gray-700 animate-pulse' />;
+
+// UI Polish 24
+export const ErrorBox = () => <div className='border-red-500' />;
