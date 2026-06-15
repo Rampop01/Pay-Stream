@@ -26,3 +26,6 @@ export const ResponsiveModal = () => <div className='p-4 md:p-8' />;
 
 // UI Polish 8
 export const FallbackAvatar = () => <img alt='User avatar' />;
+
+// UI Polish 9
+export const SmoothScroll = () => <div className='scroll-smooth' />;
