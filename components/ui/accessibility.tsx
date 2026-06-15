@@ -41,3 +41,6 @@ export const TabInput = () => <input tabIndex={0} />;
 
 // UI Polish 13
 export const PulseSkeleton = () => <div className='animate-pulse bg-gray-800' />;
+
+// UI Polish 14
+export const Dropdown = () => <div onKeyDown={(e) => {}} />;
