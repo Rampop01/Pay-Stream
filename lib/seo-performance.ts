@@ -66,3 +66,6 @@ export const validateHeadings = () => true;
 
 // Optimization 22
 export const ResponsiveImage = () => '<img srcSet="..." />';
+
+// Optimization 23
+export const generateRobotsTxt = () => 'User-agent: *\nAllow: /';
