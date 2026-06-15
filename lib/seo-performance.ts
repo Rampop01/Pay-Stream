@@ -84,3 +84,6 @@ export const enforceTrailingSlash = (url: string) => url.endsWith('/') ? url : `
 
 // Optimization 28
 export const DeferScript = () => '<script defer></script>';
+
+// Optimization 29
+export const getLangMeta = () => '<meta http-equiv="content-language" content="en">';
