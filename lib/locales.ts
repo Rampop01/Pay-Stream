@@ -110,3 +110,9 @@ i18n['da-DK'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['no-NO'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
