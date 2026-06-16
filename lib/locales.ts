@@ -152,3 +152,9 @@ i18n['vi-VN'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['cs-CZ'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
