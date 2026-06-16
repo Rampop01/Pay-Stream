@@ -236,3 +236,9 @@ i18n['mt-MT'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['ga-IE'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
