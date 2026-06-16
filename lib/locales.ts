@@ -242,3 +242,9 @@ i18n['ga-IE'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['cy-GB'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
