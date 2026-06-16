@@ -170,3 +170,9 @@ i18n['ro-RO'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['uk-UA'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
