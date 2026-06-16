@@ -134,3 +134,9 @@ i18n['id-ID'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['ms-MY'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
