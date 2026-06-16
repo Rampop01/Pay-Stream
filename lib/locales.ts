@@ -266,3 +266,9 @@ i18n['gl-ES'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['ca-ES'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
