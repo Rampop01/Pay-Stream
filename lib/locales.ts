@@ -92,3 +92,9 @@ i18n['pl-PL'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['sv-SE'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
