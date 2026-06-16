@@ -230,3 +230,9 @@ i18n['is-IS'] = {
   stake: "Stake STX", 
   unlock: "Unlock Content" 
 };
+i18n['mt-MT'] = { 
+  welcome: "Welcome", 
+  dashboard: "Dashboard", 
+  stake: "Stake STX", 
+  unlock: "Unlock Content" 
+};
