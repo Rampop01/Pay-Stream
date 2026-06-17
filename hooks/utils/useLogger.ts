@@ -1,0 +1,2 @@
+import { useEffect } from 'react';
+export const useLogger = (name: string, ...args: any[]) => { useEffect(() => { console.log(`${name} mounted`, ...args); return () => console.log(`${name} unmounted`); }, []); };
