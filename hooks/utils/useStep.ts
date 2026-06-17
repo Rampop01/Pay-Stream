@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useStep = (max: number) => { const [cur, setCur] = useState(1); return [cur, { next: () => setCur(c => Math.min(c+1, max)), prev: () => setCur(c => Math.max(c-1, 1)) }] as const; };
