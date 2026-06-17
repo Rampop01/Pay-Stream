@@ -1,0 +1,2 @@
+import { useState, useEffect, useRef } from 'react';
+export const useThrottle = <T>(val: T, ms: number) => { const [state, setState] = useState<T>(val); const last = useRef(Date.now()); useEffect(() => { const now = Date.now(); if (now >= last.current + ms) { last.current = now; setState(val); } else { const id = setTimeout(() => { last.current = Date.now(); setState(val); }, ms - (now - last.current)); return () => clearTimeout(id); } }, [val, ms]); return state; };
