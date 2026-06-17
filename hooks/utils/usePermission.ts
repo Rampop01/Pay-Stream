@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const usePermission = (desc: any) => { const [state, setState] = useState(''); useEffect(() => { navigator.permissions.query(desc).then(s => setState(s.state)); }, [desc]); return state; };
