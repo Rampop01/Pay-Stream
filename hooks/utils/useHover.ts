@@ -1,0 +1,2 @@
+import { useState, useRef, useEffect } from 'react';
+export const useHover = <T extends HTMLElement>() => { const [val, setVal] = useState(false); const ref = useRef<T>(null); useEffect(() => { const node = ref.current; if(node) { node.addEventListener('mouseenter', () => setVal(true)); node.addEventListener('mouseleave', () => setVal(false)); } }, []); return [ref, val]; };
