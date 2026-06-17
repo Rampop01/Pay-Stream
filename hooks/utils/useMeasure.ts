@@ -1,0 +1,2 @@
+import { useState, useRef, useEffect } from 'react';
+export const useMeasure = () => { const [rect, setRect] = useState({ width: 0, height: 0 }); const ref = useRef(null); useEffect(() => { if (!ref.current) return; const obs = new ResizeObserver(([entry]) => setRect(entry.contentRect)); obs.observe(ref.current); return () => obs.disconnect(); }, []); return [ref, rect]; };
