@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useDefault = <T>(initial: T, defaultVal: T) => { const [state, setState] = useState<T|undefined|null>(initial); return [state === undefined || state === null ? defaultVal : state, setState] as const; };
