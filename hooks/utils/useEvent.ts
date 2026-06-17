@@ -1,0 +1,2 @@
+import { useEffect } from 'react';
+export const useEvent = (name: string, handler: any, target: any = window) => { useEffect(() => { target.addEventListener(name, handler); return () => target.removeEventListener(name, handler); }, [name, handler, target]); };
