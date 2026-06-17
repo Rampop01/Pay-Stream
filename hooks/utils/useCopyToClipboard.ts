@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useCopyToClipboard = () => { const [state, setState] = useState(false); const copyToClipboard = async (text: string) => { try { await navigator.clipboard.writeText(text); setState(true); } catch { setState(false); } }; return [state, copyToClipboard]; };
