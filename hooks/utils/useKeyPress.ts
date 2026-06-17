@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useKeyPress = (target: string) => { const [pressed, setPressed] = useState(false); useEffect(() => { const down = (e: any) => e.key === target && setPressed(true); const up = (e: any) => e.key === target && setPressed(false); window.addEventListener('keydown', down); window.addEventListener('keyup', up); return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); }; }, [target]); return pressed; };
