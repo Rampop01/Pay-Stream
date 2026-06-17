@@ -1,0 +1,2 @@
+import { useRef } from 'react';
+export const useThrottleFn = (fn: any, ms: number) => { const last = useRef(0); return (...args: any[]) => { const now = Date.now(); if (now - last.current >= ms) { fn(...args); last.current = now; } }; };
