@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useWindowScroll = () => { const [state, setState] = useState({ x: 0, y: 0 }); useEffect(() => { const h = () => setState({ x: window.pageXOffset, y: window.pageYOffset }); window.addEventListener('scroll', h); return () => window.removeEventListener('scroll', h); }, []); return state; };
