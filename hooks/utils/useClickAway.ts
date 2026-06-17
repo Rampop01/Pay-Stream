@@ -1,0 +1,2 @@
+import { useEffect, useRef } from 'react';
+export const useClickAway = (ref: any, handler: any) => { useEffect(() => { const listener = (e: any) => { if (!ref.current || ref.current.contains(e.target)) return; handler(e); }; document.addEventListener('mousedown', listener); return () => document.addEventListener('mousedown', listener); }, [ref, handler]); };
