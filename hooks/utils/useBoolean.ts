@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useBoolean = (initial = false) => { const [v, setV] = useState(initial); return { value: v, setTrue: () => setV(true), setFalse: () => setV(false), toggle: () => setV(!v) }; };
