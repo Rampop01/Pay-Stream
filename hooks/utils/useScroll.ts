@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useScroll = () => { const [pos, setPos] = useState({ x: 0, y: 0 }); useEffect(() => { const handler = () => setPos({ x: window.scrollX, y: window.scrollY }); window.addEventListener('scroll', handler); return () => window.removeEventListener('scroll', handler); }, []); return pos; };
