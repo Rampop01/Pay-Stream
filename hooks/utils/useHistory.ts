@@ -1,0 +1,2 @@
+import { useState, useCallback } from 'react';
+export const useHistory = <T>(initial: T) => { const [state, setState] = useState(initial); const [history, setHistory] = useState([initial]); const [ptr, setPtr] = useState(0); const set = useCallback((v: T) => { const newHistory = history.slice(0, ptr + 1); newHistory.push(v); setHistory(newHistory); setPtr(newHistory.length - 1); setState(v); }, [history, ptr]); return [state, set, { history, pointer: ptr }] as const; };
