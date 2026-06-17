@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useDebounce = <T>(val: T, delay: number) => { const [debounced, setDebounced] = useState(val); useEffect(() => { const t = setTimeout(() => setDebounced(val), delay); return () => clearTimeout(t); }, [val, delay]); return debounced; };
