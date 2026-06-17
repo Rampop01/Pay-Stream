@@ -1,0 +1,1 @@
+export const useSpeechSynthesis = () => { return { speak: (text: string) => { const u = new SpeechSynthesisUtterance(text); window.speechSynthesis.speak(u); } }; };
