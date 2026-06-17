@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useList = <T>(initial: T[] = []) => { const [l, setL] = useState(initial); return [l, { set: setL, push: (v: T) => setL(cur => [...cur, v]) }] as const; };
