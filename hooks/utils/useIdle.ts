@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useIdle = (ms: number) => { const [idle, setIdle] = useState(false); useEffect(() => { let t = setTimeout(() => setIdle(true), ms); return () => clearTimeout(t); }, [ms]); return idle; };
