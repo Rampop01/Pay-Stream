@@ -1,0 +1,2 @@
+import { useState, useEffect } from 'react';
+export const useFetch = (url: string) => { const [data, setData] = useState(null); useEffect(() => { fetch(url).then(r => r.json()).then(setData); }, [url]); return data; };
