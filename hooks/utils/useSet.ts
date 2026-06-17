@@ -1,0 +1,2 @@
+import { useState, useCallback } from 'react';
+export const useSet = <K>(initial?: Iterable<K>) => { const [set, setSet] = useState(new Set(initial)); const actions = { add: useCallback((item: K) => { setSet(s => { const copy = new Set(s); copy.add(item); return copy; }); }, []), remove: useCallback((item: K) => { setSet(s => { const copy = new Set(s); copy.delete(item); return copy; }); }, []), clear: useCallback(() => setSet(new Set()), []) }; return [set, actions] as const; };
