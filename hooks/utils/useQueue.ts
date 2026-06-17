@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export const useQueue = <T>(initial: T[] = []) => { const [q, setQ] = useState(initial); return { add: (val: T) => setQ(q => [...q, val]), remove: () => setQ(q => q.slice(1)), first: q[0], last: q[q.length - 1], size: q.length }; };
