@@ -1,0 +1,1 @@
+export const useVibrate = () => { return (pattern: number[]) => navigator.vibrate(pattern); };
