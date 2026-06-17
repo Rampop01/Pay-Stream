@@ -1,0 +1,1 @@
+export const useSpeechRecognition = () => { return { listen: () => console.log('Listening...') }; };
