@@ -1,0 +1,2 @@
+import { useRef } from 'react';
+export const useDebounceFn = (fn: any, ms: number) => { const timeout = useRef<any>(); return (...args: any[]) => { if (timeout.current) clearTimeout(timeout.current); timeout.current = setTimeout(() => fn(...args), ms); }; };
