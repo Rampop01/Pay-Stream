@@ -1,0 +1,2 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
+export const useRafState = <T>(initialState: T) => { const frame = useRef(0); const [state, setState] = useState(initialState); const setRafState = useCallback((val: T) => { cancelAnimationFrame(frame.current); frame.current = requestAnimationFrame(() => setState(val)); }, []); useEffect(() => () => cancelAnimationFrame(frame.current), []); return [state, setRafState] as const; };
