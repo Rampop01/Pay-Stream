@@ -1,0 +1,2 @@
+import { useState, useCallback } from 'react';
+export const useMap = <K,V>(initial?: Iterable<readonly [K,V]>) => { const [map, setMap] = useState(new Map(initial)); const actions = { set: useCallback((k: K, v: V) => { setMap(m => { const copy = new Map(m); copy.set(k, v); return copy; }); }, []), remove: useCallback((k: K) => { setMap(m => { const copy = new Map(m); copy.delete(k); return copy; }); }, []), clear: useCallback(() => setMap(new Map()), []) }; return [map, actions] as const; };
