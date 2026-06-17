@@ -1,0 +1,2 @@
+import { useEffect, useRef, useState } from 'react';
+export const useIntersectionObserver = (ref: any) => { const [entry, setEntry] = useState(null); useEffect(() => { const obs = new IntersectionObserver(([e]) => setEntry(e)); if (ref.current) obs.observe(ref.current); return () => obs.disconnect(); }, [ref]); return entry; };
