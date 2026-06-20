@@ -1,0 +1,1 @@
+export const parseQueryString = (qs: string) => Object.fromEntries(new URLSearchParams(qs));
