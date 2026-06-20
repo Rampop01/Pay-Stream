@@ -1,0 +1,1 @@
+export const countWords = (s: string) => toWords(s).length;
