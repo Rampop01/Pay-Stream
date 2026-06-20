@@ -1,0 +1,1 @@
+export const getScrollPosition = () => ({ x: window.pageXOffset, y: window.pageYOffset });
