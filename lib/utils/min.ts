@@ -1,0 +1,1 @@
+export const min = (arr: number[]) => Math.min(...arr);
