@@ -1,0 +1,1 @@
+export const round = (num: number, dec: number = 0) => { const p = Math.pow(10, dec); return Math.round(num * p) / p; };
