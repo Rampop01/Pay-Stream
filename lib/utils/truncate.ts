@@ -1,0 +1,1 @@
+export const truncate = (s: string, len: number) => s.length > len ? s.substring(0, len) + '...' : s;
