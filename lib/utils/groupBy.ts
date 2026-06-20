@@ -1,0 +1,1 @@
+export const groupBy = <T>(arr: T[], key: keyof T) => arr.reduce((acc, item) => ({ ...acc, [item[key] as any]: [...(acc[item[key] as any] || []), item] }), {} as Record<string, T[]>);
