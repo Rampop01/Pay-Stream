@@ -1,0 +1,1 @@
+export const deleteCookie = (name: string) => setCookie(name, '', -1);
