@@ -1,0 +1,1 @@
+export const stringifyQuery = (obj: any) => new URLSearchParams(obj).toString();
