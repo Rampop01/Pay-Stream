@@ -1,0 +1,1 @@
+export const debounce = (fn: Function, ms: number) => { let id: any; return (...args: any[]) => { clearTimeout(id); id = setTimeout(() => fn(...args), ms); }; };
