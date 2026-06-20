@@ -1,0 +1,1 @@
+export const max = (arr: number[]) => Math.max(...arr);
