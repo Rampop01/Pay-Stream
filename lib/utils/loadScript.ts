@@ -1,0 +1,1 @@
+export const loadScript = (src: string) => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
