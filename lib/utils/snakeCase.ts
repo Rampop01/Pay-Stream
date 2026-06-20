@@ -1,0 +1,1 @@
+export const snakeCase = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
