@@ -1,0 +1,1 @@
+export const omit = (obj: any, keys: string[]) => Object.fromEntries(Object.entries(obj).filter(([k]) => !keys.includes(k)));
