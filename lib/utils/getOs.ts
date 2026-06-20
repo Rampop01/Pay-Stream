@@ -1,0 +1,1 @@
+export const getOs = () => { const ua = navigator.userAgent; if (ua.indexOf('Win') > -1) return 'Windows'; if (ua.indexOf('Mac') > -1) return 'MacOS'; if (ua.indexOf('X11') > -1) return 'UNIX'; if (ua.indexOf('Linux') > -1) return 'Linux'; return 'Unknown'; };
