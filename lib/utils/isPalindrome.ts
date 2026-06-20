@@ -1,0 +1,1 @@
+export const isPalindrome = (s: string) => s === reverseString(s);
