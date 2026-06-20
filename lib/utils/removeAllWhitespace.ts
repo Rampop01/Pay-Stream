@@ -1,0 +1,1 @@
+export const removeAllWhitespace = (s: string) => s.replace(/\s+/g, '');
