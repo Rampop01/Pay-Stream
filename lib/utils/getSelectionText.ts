@@ -1,0 +1,1 @@
+export const getSelectionText = () => window.getSelection()?.toString() || '';
