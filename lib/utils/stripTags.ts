@@ -1,0 +1,1 @@
+export const stripTags = (html: string) => html.replace(/<[^>]*>?/gm, '');
