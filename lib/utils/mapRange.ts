@@ -1,0 +1,1 @@
+export const mapRange = (val: number, inMin: number, inMax: number, outMin: number, outMax: number) => (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
