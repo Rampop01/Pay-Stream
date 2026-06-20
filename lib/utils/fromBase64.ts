@@ -1,0 +1,1 @@
+export const fromBase64 = (b64: string) => Buffer.from(b64, 'base64').toString('ascii');
