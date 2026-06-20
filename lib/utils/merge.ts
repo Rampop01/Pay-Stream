@@ -1,0 +1,1 @@
+export const merge = (target: any, ...sources: any[]) => Object.assign(target, ...sources);
