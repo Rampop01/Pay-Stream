@@ -1,0 +1,1 @@
+export const toWords = (s: string) => s.match(/\b\w+\b/g) || [];
