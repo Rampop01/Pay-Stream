@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useContentById } from '@/hooks/useContent';
+import { useContentById, useContent } from '@/hooks/useContent';
 import { Play, Share2, ArrowLeft, Sparkles, Zap, ShieldCheck, Globe, Star, Loader2, Lock, Flag } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
