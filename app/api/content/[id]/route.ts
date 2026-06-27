@@ -3,10 +3,11 @@ import { getContentById, updateContent, deleteContent } from '@/lib/db';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const content = await getContentById(params.id);
+    const { id } = await params;
+    const content = await getContentById(id);
     if (!content) {
       return NextResponse.json({ error: 'Content not found' }, { status: 404 });
     }
@@ -18,11 +19,12 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const updatedContent = await updateContent(params.id, body);
+    const updatedContent = await updateContent(id, body);
     if (!updatedContent) {
       return NextResponse.json({ error: 'Content not found' }, { status: 404 });
     }
@@ -34,10 +36,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const success = await deleteContent(params.id);
+    const { id } = await params;
+    const success = await deleteContent(id);
     if (!success) {
       return NextResponse.json({ error: 'Content not found' }, { status: 404 });
     }

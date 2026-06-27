@@ -3,17 +3,18 @@ import { addComment } from '@/lib/db';
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const { userAddress, text } = await request.json();
 
     if (!userAddress || !text) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    const comment = await addComment(params.id, {
-      contentId: params.id,
+    const comment = await addComment(id, {
+      contentId: id,
       userAddress,
       text
     });

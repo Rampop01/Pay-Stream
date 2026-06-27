@@ -3,10 +3,10 @@ import { getContentById, updateContent, recordUnlock, addReferralEarning } from 
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { txId, buyerAddress, referrerAddress } = await req.json();
 
     if (!txId || !buyerAddress) {

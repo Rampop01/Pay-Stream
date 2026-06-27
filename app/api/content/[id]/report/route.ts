@@ -6,10 +6,10 @@ const DATA_FILE = path.join(process.cwd(), 'data/reports.json');
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { reason, reporterAddress } = await req.json();
 
     if (!reason || !reporterAddress) {
